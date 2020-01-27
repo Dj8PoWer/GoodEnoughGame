@@ -2,6 +2,7 @@
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -31,6 +32,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     private void Awake()
     {
+        //set up singleton
         if(PhotonRoom.room == null)
         {
             PhotonRoom.room = this;
@@ -45,6 +47,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     public override void OnEnable()
     {
+        //subcribe to functions
         base.OnEnable();
         PhotonNetwork.AddCallbackTarget(this);
         SceneManager.sceneLoaded += OnSceneFinishedLoading;
@@ -60,6 +63,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     //Use this for initialization
     void Start()
     {
+        //set private variables
         PV = GetComponent<PhotonView>();
         readyToCount = false;
         readyToStart = false;
@@ -71,17 +75,41 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     // Update is called once per frame
     void Update()
     {
-        
+        //for delay start only, it counts down to start
+        if (MultiplayerSettings.multiplayerSettings.delayStart)
+        {
+            if (playerInRoom == 1)
+                RestartTimer();
+            if (!isGameLoaded)
+            {
+                if (readyToStart)
+                {
+                    atMaxPlayers -= Time.deltaTime;
+                    lessThanMaxPlayers = atMaxPlayers;
+                    timeToStart = atMaxPlayers;
+                }
+                else if(readyToCount)
+                {
+                    lessThanMaxPlayers -= Time.deltaTime;
+                    timeToStart -= lessThanMaxPlayers;
+                }
+                Debug.Log("Displayer time to start to the players" + timeToStart);
+                if (timeToStart <= 0)
+                    StartGame();
+            }
+        }
     }
 
     public override void OnJoinedRoom()
     {
+        //sets player data when joining a room
         base.OnJoinedRoom();
         Debug.Log("Succesfully joined a room");
         photonPlayers = PhotonNetwork.PlayerList;
         playerInRoom = photonPlayers.Length;
         myNumberInRoom = playerInRoom;
         PhotonNetwork.NickName = myNumberInRoom.ToString();
+        //for delayed start only
         if (MultiplayerSettings.multiplayerSettings.delayStart)
         {
             Debug.Log("Displayer players in room out of max players possible (" + playerInRoom + ":" + MultiplayerSettings.multiplayerSettings.maxPlayer + ")");
@@ -95,5 +123,89 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
                 PhotonNetwork.CurrentRoom.IsOpen = false;
             }
         }
+        else
+            StartGame();
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+        Debug.Log("A new player has joined the room");
+        photonPlayers = PhotonNetwork.PlayerList;
+        playerInRoom++;
+        if(MultiplayerSettings.multiplayerSettings.delayStart)
+        {
+            Debug.Log("Displayer players in room out of max players possible (" + playerInRoom + ":" + MultiplayerSettings.multiplayerSettings.maxPlayer + ")");
+            if (playerInRoom > 1)
+                readyToCount = true;
+            if (MultiplayerSettings.multiplayerSettings.delayStart)
+            {
+                Debug.Log("Displayer players in room out of max players possible (" + playerInRoom + ":" + MultiplayerSettings.multiplayerSettings.maxPlayer + ")");
+                if (playerInRoom > 1)
+                    readyToCount = true;
+                if (playerInRoom == MultiplayerSettings.multiplayerSettings.maxPlayer)
+                {
+                    readyToStart = true;
+                    if (!PhotonNetwork.IsMasterClient)
+                        return;
+                    PhotonNetwork.CurrentRoom.IsOpen = false;
+                }
+            }
+        }
+    }
+
+    void StartGame()
+    {
+        isGameLoaded = true;
+        if (!PhotonNetwork.IsMasterClient)
+            return;
+        if (MultiplayerSettings.multiplayerSettings.delayStart)
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+        }
+        PhotonNetwork.LoadLevel(MultiplayerSettings.multiplayerSettings.multiplayerScene);
+    }
+
+    void RestartTimer()
+    {
+        lessThanMaxPlayers = startingTime;
+        timeToStart = startingTime;
+        atMaxPlayers = 6;
+        readyToCount = false;
+        readyToStart = false;
+    }
+
+    void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        //called when multiplayer scene is loaded
+        currentScene = scene.buildIndex;
+        if (currentScene == MultiplayerSettings.multiplayerSettings.multiplayerScene)
+        {
+            isGameLoaded = true;
+            if (MultiplayerSettings.multiplayerSettings.delayStart)
+            {
+                PV.RPC("RPC_LoadedGameScene", RpcTarget.MasterClient);
+            }
+            else
+            {
+                RPC_CreatePlayer();
+            }
+        }
+    }
+
+    [PunRPC]
+    private void RPC_LoadedGameScene()
+    {
+        playerInGame++;
+        if (playerInGame == PhotonNetwork.PlayerList.Length)
+        {
+            PV.RPC("RPC_CreatePlayer", RpcTarget.All);
+        }
+    }
+
+    [PunRPC]
+    private void RPC_CreatePlayer()
+    {
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonNetworkPlayer"), transform.position, Quaternion.identity, 0);
     }
 }
