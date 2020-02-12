@@ -1,24 +1,29 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField]
-    int speed;
+    int speed = 0;
+
+    private PhotonView PV;
 
     SpriteRenderer renderer;
 
     // Start is called before the first frame update
     void Start()
     {
+        PV = GetComponent<PhotonView>();
         renderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Deplacement();
+        if (PV.IsMine)
+            Deplacement();
     }
 
     void Deplacement()
