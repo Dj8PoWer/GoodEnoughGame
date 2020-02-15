@@ -777,7 +777,6 @@ MonoBehaviour:
   playerInRoom: 0
   myNumberInRoom: 0
   playerInGame: 0
-  startingTime: 10
 --- !u!4 &1367515413
 Transform:
   m_ObjectHideFlags: 0

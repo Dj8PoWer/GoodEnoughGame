@@ -22,22 +22,14 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     public int playerInGame;
 
-    //Delayed start
-    private bool readyToCount;
-    private bool readyToStart;
-    public float startingTime;
-    private float lessThanMaxPlayers;
-    private float atMaxPlayers;
-    private float timeToStart;
-
     private void Awake()
     {
         //set up singleton
-        if(PhotonRoom.room == null)
+        if (PhotonRoom.room == null)
         {
             PhotonRoom.room = this;
         }
-        else if(PhotonRoom.room != this)
+        else if (PhotonRoom.room != this)
         {
             Destroy(PhotonRoom.room.gameObject);
             PhotonRoom.room = this;
@@ -65,39 +57,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     {
         //set private variables
         PV = GetComponent<PhotonView>();
-        readyToCount = false;
-        readyToStart = false;
-        lessThanMaxPlayers = startingTime;
-        atMaxPlayers = 6;
-        timeToStart = startingTime;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //for delay start only, it counts down to start
-        if (MultiplayerSettings.multiplayerSettings.delayStart)
-        {
-            if (playerInRoom == 1)
-                RestartTimer();
-            if (!isGameLoaded)
-            {
-                if (readyToStart)
-                {
-                    atMaxPlayers -= Time.deltaTime;
-                    lessThanMaxPlayers = atMaxPlayers;
-                    timeToStart = atMaxPlayers;
-                }
-                else if(readyToCount)
-                {
-                    lessThanMaxPlayers -= Time.deltaTime;
-                    timeToStart -= lessThanMaxPlayers;
-                }
-                Debug.Log("Displayer time to start to the players" + timeToStart);
-                if (timeToStart <= 0)
-                    StartGame();
-            }
-        }
     }
 
     public override void OnJoinedRoom()
@@ -109,22 +68,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         playerInRoom = photonPlayers.Length;
         myNumberInRoom = playerInRoom;
         PhotonNetwork.NickName = myNumberInRoom.ToString();
-        //for delayed start only
-        if (MultiplayerSettings.multiplayerSettings.delayStart)
-        {
-            Debug.Log("Displayer players in room out of max players possible (" + playerInRoom + ":" + MultiplayerSettings.multiplayerSettings.maxPlayer + ")");
-            if (playerInRoom > 1)
-                readyToCount = true;
-            if (playerInRoom == MultiplayerSettings.multiplayerSettings.maxPlayer)
-            {
-                readyToStart = true;
-                if (!PhotonNetwork.IsMasterClient)
-                    return;
-                PhotonNetwork.CurrentRoom.IsOpen = false;
-            }
-        }
-        else
-            StartGame();
+        StartGame();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -133,25 +77,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         Debug.Log("A new player has joined the room");
         photonPlayers = PhotonNetwork.PlayerList;
         playerInRoom++;
-        if(MultiplayerSettings.multiplayerSettings.delayStart)
-        {
-            Debug.Log("Displayer players in room out of max players possible (" + playerInRoom + ":" + MultiplayerSettings.multiplayerSettings.maxPlayer + ")");
-            if (playerInRoom > 1)
-                readyToCount = true;
-            if (MultiplayerSettings.multiplayerSettings.delayStart)
-            {
-                Debug.Log("Displayer players in room out of max players possible (" + playerInRoom + ":" + MultiplayerSettings.multiplayerSettings.maxPlayer + ")");
-                if (playerInRoom > 1)
-                    readyToCount = true;
-                if (playerInRoom == MultiplayerSettings.multiplayerSettings.maxPlayer)
-                {
-                    readyToStart = true;
-                    if (!PhotonNetwork.IsMasterClient)
-                        return;
-                    PhotonNetwork.CurrentRoom.IsOpen = false;
-                }
-            }
-        }
     }
 
     void StartGame()
@@ -164,15 +89,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
             PhotonNetwork.CurrentRoom.IsOpen = false;
         }
         PhotonNetwork.LoadLevel(MultiplayerSettings.multiplayerSettings.multiplayerScene);
-    }
-
-    void RestartTimer()
-    {
-        lessThanMaxPlayers = startingTime;
-        timeToStart = startingTime;
-        atMaxPlayers = 6;
-        readyToCount = false;
-        readyToStart = false;
     }
 
     void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
