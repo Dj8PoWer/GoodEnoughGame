@@ -71,7 +71,7 @@ public class PlayerManager : MonoBehaviour
     void Flip()
     {
         //if camera is on the right side of the screen, flips the character
-        if (Camera.main.ScreenToViewportPoint(Input.mousePosition).x > 0.5f)
+        if (Camera.main.ScreenToViewportPoint(Input.mousePosition).x < 0.5f)
             player.transform.rotation = new Quaternion(0, 180, 0, 0);
         else
             player.transform.rotation = new Quaternion(0, 0, 0, 0);
