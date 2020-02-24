@@ -11,16 +11,10 @@ public class Items : MonoBehaviour
 
     public Items()
     {
-        this.hpFlat = ilvl * 100 + 50;
-        this.hpPercent = ilvl * 0.01f + 0.02f;
-        this.globalDamage = ilvl * 0.02f + 0.05f;
+        hpFlat = ilvl * 100 + 50;
+        hpPercent = ilvl * 0.01f + 0.02f;
+        globalDamage = ilvl * 0.02f + 0.05f;
     }
 
     public int Ilvl => ilvl;
-
-    public int HpFlat => hpFlat;
-
-    public float HpPercent => hpPercent;
-
-    public float GlobalDamage => globalDamage;
 }
