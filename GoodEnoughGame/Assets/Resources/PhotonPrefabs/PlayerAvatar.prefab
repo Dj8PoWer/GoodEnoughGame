@@ -745,6 +745,8 @@ GameObject:
   - component: {fileID: 5650810683664899902}
   - component: {fileID: 6432958268627643354}
   - component: {fileID: 6574424237502944692}
+  - component: {fileID: 1423822162119767975}
+  - component: {fileID: 478661653233268473}
   m_Layer: 0
   m_Name: bow_1
   m_TagString: Untagged
@@ -835,3 +837,41 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1423822162119767975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440037910673405104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56213c3a5a842b048bcd506d3c9ccef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSpeed: 0.5
+  arrowPos: {fileID: 8136160453846979544}
+  arrowRot: {fileID: 2649066424973443087}
+  arrow: {fileID: 6417904226450301026, guid: e961a6f18ba2b7a47b365a86f078245f, type: 3}
+--- !u!114 &478661653233268473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440037910673405104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
