@@ -22,6 +22,6 @@ public class Swords : Weapons
         attackSpeed += Ilvl * 0.025f;
         castSpeed += Ilvl * 0.002f;
 
-        armor += Ilvl * 7 + 30;
+        armor = Ilvl * 7 + 30;
     }
 }
