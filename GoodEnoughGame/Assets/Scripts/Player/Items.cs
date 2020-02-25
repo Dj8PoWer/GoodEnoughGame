@@ -4,6 +4,35 @@ using UnityEngine;
 
 public class Items : MonoBehaviour
 {
+    protected enum statsType{
+        hpFlat,
+        hpPercent,
+        hpRegenFlat,
+        hpRegenPercent,
+        moveSpeed,
+
+        armor,
+        fireResist,
+        waterResist,
+        airResist,
+
+        attackSpeed,
+        castSpeed,
+
+        globalDamage,
+
+        physicalDmgFlat,
+        physicalDmgPercent,
+
+        fireDamageFlat,
+        waterDamageFlat,
+        airDamageFlat,
+
+        fireDamagePercent,
+        waterDamagePercent,
+        airDamagePercent    
+    }
+
     private int ilvl;
     protected int hpFlat;
     protected float hpPercent;
