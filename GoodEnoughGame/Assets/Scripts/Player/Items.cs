@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Items : MonoBehaviour
 {
-    protected enum statsType{
+    public enum statsType{
         hpFlat,
         hpPercent,
         hpRegenFlat,

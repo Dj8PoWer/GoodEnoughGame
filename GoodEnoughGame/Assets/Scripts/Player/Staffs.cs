@@ -49,6 +49,10 @@ public class Staffs : Weapons
         
         GetRandomStats();
     }
+    
+    public List<(statsType, float)> Stats => stats;
+
+    public int BaseDmg => baseDmg;
 
     private void GetRandomStats()
     {
