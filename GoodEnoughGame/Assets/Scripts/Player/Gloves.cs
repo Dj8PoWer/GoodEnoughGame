@@ -4,18 +4,51 @@ using UnityEngine;
 
 public class Gloves : Armors
 {
+    #region Attributes
+
     // Les attributs en commentaires sont les attributs deja herites
 
     private float attackSpeed;
     private float castSpeed;
-    //private int hpFlat;
-    //private int armor;
+    //private float hpFlat;
+    //private float armor;
+    private List<statsType> possibleStats = new List<statsType>
+    {
+        statsType.attackSpeed,
+        statsType.castSpeed,
+        statsType.hpFlat,
+        statsType.armor
+    };
+    private List<statsType> Stats = new List<statsType>();
 
-    public Gloves()
+    #endregion Attributes
+
+    #region Constructor
+
+    public Gloves(int ilvl) : base (ilvl)
     {
         attackSpeed = Ilvl * 0.05f + 0.05f;
         castSpeed = Ilvl * 0.03f + 0.03f;
-        hpFlat += Ilvl * 1 + 70;
-        armor += Ilvl * 1 + 5;
+        hpFlat += Ilvl * 1f + 70f;
+        armor += Ilvl * 1f + 5f;
     }
+
+
+    #endregion Constructor
+
+    #region Methods
+
+    private void ChooseStats(List<statsType> possibleStats)
+    {
+
+        for (int i = 0; i < Random.Range(1, possibleStats.Count); i++)
+        {
+            int index = Random.Range(0, possibleStats.Count - 1);
+            Stats.Add(possibleStats[index]);
+            possibleStats.RemoveAt(index);
+        }
+
+    }
+
+    #endregion Methods
 }
