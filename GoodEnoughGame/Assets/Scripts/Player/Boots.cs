@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ public class Boots : Armors
         statsType.moveSpeed,
         statsType.armor
     };
-    private List<statsType> Stats = new List<statsType>();
+    private List<(statsType, float)> stats = new List<(statsType, float)>();
 
     #endregion Attributes
 
@@ -43,10 +44,31 @@ public class Boots : Armors
     private void ChooseStats(List<statsType> possibleStats)
     {
 
-        for (int i = 0; i < Random.Range(1, possibleStats.Count); i++)
+        for (int i = 0; i <= UnityEngine.Random.Range(1, possibleStats.Count); i++)
         {
-            int index = Random.Range(0, possibleStats.Count - 1);
-            Stats.Add(possibleStats[index]);
+            int index = UnityEngine.Random.Range(0, possibleStats.Count - 1);
+
+            switch (possibleStats[index])
+
+            {
+                case statsType.hpFlat:
+                    stats.Add((statsType.hpFlat, hpFlat));
+                    break;
+                case statsType.hpPercent:
+                    stats.Add((statsType.hpPercent, hpPercent));
+                    break;
+                case statsType.hpRegenFlat:
+                    stats.Add((statsType.hpRegenFlat, hpRegenFlat));
+                    break;
+                case statsType.moveSpeed:
+                    stats.Add((statsType.moveSpeed, moveSpeed));
+                    break;
+                case statsType.armor:
+                    stats.Add((statsType.armor, armor));
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
             possibleStats.RemoveAt(index);
         }
 

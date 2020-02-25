@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +24,7 @@ public class Chestplate : Armors
         statsType.waterResist,
         statsType.airResist
     };
-    private List<statsType> Stats = new List<statsType>();
+    private List<(statsType, float)> stats = new List<(statsType, float)>();
 
     #endregion Attributes
 
@@ -46,10 +47,34 @@ public class Chestplate : Armors
     private void ChooseStats(List<statsType> possibleStats)
     {
 
-        for (int i = 0; i < Random.Range(1, possibleStats.Count); i++)
+        for (int i = 0; i <= UnityEngine.Random.Range(1, possibleStats.Count); i++)
         {
-            int index = Random.Range(0, possibleStats.Count - 1);
-            Stats.Add(possibleStats[index]);
+            int index = UnityEngine.Random.Range(0, possibleStats.Count - 1);
+
+            switch (possibleStats[index])
+
+            {
+                case statsType.armor:
+                    stats.Add((statsType.armor, armor));
+                    break;
+                case statsType.hpFlat:
+                    stats.Add((statsType.hpFlat, hpFlat));
+                    break;
+                case statsType.hpPercent:
+                    stats.Add((statsType.hpPercent, hpPercent));
+                    break;
+                case statsType.fireResist:
+                    stats.Add((statsType.fireResist, fireResist));
+                    break;
+                case statsType.waterResist:
+                    stats.Add((statsType.waterResist, waterResist));
+                    break;
+                case statsType.airResist:
+                    stats.Add((statsType.airResist, airResist));
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
             possibleStats.RemoveAt(index);
         }
 
