@@ -28,6 +28,12 @@ public class Chestplate : Armors
 
     #endregion Attributes
 
+    #region Getters&Setters
+
+    public List<(statsType, float)> Stats => stats;
+
+    #endregion Getters&Setters
+
     #region Constructor
 
     public Chestplate(int ilvl) : base (ilvl)

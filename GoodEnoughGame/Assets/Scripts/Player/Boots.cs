@@ -26,6 +26,12 @@ public class Boots : Armors
 
     #endregion Attributes
 
+    #region Getters&Setters
+
+    public List<(statsType, float)> Stats => stats;
+
+    #endregion Getters&Setters
+
     #region Constructor
 
     public Boots(int ilvl) : base (ilvl)

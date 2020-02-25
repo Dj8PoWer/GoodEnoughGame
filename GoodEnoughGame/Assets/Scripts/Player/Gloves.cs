@@ -24,6 +24,12 @@ public class Gloves : Armors
 
     #endregion Attributes
 
+    #region Getters&Setters
+
+    public List<(statsType, float)> Stats => stats;
+
+    #endregion Getters&Setters
+
     #region Constructor
 
     public Gloves(int ilvl) : base (ilvl)

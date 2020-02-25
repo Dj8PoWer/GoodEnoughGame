@@ -26,6 +26,12 @@ public class Helmet : Armors
 
     #endregion Attributes
 
+    #region Getters&Setters
+
+    public List<(statsType, float)> Stats => stats;
+
+    #endregion Getters&Setters
+
     #region Constructor
 
     public Helmet(int ilvl) : base (ilvl)
