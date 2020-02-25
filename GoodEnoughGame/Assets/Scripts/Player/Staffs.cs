@@ -106,6 +106,7 @@ public class Staffs : Weapons
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            possibleStats.RemoveAt(j);
         }
     }
 

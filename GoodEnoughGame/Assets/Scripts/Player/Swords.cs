@@ -104,6 +104,7 @@ public class Swords : Weapons
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            possibleStats.RemoveAt(j);
         }
     }
 }
