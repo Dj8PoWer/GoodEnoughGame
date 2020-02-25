@@ -34,12 +34,13 @@ public class Items : MonoBehaviour
     }
 
     private int ilvl;
-    protected int hpFlat;
+    protected float hpFlat;
     protected float hpPercent;
     protected float globalDamage;
 
-    public Items()
+    public Items(int ilvl)
     {
+        this.ilvl = ilvl;
         hpFlat = ilvl * 100 + 50;
         hpPercent = ilvl * 0.01f + 0.02f;
         globalDamage = ilvl * 0.02f + 0.05f;

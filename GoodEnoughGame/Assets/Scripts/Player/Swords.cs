@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Swords : Weapons
 {
-    private int armor;
+    private float armor;
 
-    public Swords()
+    public Swords(int ilvl)
+        : base(ilvl)
     {
         fireDamageFlat += Ilvl * 1 + 5;
         waterDamageFlat += Ilvl * 1 + 5;

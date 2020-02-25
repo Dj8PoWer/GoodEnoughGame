@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class Weapons : Items
 {
-    protected int fireDamageFlat;
-    protected int waterDamageFlat;
-    protected int airDamageFlat;
+    protected float fireDamageFlat;
+    protected float waterDamageFlat;
+    protected float airDamageFlat;
 
     protected float fireDamagePercent;
     protected float waterDamagePercent;
     protected float airDamagePercent;
 
-    protected int physicalDmgFlat;
+    protected float physicalDmgFlat;
     protected float physicalDmgPercent;
 
     protected float attackSpeed;
     protected float castSpeed;
 
 
-    public Weapons()
+    public Weapons(int ilvl)
+        : base (ilvl)
     {
         globalDamage += Ilvl * 0.01f + 0.01f;
 

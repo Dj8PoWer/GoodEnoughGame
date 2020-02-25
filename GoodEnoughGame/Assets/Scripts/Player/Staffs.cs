@@ -6,7 +6,26 @@ public class Staffs : Weapons
 {
     private float movespeed;
 
-    public Staffs()
+    List<statsType> possibleStats = new List<statsType>
+    {
+        statsType.globalDamage,
+        statsType.hpFlat,
+        statsType.hpPercent,
+        statsType.fireDamageFlat,
+        statsType.fireDamagePercent,
+        statsType.waterDamageFlat,
+        statsType.waterDamagePercent,
+        statsType.airDamageFlat,
+        statsType.airDamagePercent,
+        statsType.physicalDmgFlat,
+        statsType.physicalDmgPercent,
+        statsType.attackSpeed,
+        statsType.castSpeed,
+        statsType.moveSpeed
+    };
+
+    public Staffs(int ilvl)
+        : base (ilvl)
     {
         fireDamageFlat += Ilvl * 8 + 40;
         waterDamageFlat += Ilvl * 8 + 40;

@@ -6,7 +6,8 @@ public class Bows : Weapons
 {
     private float movespeed;
 
-    public Bows()
+    public Bows(int ilvl)
+        : base (ilvl)
     {
         fireDamageFlat += Ilvl * 5 + 20;
         waterDamageFlat += Ilvl * 5 + 20;
