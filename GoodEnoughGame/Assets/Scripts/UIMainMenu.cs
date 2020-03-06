@@ -8,7 +8,8 @@ public class UIMainMenu : MonoBehaviour
 {
     public void QuitGame()
     {
-
+        Debug.Log("QUIT GAME");
+        Application.Quit();
     }
 
     public void JoinOnlineLooby()
