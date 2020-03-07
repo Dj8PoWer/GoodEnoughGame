@@ -211,13 +211,15 @@ GameObject:
   m_Component:
   - component: {fileID: 8629147589900697302}
   - component: {fileID: 8772689681470421207}
+  - component: {fileID: 6829968676059013096}
+  - component: {fileID: 9151655210588369337}
   m_Layer: 0
   m_Name: staff_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8629147589900697302
 Transform:
   m_ObjectHideFlags: 0
@@ -281,6 +283,44 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6829968676059013096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138596690222936472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070c30d0ed3e10a47a06a96d1c57488e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSpeed: 0.5
+  projectilePos: {fileID: 8136160453846979544}
+  projectileRot: {fileID: 2649066424973443087}
+  projectile: {fileID: 1391134630614147319, guid: 2e22ce2abd6c958468fbd91ed2fdc838,
+    type: 3}
+--- !u!114 &9151655210588369337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138596690222936472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &3213699067469359435
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,7 +793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5650810683664899902
 Transform:
   m_ObjectHideFlags: 0
