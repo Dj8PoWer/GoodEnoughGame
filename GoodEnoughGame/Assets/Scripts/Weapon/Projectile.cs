@@ -14,19 +14,20 @@ public class Projectile : MonoBehaviour
     {
         projectile = GetComponent<Rigidbody2D>();
 
-        Quaternion rotation = Quaternion.Euler(0, 0, Random.Range(0, 180) - 90);
+        Quaternion rotation = Quaternion.Euler(0, 0, Random.Range(0, 120) - 60);
         Vector3 vect = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
         Debug.Log(vect);
         Vector3 rotateVector = rotation * vect;
         Debug.Log(rotateVector);
 
-        projectile.AddForce(rotateVector * speed * 50)
+        projectile.AddForce(rotateVector * 10);
     }
 
     // Update is called once per frame
     void Update()
     {
         Vector2 currentVector= new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+        currentVector.Normalize();
         projectile.AddForce(currentVector * Time.deltaTime * speed);
 
         time -= Time.deltaTime;

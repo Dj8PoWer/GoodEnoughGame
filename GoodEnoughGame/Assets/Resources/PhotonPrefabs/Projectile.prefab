@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 2
-  speed: 0
+  speed: 87.23
   mousePos: {x: 0, y: 0}
   projectile: {fileID: 0}
 --- !u!50 &848858733049100565

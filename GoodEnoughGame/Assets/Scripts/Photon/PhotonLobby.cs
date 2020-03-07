@@ -3,6 +3,7 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PhotonLobby : MonoBehaviourPunCallbacks
 {
@@ -11,6 +12,8 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
 
     public GameObject joinButton;
     public GameObject cancelButton;
+
+    public Text serverName;
 
     private void Awake()
     {
@@ -35,6 +38,16 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
         joinButton.SetActive(false);
         cancelButton.SetActive(true);
         PhotonNetwork.JoinRandomRoom();
+    }
+
+    public void JoinRoom()
+    {
+        if (serverName.text != "")
+        {
+            RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)MultiplayerSettings.multiplayerSettings.maxPlayer }; ;
+        }
+        else
+            CreateRoom();
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
