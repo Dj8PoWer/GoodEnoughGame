@@ -30,6 +30,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     {
         Debug.Log("Player connected to the photon server");
         PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.JoinLobby();
         joinButton.SetActive(true);
     }
 
@@ -37,31 +38,48 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     {
         joinButton.SetActive(false);
         cancelButton.SetActive(true);
-        PhotonNetwork.JoinRandomRoom();
+        JoinRoom();
     }
 
     public void JoinRoom()
     {
         if (serverName.text != "")
         {
-            RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)MultiplayerSettings.multiplayerSettings.maxPlayer }; ;
+            Debug.Log("Trying to join " + serverName.text);
+            PhotonNetwork.JoinRoom(serverName.text);
         }
         else
-            CreateRoom();
+        {
+            Debug.Log("Trying to join a RandomRoom");
+            PhotonNetwork.JoinRandomRoom();
+        }
+    }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("Player failed to join a room");
+        CreateRoom(serverName.text);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        Debug.Log("Player failed to join random room");
-        CreateRoom();
+        Debug.Log("Player failed to join a room");
+        CreateRoom(serverName.text);
     }
 
-    void CreateRoom()
+    void CreateRoom(string name = "")
     {
         Debug.Log("Trying to create a new room");
-        int randomRoomName = Random.Range(0, 10000);
-        RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte) MultiplayerSettings.multiplayerSettings.maxPlayer };
-        PhotonNetwork.CreateRoom("Room" + randomRoomName, roomOps);
+        RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)MultiplayerSettings.multiplayerSettings.maxPlayer };
+        if (serverName.text != "")
+        {
+            PhotonNetwork.CreateRoom(serverName.text, roomOps);
+        }
+        else
+        {
+            int randomRoomName = Random.Range(0, 10000);
+            PhotonNetwork.CreateRoom("Room" + randomRoomName, roomOps);
+        }
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
