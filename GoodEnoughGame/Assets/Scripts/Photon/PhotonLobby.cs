@@ -12,6 +12,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
 
     public GameObject joinButton;
     public GameObject cancelButton;
+    public GameObject offline;
 
     public Text serverName;
 
@@ -32,6 +33,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.JoinLobby();
         joinButton.SetActive(true);
+        offline.SetActive(false);
     }
 
     public void OnJoinButtonClick()
