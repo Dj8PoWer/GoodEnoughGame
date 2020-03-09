@@ -5,10 +5,14 @@ using UnityEngine;
 public class SwordSlash : MonoBehaviour
 {
     float time = 0.4f;
+    
+    public AudioClip spawn;
+    AudioSource audio;
 
     void Start()
     {
-        
+        audio = GetComponent<AudioSource>();
+        audio.PlayOneShot(spawn, 0.8F);
     }
 
     // Update is called once per frame

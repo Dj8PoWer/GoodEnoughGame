@@ -8,6 +8,9 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float speed;
     public Vector2 mousePos;
     public Rigidbody2D projectile;
+
+    public AudioClip spawn;
+    AudioSource audio;
     
     // Start is called before the first frame update
     void Start()
@@ -21,6 +24,9 @@ public class Projectile : MonoBehaviour
         Debug.Log(rotateVector);
 
         projectile.AddForce(rotateVector * 10);
+
+        audio = GetComponent<AudioSource>();
+        audio.PlayOneShot(spawn, 0.8F);
     }
 
     // Update is called once per frame
