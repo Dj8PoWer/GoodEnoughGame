@@ -7,9 +7,40 @@ public class WeaponManager : MonoBehaviour
 {
     PhotonView PV;
 
+    public GameObject staff;
+    public GameObject sword;
+    public GameObject bow;
+
     void Start()
     {
         PV = GetComponent<PhotonView>();
+    }
+
+    private void Update()
+    {
+        SwapWeapon();
+    }
+
+    public void SwapWeapon()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            staff.SetActive(false);
+            bow.SetActive(false);
+            sword.SetActive(true);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            staff.SetActive(false);
+            bow.SetActive(true);
+            sword.SetActive(false);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            staff.SetActive(true);
+            bow.SetActive(false);
+            sword.SetActive(false);
+        }
     }
 
     void LateUpdate()

@@ -11,19 +11,19 @@ public class Projectile : MonoBehaviour
 
     public AudioClip spawn;
     AudioSource audio;
+
+    public GameObject texture;
     
     // Start is called before the first frame update
     void Start()
     {
         projectile = GetComponent<Rigidbody2D>();
 
-        Quaternion rotation = Quaternion.Euler(0, 0, Random.Range(0, 120) - 60);
+        Quaternion rotation = Quaternion.Euler(0, 0, Random.Range(-30, 30));
         Vector3 vect = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
-        Debug.Log(vect);
         Vector3 rotateVector = rotation * vect;
-        Debug.Log(rotateVector);
 
-        projectile.AddForce(rotateVector * 10);
+        projectile.AddForce(rotateVector * 30);
 
         audio = GetComponent<AudioSource>();
         audio.PlayOneShot(spawn, 0.8F);
@@ -35,11 +35,18 @@ public class Projectile : MonoBehaviour
         Vector2 currentVector= new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
         currentVector.Normalize();
         projectile.AddForce(currentVector * Time.deltaTime * speed);
-
+        
         time -= Time.deltaTime;
         if (time <= 0)
         {
             Destroy(gameObject);
         }
+    }
+
+    private void LateUpdate()
+    {
+        Vector2 dir = projectile.velocity;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        texture.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 }

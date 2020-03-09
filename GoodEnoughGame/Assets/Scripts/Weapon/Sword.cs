@@ -28,12 +28,17 @@ public class Sword : MonoBehaviour
     {
         if (PV.IsMine)
         {
-            cooldown -= Time.deltaTime;
+//            if (animator.GetBool("Attack"))
+//                animator.SetBool("Attack", false);
             if (cooldown <= 0 && Input.GetKey(KeyCode.Mouse0))
             {
+                //                animator.SetBool("Attack", true);
+                animator.SetTrigger("attacc");
                 PV.RPC("RPC_Attack", RpcTarget.All, slashPos.position, slashRot.rotation);
                 cooldown = attackSpeed;
             }
+            else
+                cooldown -= Time.deltaTime;
         }
     }
 
@@ -52,7 +57,6 @@ public class Sword : MonoBehaviour
     [PunRPC]
     void RPC_Attack(Vector3 pos, Quaternion rot)
     {
-        animator.SetTrigger("Attack");
         Instantiate(slash, pos, rot);
     }
 }

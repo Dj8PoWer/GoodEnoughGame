@@ -39,7 +39,7 @@ public class Staff : MonoBehaviour
     [PunRPC]
     void RPC_Attack(Vector3 pos, Quaternion rot, Vector2 mousePos)
     {
-        var Object = Instantiate(projectile, pos, rot);
+        var Object = Instantiate(projectile, pos, Quaternion.identity);
         var projectil = Object.GetComponent<Projectile>();
         projectil.mousePos = mousePos;
     }

@@ -27,19 +27,22 @@ public class Bow : MonoBehaviour
     {
         if (PV.IsMine)
         {
-            cooldown -= Time.deltaTime;
+            if (animator.GetBool("Shot"))
+                animator.SetBool("Shot", false);
             if (cooldown <= 0 && Input.GetKey(KeyCode.Mouse0))
             {
+                animator.SetBool("Shot", true);
                 PV.RPC("RPC_Attack", RpcTarget.All, arrowPos.position, arrowRot.rotation);
                 cooldown = attackSpeed;
             }
+            else
+                cooldown -= Time.deltaTime;
         }
     }
 
     [PunRPC]
     void RPC_Attack(Vector3 pos, Quaternion rot)
     {
-        animator.SetTrigger("Attack");
         Instantiate(arrow, pos, rot);
     }
 }
