@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5987077705915133927}
   m_Layer: 0
   m_Name: arrow
-  m_TagString: Untagged
+  m_TagString: ProjectileAlly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,10 +130,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0004658699, y: 0.00046610832}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -144,7 +144,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.07}
+  m_Size: {x: 0.4049883, y: 0.1566912}
   m_EdgeRadius: 0
 --- !u!82 &5987077705915133927
 AudioSource:

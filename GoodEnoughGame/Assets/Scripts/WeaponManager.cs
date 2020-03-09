@@ -11,35 +11,60 @@ public class WeaponManager : MonoBehaviour
     public GameObject sword;
     public GameObject bow;
 
+    int staffID;
+    int swordID;
+    int bowID;
+
     void Start()
     {
         PV = GetComponent<PhotonView>();
+        PhotonView[] childs = GetComponentsInChildren<PhotonView>();
+        staffID = childs[1].ViewID;
+        bowID = childs[2].ViewID;
+        swordID = childs[3].ViewID;
+        staff.SetActive(true);
+        bow.SetActive(false);
+        sword.SetActive(false);
     }
 
     private void Update()
     {
-        SwapWeapon();
+        if (PV.IsMine)
+            Swap();
     }
 
-    public void SwapWeapon()
+    public void Swap()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
+            PV.RPC("SwapWeapon", RpcTarget.All, swordID, staffID, bowID, 1);
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+            PV.RPC("SwapWeapon", RpcTarget.All, swordID, staffID, bowID, 2);
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+            PV.RPC("SwapWeapon", RpcTarget.All, swordID, staffID, bowID, 3);
+    }
+
+
+    [PunRPC]
+    public void SwapWeapon(int sword, int staff, int bow, int i)
+    {
+
+        if (i == 1)
         {
-            staff.SetActive(false);
-            bow.SetActive(false);
-            sword.SetActive(true);
+            PhotonView.Find(staff).gameObject.SetActive(false);
+            PhotonView.Find(bow).gameObject.SetActive(false);
+            PhotonView.Find(sword).gameObject.SetActive(true);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (i == 2)
         {
-            staff.SetActive(false);
-            bow.SetActive(true);
-            sword.SetActive(false);
+            PhotonView.Find(staff).gameObject.SetActive(false);
+            PhotonView.Find(bow).gameObject.SetActive(true);
+            PhotonView.Find(sword).gameObject.SetActive(false);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (i == 3)
         {
-            staff.SetActive(true);
-            bow.SetActive(false);
-            sword.SetActive(false);
+            PhotonView.Find(staff).gameObject.SetActive(true);
+            PhotonView.Find(bow).gameObject.SetActive(false);
+            PhotonView.Find(sword).gameObject.SetActive(false);
         }
     }
 

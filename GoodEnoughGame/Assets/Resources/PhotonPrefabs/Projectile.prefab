@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 7008105245733172729}
   - component: {fileID: 848858733049100565}
   - component: {fileID: 4149405643760426571}
+  - component: {fileID: 8986813111086717670}
   m_Layer: 0
   m_Name: Projectile
-  m_TagString: Untagged
+  m_TagString: ProjectileAlly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,6 +170,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!61 &8986813111086717670
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391134630614147319}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.029772013, y: 0.0012944937}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.68674654, y: 0.37608218}
+  m_EdgeRadius: 0
 --- !u!1 &5213883648164445313
 GameObject:
   m_ObjectHideFlags: 0
