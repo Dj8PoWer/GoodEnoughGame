@@ -47,12 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 543044436afa97449a2330ef010889b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 1.3
+  time: 2
   speed: 300
   mousePos: {x: 0, y: 0}
   projectile: {fileID: 0}
   spawn: {fileID: 0}
   texture: {fileID: 5213883648164445313}
+  strength: 5
+  target: 
 --- !u!50 &848858733049100565
 Rigidbody2D:
   serializedVersion: 4

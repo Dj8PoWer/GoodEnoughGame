@@ -9,6 +9,9 @@ public class Arrow : MonoBehaviour
     
     public AudioClip spawn;
     AudioSource audio;
+    
+    public int strength = 10;
+    public string target = "";
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +28,31 @@ public class Arrow : MonoBehaviour
         time -= Time.deltaTime;
         if (time <= 0)
         {
+            Destroy(gameObject);
+        }
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Player") && target == "player")
+        {
+            Debug.Log("touch");
+            PlayerManager p = other.GetComponent<PlayerManager>();
+            p.TakeDamage(strength);
+            Destroy(gameObject);
+        }
+        if(other.CompareTag("MobShooter") && target == "mob")
+        {
+            Debug.Log(" mobtouch");
+            MobShooter p = other.GetComponent<MobShooter>();
+            p.TakeDamage(strength);
+            Destroy(gameObject);
+        }
+        if(other.CompareTag("MobChaser") && target == "mob")
+        {
+            Debug.Log("mobtouch");
+            MobChaser p = other.GetComponent<MobChaser>();
+            p.TakeDamage(strength);
             Destroy(gameObject);
         }
     }

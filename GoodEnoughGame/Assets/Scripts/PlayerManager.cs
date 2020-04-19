@@ -8,6 +8,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     int speed = 0;
 
+    public int health = 100;
+
     private PhotonView PV;
 
     private Animator animPlayer;
@@ -28,6 +30,8 @@ public class PlayerManager : MonoBehaviour
         {
             cam.SetActive(true);
         }
+
+        gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -77,5 +81,15 @@ public class PlayerManager : MonoBehaviour
         else
             player.transform.rotation = new Quaternion(0, 0, 0, 0);
     }
-
+    
+    public void TakeDamage(int amount)
+    {
+        health -= amount;
+        //animPlayer.SetBool("Hurt", true);
+        if (health <= 0)
+        {
+            //animPlayer.SetBool("Dying", true);
+            Destroy(gameObject);
+        }
+    }
 }

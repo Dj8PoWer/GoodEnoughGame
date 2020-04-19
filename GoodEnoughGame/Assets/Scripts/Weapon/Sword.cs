@@ -57,6 +57,9 @@ public class Sword : MonoBehaviour
     [PunRPC]
     void RPC_Attack(Vector3 pos, Quaternion rot)
     {
-        Instantiate(slash, pos, rot);
+        var Object = Instantiate(slash, pos, rot);
+        var projectil = Object.GetComponent<SwordSlash>();
+        projectil.target = "mob";
     }
+    
 }

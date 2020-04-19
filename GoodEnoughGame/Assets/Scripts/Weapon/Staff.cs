@@ -42,5 +42,6 @@ public class Staff : MonoBehaviour
         var Object = Instantiate(projectile, pos, Quaternion.identity);
         var projectil = Object.GetComponent<Projectile>();
         projectil.mousePos = mousePos;
+        projectil.target = "mob";
     }
 }

@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - ProjectileAlly
+  - Mob
+  - MobChaser
+  - MobShooter
   layers:
   - Default
   - TransparentFX

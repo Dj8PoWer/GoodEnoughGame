@@ -43,6 +43,8 @@ public class Bow : MonoBehaviour
     [PunRPC]
     void RPC_Attack(Vector3 pos, Quaternion rot)
     {
-        Instantiate(arrow, pos, rot);
+        var Object = Instantiate(arrow, pos, rot);
+        var projectil = Object.GetComponent<Arrow>();
+        projectil.target = "mob";
     }
 }
