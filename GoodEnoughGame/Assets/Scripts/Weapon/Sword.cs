@@ -34,7 +34,7 @@ public class Sword : MonoBehaviour
             {
                 //                animator.SetBool("Attack", true);
                 animator.SetTrigger("attacc");
-                PV.RPC("RPC_Attack", RpcTarget.All, slashPos.position, slashRot.rotation);
+                PV.RPC("RPC_Attack", RpcTarget.MasterClient, slashPos.position, slashRot.rotation);
                 cooldown = attackSpeed;
             }
             else
@@ -57,7 +57,7 @@ public class Sword : MonoBehaviour
     [PunRPC]
     void RPC_Attack(Vector3 pos, Quaternion rot)
     {
-        var Object = Instantiate(slash, pos, rot);
+        var Object = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "slash_1"), slashPos.position, slashRot.rotation, 0);
         var projectil = Object.GetComponent<SwordSlash>();
         projectil.target = "mob";
     }

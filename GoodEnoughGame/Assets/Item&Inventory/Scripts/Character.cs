@@ -28,6 +28,8 @@ public class Character : MonoBehaviour
     public CharacterStat waterDamagePercent;
     public CharacterStat airDamagePercent;
 
+    #region Inventory
+
     public Inventory Inventory;
     public EquipmentPanel EquipmentPanel;
 
@@ -226,4 +228,5 @@ public class Character : MonoBehaviour
         }
     }
 
+    #endregion
 }

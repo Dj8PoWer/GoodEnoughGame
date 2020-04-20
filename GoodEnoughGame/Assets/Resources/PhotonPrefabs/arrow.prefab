@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: -6033551544412951912}
   - component: {fileID: -7914958475032027141}
   - component: {fileID: 5987077705915133927}
+  - component: {fileID: 7773257047903230947}
+  - component: {fileID: 5666882203877514524}
   m_Layer: 0
   m_Name: arrow
   m_TagString: ProjectileAlly
@@ -99,6 +101,8 @@ MonoBehaviour:
   time: 0.7
   speed: 14
   spawn: {fileID: 0}
+  strength: 10
+  target: 
 --- !u!50 &-6033551544412951912
 Rigidbody2D:
   serializedVersion: 4
@@ -242,3 +246,40 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7773257047903230947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6417904226450301026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 5666882203877514524}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &5666882203877514524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6417904226450301026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0

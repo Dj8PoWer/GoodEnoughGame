@@ -41,6 +41,8 @@ public class PlayerManager : MonoBehaviour
         {
             Deplacement();
             Flip();
+            if (PhotonNetwork.IsMasterClient)
+                Debug.Log("master");
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Staff : MonoBehaviour
@@ -30,7 +31,7 @@ public class Staff : MonoBehaviour
             cooldown -= Time.deltaTime;
             if (cooldown <= 0 && Input.GetKey(KeyCode.Mouse0))
             {
-                PV.RPC("RPC_Attack", RpcTarget.All, projectilePos.position, projectileRot.rotation, (Vector2)(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
+                PV.RPC("RPC_Attack", RpcTarget.MasterClient, projectilePos.position, projectileRot.rotation, (Vector2)(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
                 cooldown = attackSpeed;
             }
         }
@@ -39,7 +40,7 @@ public class Staff : MonoBehaviour
     [PunRPC]
     void RPC_Attack(Vector3 pos, Quaternion rot, Vector2 mousePos)
     {
-        var Object = Instantiate(projectile, pos, Quaternion.identity);
+        var Object = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Projectile"), pos, Quaternion.identity, 0);
         var projectil = Object.GetComponent<Projectile>();
         projectil.mousePos = mousePos;
         projectil.target = "mob";
