@@ -6,34 +6,47 @@ public class EquipmentPanel : MonoBehaviour
 {
     [SerializeField]
     Transform equipmentSlotsParent;
-    [SerializeField]
-    EquipmentSlot[] equipmentSlots;
 
-    public event Action<Items> OnItemRightClickedEvent;
+    public EquipmentSlot[] EquipmentSlots;
+
+    public event Action<ItemSlot> OnPointerEnterEvent;
+    public event Action<ItemSlot> OnPointerExitEvent;
+    public event Action<ItemSlot> OnRightClickEvent;
+    public event Action<ItemSlot> OnBeginDragEvent;
+    public event Action<ItemSlot> OnEndDragEvent;
+    public event Action<ItemSlot> OnDragEvent;
+    public event Action<ItemSlot> OnDropEvent;
 
 
-    public void Initialize()
+    private void Start()
     {
-        for (int i = 0; i < equipmentSlots.Length; i++)
+        OnValidate();
+        for (int i = 0; i < EquipmentSlots.Length; i++)
         {
-            equipmentSlots[i].OnRightClickEvent += OnItemRightClickedEvent;
+            EquipmentSlots[i].OnPointerEnterEvent += slot => OnPointerEnterEvent(slot);
+            EquipmentSlots[i].OnPointerExitEvent += slot => OnPointerExitEvent(slot);
+            EquipmentSlots[i].OnRightClickEvent += slot => OnRightClickEvent(slot);
+            EquipmentSlots[i].OnBeginDragEvent += slot => OnBeginDragEvent(slot);
+            EquipmentSlots[i].OnEndDragEvent += slot => OnEndDragEvent(slot);
+            EquipmentSlots[i].OnDragEvent += slot => OnDragEvent(slot);
+            EquipmentSlots[i].OnDropEvent += slot => OnDropEvent(slot);
         }
     }
 
 
     private void OnValidate()
     {
-        equipmentSlots = equipmentSlotsParent.GetComponentsInChildren<EquipmentSlot>();
+        EquipmentSlots = equipmentSlotsParent.GetComponentsInChildren<EquipmentSlot>();
     }
 
     public bool AddItem(EquipableItem item, out EquipableItem previousItem)
     {
-        for (int i = 0; i < equipmentSlots.Length; i++)
+        for (int i = 0; i < EquipmentSlots.Length; i++)
         {
-            if (equipmentSlots[i].equipmentType == item.equipmentType)
+            if (EquipmentSlots[i].equipmentType == item.equipmentType)
             {
-                previousItem = (EquipableItem) equipmentSlots[i].ItemGS;
-                equipmentSlots[i].ItemGS = item;
+                previousItem = (EquipableItem) EquipmentSlots[i].ItemGS;
+                EquipmentSlots[i].ItemGS = item;
                 return true;
             }
         }
@@ -43,11 +56,11 @@ public class EquipmentPanel : MonoBehaviour
 
     public bool RemoveItem(EquipableItem item)
     {
-        for (int i = 0; i < equipmentSlots.Length; i++)
+        for (int i = 0; i < EquipmentSlots.Length; i++)
         {
-            if (equipmentSlots[i].ItemGS == item)
+            if (EquipmentSlots[i].ItemGS == item)
             {
-                equipmentSlots[i].ItemGS = null;
+                EquipmentSlots[i].ItemGS = null;
                 return true;
             }
         }
