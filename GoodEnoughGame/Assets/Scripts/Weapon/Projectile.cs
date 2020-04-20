@@ -58,7 +58,7 @@ public class Projectile : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         texture.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Player") && target == "player")

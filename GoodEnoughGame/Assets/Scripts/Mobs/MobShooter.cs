@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class MobShooter : MonoBehaviour
 {
@@ -17,15 +18,40 @@ public class MobShooter : MonoBehaviour
 
     private Animator animMobShooter;
     
+    private PhotonView PV;
+    
     void Start()
     {
         animMobShooter = GetComponent<Animator>();
         time = originalTime;
+        
+        PV = GetComponent<PhotonView>();
+        
+        target = null;
+        var players = GameObject.FindGameObjectsWithTag("Player");
+        float minimum = float.MaxValue;
+        foreach (var play in players)
+        {
+            if (Vector2.Distance(transform.position, play.transform.position) < minimum)
+                target = play;
+        }
     }
 
     void Update()
     {
-        target = GameObject.FindWithTag("Player");
+        //old version : target = GameObject.FindWithTag("Player");
+        
+        if (target == null)
+        {
+            var players = GameObject.FindGameObjectsWithTag("Player");
+            float minimum = float.MaxValue;
+            foreach (var play in players)
+            {
+                if (Vector2.Distance(transform.position, play.transform.position) < minimum)
+                    target = play;
+            }
+        }
+        
         if (Vector2.Distance(transform.position, target.transform.position) > stopping)
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
         
@@ -38,10 +64,7 @@ public class MobShooter : MonoBehaviour
 
         if (time <= 0)
         {
-            var Object = Instantiate(proj, this.transform.position, Quaternion.identity);
-            var projectil = Object.GetComponent<Projectile>();
-            projectil.mousePos = target.transform.position;
-            projectil.target = "player";
+            PV.RPC("RPC_Attack", RpcTarget.MasterClient, target.transform.position, Quaternion.identity);
 
             time = originalTime;
         }
@@ -60,5 +83,13 @@ public class MobShooter : MonoBehaviour
             //animPlayer.SetBool("Dying", true);
             Destroy(gameObject);
         }
+    }
+    
+    [PunRPC]
+    void RPC_Attack(Vector3 pos, Quaternion rot)
+    {
+        var Object = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arrow"), arrowPos.position, arrowRot.rotation, 0);
+        var projectil = Object.GetComponent<Arrow>();
+        projectil.target = "player";
     }
 }
