@@ -43,21 +43,21 @@ public class Arrow : MonoBehaviour
             Debug.Log("touch");
             PlayerManager p = other.GetComponent<PlayerManager>();
             p.TakeDamage(strength);
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
         if(other.CompareTag("MobShooter") && target == "mob")
         {
             Debug.Log(" mobtouch");
             MobShooter p = other.GetComponent<MobShooter>();
             p.TakeDamage(strength);
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
         if(other.CompareTag("MobChaser") && target == "mob")
         {
             Debug.Log("mobtouch");
             MobChaser p = other.GetComponent<MobChaser>();
             p.TakeDamage(strength);
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }
