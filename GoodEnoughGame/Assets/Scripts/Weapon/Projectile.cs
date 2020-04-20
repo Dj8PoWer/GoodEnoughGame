@@ -54,29 +54,26 @@ public class Projectile : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         texture.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Player") && target == "player")
         {
-            Debug.Log("touch");
             PlayerManager p = other.GetComponent<PlayerManager>();
             p.TakeDamage(strength);
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
         if(other.CompareTag("MobShooter") && target == "mob")
         {
-            Debug.Log(" mobtouch");
             MobShooter p = other.GetComponent<MobShooter>();
             p.TakeDamage(strength);
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
         if(other.CompareTag("MobChaser") && target == "mob")
         {
-            Debug.Log("mobtouch");
             MobChaser p = other.GetComponent<MobChaser>();
             p.TakeDamage(strength);
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }
