@@ -379,15 +379,9 @@ GameObject:
   - component: {fileID: 1113833297447993576}
   - component: {fileID: 5992203305232018051}
   - component: {fileID: 3832048362043460757}
-<<<<<<< Updated upstream
   - component: {fileID: -7114817748323433069}
   - component: {fileID: 4046558560402241914}
-  - component: {fileID: -5071536873213762392}
   - component: {fileID: 7988786001433651402}
-=======
-  - component: {fileID: 1398077081721969748}
-  - component: {fileID: 6808790632450243528}
->>>>>>> Stashed changes
   m_Layer: 0
   m_Name: PlayerAvatar
   m_TagString: Player
@@ -465,27 +459,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
-<<<<<<< Updated upstream
 --- !u!50 &-7114817748323433069
-=======
---- !u!58 &1398077081721969748
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3213699067469359435}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.04933834}
-  serializedVersion: 2
-  m_Radius: 0.25
---- !u!50 &6808790632450243528
->>>>>>> Stashed changes
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -506,7 +480,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
-<<<<<<< Updated upstream
 --- !u!61 &4046558560402241914
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -533,18 +506,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-5071536873213762392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3213699067469359435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 244313526e13f9a43a6332446fed59b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7988786001433651402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,8 +521,6 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
-=======
->>>>>>> Stashed changes
 --- !u!1 &4977627008359032124
 GameObject:
   m_ObjectHideFlags: 0
