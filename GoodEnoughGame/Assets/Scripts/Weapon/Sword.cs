@@ -57,7 +57,7 @@ public class Sword : MonoBehaviour
     [PunRPC]
     void RPC_Attack(Vector3 pos, Quaternion rot)
     {
-        var Object = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "slash_1"), slashPos.position, slashRot.rotation, 0);
+        var Object = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "slash_1"), pos, rot, 0);
         var projectil = Object.GetComponent<SwordSlash>();
         projectil.target = "mob";
     }

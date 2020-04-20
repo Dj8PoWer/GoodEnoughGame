@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System.IO;
 
 public class MobShooter : MonoBehaviour
 {
@@ -88,7 +89,7 @@ public class MobShooter : MonoBehaviour
     [PunRPC]
     void RPC_Attack(Vector3 pos, Quaternion rot)
     {
-        var Object = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arrow"), arrowPos.position, arrowRot.rotation, 0);
+        var Object = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arrow"), pos, rot, 0);
         var projectil = Object.GetComponent<Arrow>();
         projectil.target = "player";
     }
