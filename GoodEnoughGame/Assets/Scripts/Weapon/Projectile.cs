@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Projectile : MonoBehaviour
 {
@@ -32,20 +33,23 @@ public class Projectile : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        Vector2 currentVector= new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
-        currentVector.Normalize();
-        projectile.AddForce(currentVector * Time.deltaTime * speed);
-        
-        time -= Time.deltaTime;
-        if (time <= 0)
+        if (PhotonNetwork.IsMasterClient)
         {
-            Destroy(gameObject);
-        }
+            Vector2 currentVector = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+            currentVector.Normalize();
+            projectile.AddForce(currentVector * Time.deltaTime * speed);
 
-        if (transform.position.x == mousePos.x && transform.position.y == mousePos.y)
-            Destroy(gameObject);
+            time -= Time.deltaTime;
+            if (time <= 0)
+            {
+                Destroy(gameObject);
+            }
+
+            if (transform.position.x == mousePos.x && transform.position.y == mousePos.y)
+                Destroy(gameObject);
+        }
     }
 
     private void LateUpdate()

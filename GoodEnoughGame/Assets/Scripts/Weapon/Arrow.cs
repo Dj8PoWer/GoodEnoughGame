@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,12 +24,15 @@ public class Arrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
-
-        time -= Time.deltaTime;
-        if (time <= 0)
+        if (PhotonNetwork.IsMasterClient)
         {
-            Destroy(gameObject);
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
+
+            time -= Time.deltaTime;
+            if (time <= 0)
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
         }
     }
     

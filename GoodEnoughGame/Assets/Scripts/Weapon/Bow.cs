@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Bow : MonoBehaviour
@@ -32,7 +33,7 @@ public class Bow : MonoBehaviour
             if (cooldown <= 0 && Input.GetKey(KeyCode.Mouse0))
             {
                 animator.SetBool("Shot", true);
-                PV.RPC("RPC_Attack", RpcTarget.All, arrowPos.position, arrowRot.rotation);
+                PV.RPC("RPC_Attack", RpcTarget.MasterClient, arrowPos.position, arrowRot.rotation);
                 cooldown = attackSpeed;
             }
             else
@@ -43,7 +44,7 @@ public class Bow : MonoBehaviour
     [PunRPC]
     void RPC_Attack(Vector3 pos, Quaternion rot)
     {
-        var Object = Instantiate(arrow, pos, rot);
+        var Object = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arrow"), arrowPos.position, arrowRot.rotation, 0);
         var projectil = Object.GetComponent<Arrow>();
         projectil.target = "mob";
     }
