@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float speed;
     public Vector2 mousePos;
     public Rigidbody2D projectile;
+    public float angle;
 
     public AudioClip spawn;
     AudioSource audio;
@@ -22,7 +23,7 @@ public class Projectile : MonoBehaviour
     {
         projectile = GetComponent<Rigidbody2D>();
 
-        Quaternion rotation = Quaternion.Euler(0, 0, Random.Range(-30, 30));
+        Quaternion rotation = Quaternion.Euler(0, 0, angle);
         Vector3 vect = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
         Vector3 rotateVector = rotation * vect;
 
@@ -35,20 +36,14 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (PhotonNetwork.IsMasterClient)
+        Vector2 currentVector = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+        currentVector.Normalize();
+        projectile.AddForce(currentVector * Time.deltaTime * speed);
+
+        time -= Time.deltaTime;
+        if (time <= 0)
         {
-            Vector2 currentVector = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
-            currentVector.Normalize();
-            projectile.AddForce(currentVector * Time.deltaTime * speed);
-
-            time -= Time.deltaTime;
-            if (time <= 0)
-            {
-                PhotonNetwork.Destroy(gameObject);
-            }
-
-            if (transform.position.x == mousePos.x && transform.position.y == mousePos.y)
-                Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -66,19 +61,19 @@ public class Projectile : MonoBehaviour
             Debug.Log("hit");
             PlayerManager p = other.GetComponent<PlayerManager>();
             p.TakeDamage(strength);
-            PhotonNetwork.Destroy(gameObject);
+            Destroy(gameObject);
         }
         if(other.CompareTag("MobShooter") && target == "mob")
         {
             MobShooter p = other.GetComponent<MobShooter>();
             p.TakeDamage(strength);
-            PhotonNetwork.Destroy(gameObject);
+            Destroy(gameObject);
         }
         if(other.CompareTag("MobChaser") && target == "mob")
         {
             MobChaser p = other.GetComponent<MobChaser>();
             p.TakeDamage(strength);
-            PhotonNetwork.Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }

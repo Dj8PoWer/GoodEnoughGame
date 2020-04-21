@@ -53,6 +53,7 @@ MonoBehaviour:
   speed: 300
   mousePos: {x: 0, y: 0}
   projectile: {fileID: 0}
+  angle: 0
   spawn: {fileID: 0}
   texture: {fileID: 5213883648164445313}
   strength: 5

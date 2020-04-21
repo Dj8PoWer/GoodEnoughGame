@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class MobChaser : MonoBehaviour
+public class MobChaser : MonoBehaviour, IPunObservable
 {
     public float speed = 1.5f;
     public float stopping = 0f;
@@ -31,7 +31,10 @@ public class MobChaser : MonoBehaviour
         foreach (var play in players)
         {
             if (Vector2.Distance(transform.position, play.transform.position) < minimum)
+            {
+                minimum = Vector2.Distance(transform.position, play.transform.position);
                 target = play;
+            }
         }
     }
 
@@ -46,7 +49,10 @@ public class MobChaser : MonoBehaviour
             foreach (var play in players)
             {
                 if (Vector2.Distance(transform.position, play.transform.position) < minimum)
+                {
+                    minimum = Vector2.Distance(transform.position, play.transform.position);
                     target = play;
+                }
             }
         }
         
@@ -66,7 +72,8 @@ public class MobChaser : MonoBehaviour
         if (health <= 0)
         {
             //animPlayer.SetBool("Dying", true);
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
@@ -78,6 +85,18 @@ public class MobChaser : MonoBehaviour
             p.TakeDamage(strength);
 
             time = originalTime;
+        }
+    }
+
+    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if(stream.IsWriting)
+        {
+            stream.SendNext(health);
+        }
+        else
+        {
+            health = (int)stream.ReceiveNext();
         }
     }
 }

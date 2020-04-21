@@ -41,8 +41,6 @@ public class PlayerManager : MonoBehaviour
         {
             Deplacement();
             Flip();
-            if (PhotonNetwork.IsMasterClient)
-                Debug.Log("master");
         }
     }
 
@@ -93,5 +91,11 @@ public class PlayerManager : MonoBehaviour
             //animPlayer.SetBool("Dying", true);
             Destroy(gameObject);
         }
+    }
+
+    public void Teleport(Vector3 position)
+    {
+        if (PV.IsMine)
+            transform.position = position;
     }
 }
