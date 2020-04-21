@@ -14,8 +14,13 @@ public class LevelManager : MonoBehaviour
 
     public Level1SpawnPoint spawn1;
 
+    public AudioSource homeMusic;
+    public AudioSource levelMusic;
+
     void Start()
     {
+        homeMusic.Play();
+        
         PV = GetComponent<PhotonView>();
         //spawn1_1 = GetComponent<Level1Spawner1>();
         //spawn1_2 = GetComponent<Level1Spawner2>();
@@ -30,7 +35,8 @@ public class LevelManager : MonoBehaviour
 
     public void LoadLevel(int level)
     {
-
+        homeMusic.Stop();
+        levelMusic.Play();
         
         switch (level)
         {
