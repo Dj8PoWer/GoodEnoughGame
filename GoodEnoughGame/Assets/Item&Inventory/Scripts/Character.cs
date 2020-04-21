@@ -33,8 +33,8 @@ public class Character : MonoBehaviour
     public Inventory Inventory;
     public EquipmentPanel EquipmentPanel;
 
-    [SerializeField]
-    StatPanel statPanel;
+
+    public StatPanel statPanel;
     [SerializeField]
     ItemTooltips itemTooltips;
     [SerializeField]

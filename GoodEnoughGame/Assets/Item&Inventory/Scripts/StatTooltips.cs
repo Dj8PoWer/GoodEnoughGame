@@ -48,9 +48,16 @@ public class StatTooltips : MonoBehaviour
     private string GetStatModifier(CharacterStat stat)
     {
         sb.Length = 0;
-
+        float tree = 0;
         foreach (StatModifier mod in stat.StatModifiers)
         {
+            TreeNode node = mod.source as TreeNode;
+            if (node != null)
+            {
+                tree += mod.value;
+                continue;
+            }
+
             if (sb.Length != 0)
                 sb.AppendLine();
 
@@ -69,7 +76,14 @@ public class StatTooltips : MonoBehaviour
             {
                 Debug.LogError("Modifier is not from an equippable item");
             }
-
+        }
+        if (tree != 0)
+        {
+            if (sb.Length != 0)
+                sb.AppendLine();
+            sb.Append("+");
+            sb.Append(tree);
+            sb.Append(" from tree");
         }
 
         return sb.ToString();
