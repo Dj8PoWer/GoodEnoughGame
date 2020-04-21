@@ -55,7 +55,12 @@ public class MobChaser : MonoBehaviour, IPunObservable
                 }
             }
         }
-        
+
+        if (transform.position.x < target.transform.position.x)
+            transform.rotation = new Quaternion(0, 180, 0, 0);
+        else
+            transform.rotation = new Quaternion(0, 0, 0, 0);
+
         if (Vector2.Distance(transform.position, target.transform.position) > stopping)
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
         
@@ -63,6 +68,12 @@ public class MobChaser : MonoBehaviour, IPunObservable
         {
             time -= Time.deltaTime;
         }
+    }
+
+    private void OnDestroy()
+    {
+        LevelSystem levelSystem = FindObjectOfType<LevelSystem>();
+        levelSystem.AddExperience(50);
     }
 
     public void TakeDamage(int amount)
