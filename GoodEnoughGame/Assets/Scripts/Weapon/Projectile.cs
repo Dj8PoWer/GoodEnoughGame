@@ -63,6 +63,7 @@ public class Projectile : MonoBehaviour
     {
         if(other.CompareTag("Player") && target == "player")
         {
+            Debug.Log("hit");
             PlayerManager p = other.GetComponent<PlayerManager>();
             p.TakeDamage(strength);
             PhotonNetwork.Destroy(gameObject);
