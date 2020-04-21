@@ -17,6 +17,8 @@ public class MobChaser : MonoBehaviour, IPunObservable
 
     private Animator animMobChaser;
 
+    public AudioSource contactPlayer;
+
     private PhotonView PV;
     
     void Start()
@@ -97,6 +99,12 @@ public class MobChaser : MonoBehaviour, IPunObservable
 
             time = originalTime;
         }
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+            //contactPlayer.Play();
     }
 
     void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
