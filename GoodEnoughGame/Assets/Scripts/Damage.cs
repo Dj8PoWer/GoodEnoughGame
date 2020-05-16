@@ -2,10 +2,10 @@
 
 public class Damage : MonoBehaviour
 {
-    public float physical = 5f;
-    public float fire = 5f;
-    public float water = 5f;
-    public float air = 5f;
+    public float physical = 0;
+    public float fire = 0;
+    public float water = 0;
+    public float air = 0;
 
     public string target;
 

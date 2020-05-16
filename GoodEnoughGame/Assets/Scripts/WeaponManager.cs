@@ -92,4 +92,17 @@ public class WeaponManager : MonoBehaviour
 
         transform.localScale = tempRot;
     }
+
+    public void LinkStats(float attackSpeed)
+    {
+        Bow bow = this.bow.GetComponent<Bow>();
+        bow.attackSpeed = .7f / attackSpeed;
+        bow.animator.SetFloat("speed", attackSpeed);
+
+        Sword sword = this.sword.GetComponent<Sword>();
+        sword.attackSpeed = .7f / attackSpeed;
+        sword.GetComponent<Animator>().SetFloat("speed", attackSpeed);
+
+        staff.GetComponent<Staff>().attackSpeed = 1 / attackSpeed;
+    }
 }

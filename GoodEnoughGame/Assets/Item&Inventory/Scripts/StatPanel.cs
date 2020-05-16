@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Photon.Pun;
 
 public class StatPanel : MonoBehaviour
 {
@@ -9,10 +10,27 @@ public class StatPanel : MonoBehaviour
 
     private CharacterStat[] stats;
 
+    private PlayerManager player;
+
     private void OnValidate()
     {
         statDisplays = GetComponentsInChildren<StatDisplay>();
         UpdateStatNames(); 
+    }
+
+    private void Update()
+    {
+        if (player == null)
+        {
+            PlayerManager[] players;
+            players = FindObjectsOfType<PlayerManager>();
+
+            foreach (var p in players)
+            {
+                if (p.gameObject.GetPhotonView().IsMine)
+                    player = p;
+            }
+        }
     }
 
     public void SetStats(params CharacterStat[] charStats)
@@ -42,6 +60,8 @@ public class StatPanel : MonoBehaviour
         {
             statDisplays[i].Stat = stats[i];
         }
+        if (player != null)
+            player.LinkStats(stats);
     }
 
     public void UpdateStatNames()

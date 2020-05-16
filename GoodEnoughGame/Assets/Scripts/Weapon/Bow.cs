@@ -9,7 +9,7 @@ public class Bow : MonoBehaviour
     public float attackSpeed;
     private float cooldown;
 
-    private Animator animator;
+    public Animator animator;
     public Transform arrowPos;
     public Transform arrowRot;
     public GameObject arrow;
@@ -20,6 +20,11 @@ public class Bow : MonoBehaviour
     void Start()
     {
         PV = GetComponent<PhotonView>();
+        animator = GetComponent<Animator>();
+    }
+
+    private void OnValidate()
+    {
         animator = GetComponent<Animator>();
     }
 

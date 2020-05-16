@@ -7,7 +7,8 @@ public enum EquipmentType
     Chest,
     Glove,
     Boots,
-    Weapon
+    Weapon,
+    Gem
 }
 
 [CreateAssetMenu]

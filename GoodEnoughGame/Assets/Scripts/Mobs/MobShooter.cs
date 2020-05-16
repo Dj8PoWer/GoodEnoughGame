@@ -65,7 +65,8 @@ public class MobShooter : MonoBehaviour
 
         if (time <= 0)
         {
-            PV.RPC("RPC_Attack", RpcTarget.MasterClient, target.transform.position, Quaternion.identity);
+            Quaternion rotation = new Quaternion(0, 0, Vector2.Angle(transform.position, target.transform.position), 0);
+            PV.RPC("RPC_Attack", RpcTarget.All, transform.position, rotation);
 
             time = originalTime;
         }
@@ -89,8 +90,8 @@ public class MobShooter : MonoBehaviour
     [PunRPC]
     void RPC_Attack(Vector3 pos, Quaternion rot)
     {
-        var Object = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arrow"), pos, rot, 0);
-        var projectil = Object.GetComponent<Arrow>();
+        var Object = Instantiate(proj, pos, rot);
+        var projectil = Object.GetComponent<MobProjectile>();
         projectil.target = "player";
     }
 }

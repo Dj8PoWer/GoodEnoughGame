@@ -137,12 +137,12 @@ MonoBehaviour:
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
   m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 1
-    Name: Attack
   - Type: 9
     SynchronizeType: 1
     Name: attacc
+  - Type: 1
+    SynchronizeType: 1
+    Name: speed
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070c30d0ed3e10a47a06a96d1c57488e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 0.5
+  attackSpeed: 1
   projectilePos: {fileID: 8136160453846979544}
   projectileRot: {fileID: 2649066424973443087}
   projectile: {fileID: 1391134630614147319, guid: 2e22ce2abd6c958468fbd91ed2fdc838,
@@ -440,8 +440,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a421d467dc1b1994cba7a3e8fc9437f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  health: 100
+  weaponManager: {fileID: 8166526617898924468}
+  loot: {fileID: 640314737137429678, guid: a5ec004398a71004786f7c47090a8234, type: 3}
+  baseSpeed: 3
+  baseHealth: 100
   cam: {fileID: 8171280123293323810}
   player: {fileID: 4977627008359032124}
 --- !u!114 &3832048362043460757
@@ -1086,6 +1088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSpeed: 0.5
+  animator: {fileID: 6574424237502944692}
   arrowPos: {fileID: 8136160453846979544}
   arrowRot: {fileID: 2649066424973443087}
   arrow: {fileID: 6417904226450301026, guid: e961a6f18ba2b7a47b365a86f078245f, type: 3}
@@ -1127,8 +1130,11 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: Shot
+  - Type: 1
+    SynchronizeType: 1
+    Name: speed
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
