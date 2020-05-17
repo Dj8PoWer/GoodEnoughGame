@@ -22,8 +22,23 @@ public class ItemLoot : MonoBehaviour
     int amount;
     [SerializeField]
     KeyCode key = KeyCode.E;
+
     [SerializeField]
-    private Sprite[] icons;
+    private Sprite[] swordIcons;
+    [SerializeField]
+    private Sprite[] bowIcons;
+    [SerializeField]
+    private Sprite[] staffIcons;
+    [SerializeField]
+    private Sprite[] chestIcons;
+    [SerializeField]
+    private Sprite[] helmetIcons;
+    [SerializeField]
+    private Sprite[] gloveIcons;
+    [SerializeField]
+    private Sprite[] bootsIcons;
+    [SerializeField]
+    private Sprite[] gemIcons;
 
     public GameObject player;
     SpriteRenderer spritRenderer;
@@ -102,16 +117,16 @@ public class ItemLoot : MonoBehaviour
         EquipableItem i = item.GetCopy() as EquipableItem;
 
         //Select Type
-        int select = Random.Range(0, 5);
-        i.equipmentType = (EquipmentType)select;
+        int select = Random.Range(0, 8);
+        if (select < 5)
+            i.equipmentType = (EquipmentType)select;
+        else if (select < 9)
+            i.equipmentType = EquipmentType.Weapon;
+        else
+            i.equipmentType = EquipmentType.Weapon;
 
-        //Select Icon
-        if (i.equipmentType != EquipmentType.Gem)
-        {
-            //i.Icon = icons[select];
-        }
 
-        #region Select Stats FOR ARMOR
+        #region Select Stats, name and icon for weapon/armors
         if (i.equipmentType == EquipmentType.Helmet)
         {
             int stats = Random.Range(1, 5);
@@ -182,6 +197,7 @@ public class ItemLoot : MonoBehaviour
             if (Random.Range(0, 3) < 3)
                 i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
             //Select Icon
+            i.Icon = helmetIcons[Random.Range(0, 29)];
         }
         else if (i.equipmentType == EquipmentType.Chest)
         {
@@ -239,6 +255,7 @@ public class ItemLoot : MonoBehaviour
             if (Random.Range(0, 3) < 3)
                 i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
             //Select Icon
+            i.Icon = chestIcons[Random.Range(0, 41)];
         }
         else if (i.equipmentType == EquipmentType.Glove)
         {
@@ -303,6 +320,7 @@ public class ItemLoot : MonoBehaviour
             if (Random.Range(0, 3) < 3)
                 i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
             //Select Icon
+            i.Icon = gloveIcons[Random.Range(0, 20)];
         }
         else if (i.equipmentType == EquipmentType.Boots)
         {
@@ -353,13 +371,11 @@ public class ItemLoot : MonoBehaviour
             if (Random.Range(0, 3) < 3)
                 i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
             //Select Icon
+            i.Icon = bootsIcons[Random.Range(0, 53)];
         }
-        #endregion
-        #region Weapon
         else if (i.equipmentType == EquipmentType.Weapon)
         {
-            int type = Random.Range(0, 2);
-            //Select Weapon Stats
+            int type = Random.Range(0, 3);
             if (type == 0) //Sword
             {
                 int stats = Random.Range(1, 7);
@@ -465,6 +481,7 @@ public class ItemLoot : MonoBehaviour
                 if (Random.Range(0, 3) < 3)
                     i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
                 //Select Icon
+                i.Icon = swordIcons[Random.Range(0, 55)];
             }
             else if (type == 1) //Bow
             {
@@ -571,6 +588,8 @@ public class ItemLoot : MonoBehaviour
                 if (Random.Range(0, 3) < 3)
                     i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
                 //Select Icon
+                i.Icon = bowIcons[Random.Range(0, 20)];
+
             }
             else //Staff
             {
@@ -602,7 +621,7 @@ public class ItemLoot : MonoBehaviour
                     if (n == 3)
                     {
                         if (i.fireDamagePercent == 0)
-                            i.fireDamagePercent = 0.1f + 0.02f * lvl + Random.Range(-0.05f, 0.005f) * lvl;
+                            i.fireDamagePercent = 0.1f + 0.02f * lvl + Random.Range(-0.005f, 0.005f) * lvl;
                         else
                             stats++;
                     }
@@ -616,7 +635,7 @@ public class ItemLoot : MonoBehaviour
                     if (n == 5)
                     {
                         if (i.waterDamagePercent == 0)
-                            i.waterDamagePercent = 0.1f + 0.02f * lvl + Random.Range(-0.05f, 0.005f) * lvl;
+                            i.waterDamagePercent = 0.1f + 0.02f * lvl + Random.Range(-0.005f, 0.005f) * lvl;
                         else
                             stats++;
                     }
@@ -630,7 +649,7 @@ public class ItemLoot : MonoBehaviour
                     if (n == 7)
                     {
                         if (i.airDamagePercent == 0)
-                            i.airDamagePercent = 0.1f + 0.02f * lvl + Random.Range(-0.05f, 0.005f) * lvl;
+                            i.airDamagePercent = 0.1f + 0.02f * lvl + Random.Range(-0.005f, 0.005f) * lvl;
                         else
                             stats++;
                     }
@@ -665,7 +684,7 @@ public class ItemLoot : MonoBehaviour
                     if (n == 12)
                     {
                         if (i.moveSpeed == 0)
-                            i.moveSpeed = 0.1f + 0.05f * lvl + Random.Range(-0.001f, 0.001f) * lvl;
+                            i.moveSpeed -= 0.1f + 0.05f * lvl + Random.Range(-0.001f, 0.001f) * lvl;
                         else
                             stats++;
                     }
@@ -677,6 +696,8 @@ public class ItemLoot : MonoBehaviour
                 if (Random.Range(0, 3) < 3)
                     i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
                 //Select Icon
+                i.Icon = staffIcons[Random.Range(0, 18)];
+
             }
         }
         #endregion
@@ -689,9 +710,34 @@ public class ItemLoot : MonoBehaviour
             //Stats
         }
         #endregion
+
         //Select ID
         i.id = "Item" + Random.Range(10000, 99999);
 
+        //Rounding
+        i.hpFlat = (float)System.Math.Round(i.hpFlat, 2);
+        i.hpPercent = (float)System.Math.Round(i.hpPercent, 2);
+        i.hpRegenFlat = (float)System.Math.Round(i.hpRegenFlat, 2);
+        i.hpRegenPercent = (float)System.Math.Round(i.hpRegenPercent, 2);
+        i.moveSpeed = (float)System.Math.Round(i.moveSpeed, 2);
+        i.armor = (float)System.Math.Round(i.armor, 2);
+        i.fireResist = (float)System.Math.Round(i.fireResist, 2);
+        i.waterResist = (float)System.Math.Round(i.waterResist, 2);
+        i.airResist = (float)System.Math.Round(i.airResist, 2);
+        i.attackSpeed = (float)System.Math.Round(i.attackSpeed, 2);
+        i.castSpeed = (float)System.Math.Round(i.castSpeed, 2);
+        i.globalDamage = (float)System.Math.Round(i.globalDamage, 2);
+        i.physicalDmgFlat = (float)System.Math.Round(i.physicalDmgFlat, 2);
+        i.physicalDmgPercent = (float)System.Math.Round(i.physicalDmgPercent, 2);
+        i.fireDamageFlat = (float)System.Math.Round(i.fireDamageFlat, 2);
+        i.waterDamageFlat = (float)System.Math.Round(i.waterDamageFlat, 2);
+        i.airDamageFlat = (float)System.Math.Round(i.airDamageFlat, 2);
+        i.fireDamagePercent = (float)System.Math.Round(i.fireDamagePercent, 2);
+        i.waterDamagePercent = (float)System.Math.Round(i.waterDamagePercent, 2);
+        i.airDamagePercent = (float)System.Math.Round(i.airDamagePercent, 2);
+
         item = i;
+        spritRenderer.sprite = i.Icon;
     }
+
 }

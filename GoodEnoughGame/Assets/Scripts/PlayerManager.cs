@@ -132,4 +132,9 @@ public class PlayerManager : MonoBehaviour
 
         //DAMAGES
     }
+
+    public void SwapWeapons(string weapon)
+    {
+        weaponManager.Swap(weapon);
+    }
 }

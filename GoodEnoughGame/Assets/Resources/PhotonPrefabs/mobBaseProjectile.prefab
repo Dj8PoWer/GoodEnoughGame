@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8082666561976512747}
   - component: {fileID: 3218730080087636022}
   m_Layer: 0
-  m_Name: mobProjectile
+  m_Name: mobBaseProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,6 +115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9780175bc5005408b1f2f407f50c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 2
+  speed: 5
+  strength: 10
+  target: 
 --- !u!114 &3218730080087636022
 MonoBehaviour:
   m_ObjectHideFlags: 0

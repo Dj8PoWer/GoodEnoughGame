@@ -62,11 +62,16 @@ public class MobShooter : MonoBehaviour
         
         else if (Vector2.Distance(transform.position, target.transform.position) < back)
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, -speed * Time.deltaTime);
-
+        
         if (time <= 0)
         {
-            Quaternion rotation = new Quaternion(0, 0, Vector2.Angle(transform.position, target.transform.position), 0);
-            PV.RPC("RPC_Attack", RpcTarget.All, transform.position, rotation);
+            float angle = (Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg) - 90;
+            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+            Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(target.transform.position.y, target.transform.position.x) * Mathf.Rad2Deg);
+                //Mathf.Rad2Deg * Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x));
+
+
+            PV.RPC("RPC_Attack", RpcTarget.All, transform.position, (Vector2)target.transform.position);
 
             time = originalTime;
         }
@@ -88,10 +93,19 @@ public class MobShooter : MonoBehaviour
     }
     
     [PunRPC]
-    void RPC_Attack(Vector3 pos, Quaternion rot)
+    void RPC_Attack(Vector3 pos, Vector2 target)
     {
-        var Object = Instantiate(proj, pos, rot);
+        var Object = Instantiate(proj, pos, RotateTowards(target));
         var projectil = Object.GetComponent<MobProjectile>();
         projectil.target = "player";
+    }
+
+    private Quaternion RotateTowards(Vector2 target)
+    {
+        var offset = 0f;
+        Vector2 direction = target - (Vector2)transform.position;
+        direction.Normalize();
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        return Quaternion.Euler(Vector3.forward * (angle + offset));
     }
 }

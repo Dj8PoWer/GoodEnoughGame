@@ -21,6 +21,7 @@ public class Bow : MonoBehaviour
     {
         PV = GetComponent<PhotonView>();
         animator = GetComponent<Animator>();
+        animator.keepAnimatorControllerStateOnDisable = true;
     }
 
     private void OnValidate()

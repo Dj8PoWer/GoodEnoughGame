@@ -43,6 +43,16 @@ public class WeaponManager : MonoBehaviour
             PV.RPC("SwapWeapon", RpcTarget.All, swordID, staffID, bowID, 3);
     }
 
+    public void Swap(string weapon)
+    {
+        if (weapon == "Sword")
+            PV.RPC("SwapWeapon", RpcTarget.All, swordID, staffID, bowID, 1);
+        else if (weapon == "Bow")
+            PV.RPC("SwapWeapon", RpcTarget.All, swordID, staffID, bowID, 2);
+        else if (weapon == "Staff")
+            PV.RPC("SwapWeapon", RpcTarget.All, swordID, staffID, bowID, 3);
+    }
+
 
     [PunRPC]
     public void SwapWeapon(int sword, int staff, int bow, int i)
@@ -95,13 +105,19 @@ public class WeaponManager : MonoBehaviour
 
     public void LinkStats(float attackSpeed)
     {
+        this.bow.SetActive(!this.bow.activeInHierarchy);
         Bow bow = this.bow.GetComponent<Bow>();
+        bow.animator.keepAnimatorControllerStateOnDisable = true;
         bow.attackSpeed = .7f / attackSpeed;
-        bow.animator.SetFloat("speed", attackSpeed);
+        bow.animator.SetFloat("Speed", attackSpeed);
+        this.bow.SetActive(!this.bow.activeInHierarchy);
 
+        this.sword.SetActive(!this.sword.activeInHierarchy);
         Sword sword = this.sword.GetComponent<Sword>();
+        sword.animator.keepAnimatorControllerStateOnDisable = true;
         sword.attackSpeed = .7f / attackSpeed;
-        sword.GetComponent<Animator>().SetFloat("speed", attackSpeed);
+        sword.animator.SetFloat("Speed", attackSpeed * 0.310f);
+        this.sword.SetActive(!this.sword.activeInHierarchy);
 
         staff.GetComponent<Staff>().attackSpeed = 1 / attackSpeed;
     }

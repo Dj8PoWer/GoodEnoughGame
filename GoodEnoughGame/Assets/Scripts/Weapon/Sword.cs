@@ -9,7 +9,7 @@ public class Sword : MonoBehaviour
     public float attackSpeed;
     private float cooldown;
 
-    private Animator animator;
+    public Animator animator;
     public Transform slashPos;
     public Transform slashRot;
     public GameObject slash;
@@ -21,6 +21,7 @@ public class Sword : MonoBehaviour
     {
         PV = GetComponent<PhotonView>();
         animator = GetComponent<Animator>();
+        animator.keepAnimatorControllerStateOnDisable = true;
     }
 
     // Update is called once per frame

@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
     public string charName;
+
+    private PlayerManager player;
     
     // Stats of the player
 
@@ -50,6 +53,21 @@ public class Character : MonoBehaviour
     {
         if (itemTooltips == null)
             itemTooltips = FindObjectOfType<ItemTooltips>();
+    }
+
+    private void Update()
+    {
+        if (player == null)
+        {
+            PlayerManager[] players;
+            players = FindObjectsOfType<PlayerManager>();
+
+            foreach (var p in players)
+            {
+                if (p.gameObject.GetPhotonView().IsMine)
+                    player = p;
+            }
+        }
     }
 
     private void Awake()
@@ -175,6 +193,15 @@ public class Character : MonoBehaviour
 
             dropItemSlot.ItemGS = draggedItem;
             dropItemSlot.Amount = draggedItemAmount;
+
+            if (dragItem.equipmentType == EquipmentType.Weapon)
+            {
+                string[] name = dragItem.ItemName.Split(' ');
+                if (name[0] == "Sword" || name[0] == "Staff" || name[0] == "Bow")
+                    player.SwapWeapons(name[0]);
+                else
+                    player.SwapWeapons(name[1]);
+            }
         }
     }
 
@@ -210,6 +237,15 @@ public class Character : MonoBehaviour
                 }
                 item.Equip(this);
                 statPanel.UpdateStatValues();
+
+                if (item.equipmentType == EquipmentType.Weapon)
+                {
+                    string[] name = item.ItemName.Split(' ');
+                    if (name[0] == "Sword" || name[0] == "Staff" || name[0] == "Bow")
+                        player.SwapWeapons(name[0]);
+                    else
+                        player.SwapWeapons(name[1]);
+                }
             }
             else
             {
