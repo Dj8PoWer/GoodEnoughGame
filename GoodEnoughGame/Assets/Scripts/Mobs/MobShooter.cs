@@ -34,7 +34,10 @@ public class MobShooter : MonoBehaviour
         foreach (var play in players)
         {
             if (Vector2.Distance(transform.position, play.transform.position) < minimum)
+            {
+                minimum = Vector2.Distance(transform.position, play.transform.position);
                 target = play;
+            }
         }
     }
 
@@ -49,7 +52,10 @@ public class MobShooter : MonoBehaviour
             foreach (var play in players)
             {
                 if (Vector2.Distance(transform.position, play.transform.position) < minimum)
+                {
+                    minimum = Vector2.Distance(transform.position, play.transform.position);
                     target = play;
+                }
             }
         }
         
@@ -62,22 +68,24 @@ public class MobShooter : MonoBehaviour
         
         else if (Vector2.Distance(transform.position, target.transform.position) < back)
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, -speed * Time.deltaTime);
-        
-        if (time <= 0)
+        if (PhotonNetwork.IsMasterClient)
         {
-            float angle = (Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg) - 90;
-            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-            Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(target.transform.position.y, target.transform.position.x) * Mathf.Rad2Deg);
+            if (time <= 0)
+            {
+                float angle = (Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg) - 90;
+                Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+                Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(target.transform.position.y, target.transform.position.x) * Mathf.Rad2Deg);
                 //Mathf.Rad2Deg * Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x));
 
 
-            PV.RPC("RPC_Attack", RpcTarget.All, transform.position, (Vector2)target.transform.position);
+                PV.RPC("RPC_Attack", RpcTarget.All, transform.position, (Vector2)target.transform.position);
 
-            time = originalTime;
-        }
-        else
-        {
-            time -= Time.deltaTime;
+                time = originalTime;
+            }
+            else
+            {
+                time -= Time.deltaTime;
+            }
         }
     }
 
