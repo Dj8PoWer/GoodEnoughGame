@@ -8,11 +8,9 @@ public class LevelManager : MonoBehaviour
     public int level = 0;
     PhotonView PV;
 
-    public Level1Spawner1 spawn1_1;
-    public Level1Spawner2 spawn1_2;
-    public Level1Spawner3 spawn1_3;
-
-    public Level1SpawnPoint spawn1;
+    public GameObject[] levels;
+    
+    public GameObject[] spawners1;
 
     public AudioSource homeMusic;
     public AudioSource levelMusic;
@@ -30,7 +28,7 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-        //
+        //empty
     }
 
     public void LoadLevel(int level)
@@ -38,18 +36,18 @@ public class LevelManager : MonoBehaviour
         homeMusic.Stop();
         levelMusic.Play();
         
+        PV.RPC("StartLvl", RpcTarget.All, levels[level-1].transform.position);
+
         switch (level)
         {
             case 1:
-                //SendTo(players, spawn1.gameObject);
-                PV.RPC("StartLvl", RpcTarget.All, spawn1.transform.position);
-                spawn1_1.spawning = true;
-                spawn1_2.spawning = true;
-                spawn1_3.spawning = true;
+                foreach (var spawner in spawners1)
+                {
+                    spawner.GetComponent<LevelSpawner>().spawning = true;
+                }
                 break;
-
-                default:
-                    break;
+            default:
+                break;
         }
     }
 
@@ -72,6 +70,5 @@ public class LevelManager : MonoBehaviour
                 player.GetComponent<PlayerManager>().Teleport(position);
             }
         }
-            
     }
 }

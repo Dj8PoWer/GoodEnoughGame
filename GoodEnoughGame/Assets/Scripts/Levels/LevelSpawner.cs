@@ -4,10 +4,11 @@ using UnityEngine;
 using Photon.Pun;
 using System.IO;
 
-public class Level1Spawner2 : MonoBehaviour
+public class LevelSpawner : MonoBehaviour
 {
     public float spawningFrequency = 2f;
-    public float time;
+    public float time = 7f;
+    public string mob;
 
     public bool spawning = false;
 
@@ -22,7 +23,7 @@ public class Level1Spawner2 : MonoBehaviour
         {
             if (time <= 0)
             {
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "mobShooter"), transform.position, Quaternion.identity, 0);
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", mob), transform.position, Quaternion.identity, 0);
                 time = spawningFrequency;
             }
             else
