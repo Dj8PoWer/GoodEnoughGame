@@ -41,5 +41,7 @@ MonoBehaviour:
   - SpawnZombie
   - SwapWeapon
   - StartLvl
+  - RPC_Death
+  - RPC_Shoot
   DisableAutoOpenWizard: 1
   ShowSettings: 1

@@ -6,8 +6,9 @@ TagManager:
   tags:
   - ProjectileAlly
   - Mob
-  - MobChaser
-  - MobShooter
+  - Witch
+  - Zombie
+  - Skeleton
   layers:
   - Default
   - TransparentFX

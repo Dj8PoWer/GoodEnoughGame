@@ -56,22 +56,27 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player") && target == "player")
+        if (other.CompareTag("Player") && target == "player")
         {
-            Debug.Log("hit");
             PlayerManager p = other.GetComponent<PlayerManager>();
             p.TakeDamage(strength);
             Destroy(gameObject);
         }
-        if(other.CompareTag("MobShooter") && target == "mob")
+        if (other.CompareTag("Witch") && target == "mob")
         {
-            MobShooter p = other.GetComponent<MobShooter>();
+            Witch p = other.GetComponent<Witch>();
             p.TakeDamage(strength);
             Destroy(gameObject);
         }
-        if(other.CompareTag("MobChaser") && target == "mob")
+        if (other.CompareTag("Zombie") && target == "mob")
         {
-            MobChaser p = other.GetComponent<MobChaser>();
+            Zombie p = other.GetComponent<Zombie>();
+            p.TakeDamage(strength);
+            Destroy(gameObject);
+        }
+        if (other.CompareTag("Skeleton") && target == "mob")
+        {
+            Skeleton p = other.GetComponent<Skeleton>();
             p.TakeDamage(strength);
             Destroy(gameObject);
         }

@@ -46,6 +46,8 @@ public class LevelManager : MonoBehaviour
                     spawner.GetComponent<LevelSpawner>().spawning = true;
                 }
                 break;
+            case 2:
+                break;
             default:
                 break;
         }

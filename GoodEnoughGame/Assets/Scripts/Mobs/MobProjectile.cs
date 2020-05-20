@@ -47,17 +47,17 @@ public class MobProjectile : MonoBehaviour
             p.TakeDamage(strength);
             Destroy(gameObject);
         }
-        if (other.CompareTag("MobShooter") && target == "mob")
+        if (other.CompareTag("Witch") && target == "mob")
         {
             Debug.Log(" mobtouch");
-            MobShooter p = other.GetComponent<MobShooter>();
+            Witch p = other.GetComponent<Witch>();
             p.TakeDamage(strength);
             Destroy(gameObject);
         }
-        if (other.CompareTag("MobChaser") && target == "mob")
+        if (other.CompareTag("Zombie") && target == "mob")
         {
             Debug.Log("mobtouch");
-            MobChaser p = other.GetComponent<MobChaser>();
+            Zombie p = other.GetComponent<Zombie>();
             p.TakeDamage(strength);
             Destroy(gameObject);
         }

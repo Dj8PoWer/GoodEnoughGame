@@ -106,8 +106,9 @@ public class PlayerManager : MonoBehaviour
         if (health <= 0)
         {
             //animPlayer.SetBool("Dying", true);
-            Destroy(gameObject);
+            Debug.Log("DEAD");
         }
+        Debug.Log(health);
     }
 
     public void Teleport(Vector3 position)
