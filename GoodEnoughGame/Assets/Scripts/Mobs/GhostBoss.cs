@@ -31,6 +31,7 @@ public class GhostBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         health = maxHealth;
         animator = GetComponent<Animator>();
         PV = gameObject.GetPhotonView();

@@ -25,6 +25,8 @@ public class PlayerManager : MonoBehaviour
          set
          {
             health = value;
+            if (health > baseHealth)
+                health = baseHealth;
             if (health > 0)
                 hpBar.fillAmount = health / baseHealth;
             else
@@ -62,7 +64,7 @@ public class PlayerManager : MonoBehaviour
         respawnText.gameObject.SetActive(false);
         spawnpoints = GameObject.FindGameObjectsWithTag("spawnpoint");
 
-
+        StartCoroutine(Regen());
         // Assings components to variables
         animPlayer = player.GetComponent<Animator>();
         PV = GetComponent<PhotonView>();
@@ -133,7 +135,6 @@ public class PlayerManager : MonoBehaviour
     public void TakeDamage(int amount)
     {
         Health -= amount;
-        Debug.Log(health + "    " + baseHealth);
         //animPlayer.SetBool("Hurt", true);
         if (health <= 0 && alive)
         {
@@ -201,5 +202,17 @@ public class PlayerManager : MonoBehaviour
     public void SwapWeapons(string weapon)
     {
         weaponManager.Swap(weapon);
+    }
+
+    IEnumerator Regen()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            if (alive && health < baseHealth)
+            {
+                Health += hpRegen;
+            }
+        }
     }
 }

@@ -24,15 +24,12 @@ public class Arrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
 
-            time -= Time.deltaTime;
-            if (time <= 0)
-            {
-                Destroy(gameObject);
-            }
+        time -= Time.deltaTime;
+        if (time <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 
