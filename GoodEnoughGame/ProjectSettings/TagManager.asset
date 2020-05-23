@@ -9,6 +9,8 @@ TagManager:
   - Witch
   - Zombie
   - Skeleton
+  - GhostBoss
+  - spawnpoint
   layers:
   - Default
   - TransparentFX

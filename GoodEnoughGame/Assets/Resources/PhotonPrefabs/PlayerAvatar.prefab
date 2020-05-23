@@ -443,8 +443,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponManager: {fileID: 8166526617898924468}
   loot: {fileID: 640314737137429678, guid: a5ec004398a71004786f7c47090a8234, type: 3}
+  spawnpoints: []
   baseSpeed: 3
   baseHealth: 100
+  respawnText: {fileID: 0}
   cam: {fileID: 8171280123293323810}
   player: {fileID: 4977627008359032124}
 --- !u!114 &3832048362043460757

@@ -51,6 +51,11 @@ public class SwordSlash : MonoBehaviour
             Skeleton p = other.GetComponent<Skeleton>();
             p.TakeDamage(strength);
         }
+        if (other.CompareTag("GhostBoss") && target == "mob")
+        {
+            GhostBoss p = other.GetComponent<GhostBoss>();
+            p.TakeDamage(strength);
+        }
     }
 
 }

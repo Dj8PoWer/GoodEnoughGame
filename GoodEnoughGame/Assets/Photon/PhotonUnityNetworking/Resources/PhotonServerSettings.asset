@@ -43,5 +43,9 @@ MonoBehaviour:
   - StartLvl
   - RPC_Death
   - RPC_Shoot
+  - RPC_CircleAttack
+  - RPC_BurstAttack
+  - RPC_SummonAttack
+  - StartTimer
   DisableAutoOpenWizard: 1
   ShowSettings: 1

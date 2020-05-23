@@ -203,6 +203,7 @@ MonoBehaviour:
   health: 50
   originalTime: 2
   proj: {fileID: 3718564163613458053, guid: 2acfb32a7c6a7504aace1bbeb7f8a5dd, type: 3}
+  loot: {fileID: 640314737137429678, guid: a5ec004398a71004786f7c47090a8234, type: 3}
 --- !u!114 &188678731488010963
 MonoBehaviour:
   m_ObjectHideFlags: 0

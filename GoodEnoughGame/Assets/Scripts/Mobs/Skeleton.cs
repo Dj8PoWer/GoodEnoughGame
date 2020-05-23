@@ -20,6 +20,9 @@ public class Skeleton : MonoBehaviour, IPunObservable
 
     private Animator animMobShooter;
 
+    [SerializeField]
+    GameObject loot;
+
     private PhotonView PV;
 
     void Start()
@@ -91,12 +94,15 @@ public class Skeleton : MonoBehaviour, IPunObservable
         }
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, bool willLoot = true)
     {
         health -= amount;
         //animPlayer.SetBool("Hurt", true);
         if (health <= 0 && alive)
         {
+            alive = false;
+            if (willLoot && Random.Range(0,3) == 0)
+                Instantiate(loot, transform.position, Quaternion.identity);
             //animPlayer.SetBool("Dying", true);
             PV.RPC("RPC_Death", RpcTarget.All);
         }

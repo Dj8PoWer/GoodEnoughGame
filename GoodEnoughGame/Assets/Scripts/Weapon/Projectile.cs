@@ -62,21 +62,27 @@ public class Projectile : MonoBehaviour
             p.TakeDamage(strength);
             Destroy(gameObject);
         }
-        if (other.CompareTag("Witch") && target == "mob")
+        else if (other.CompareTag("Witch") && target == "mob")
         {
             Witch p = other.GetComponent<Witch>();
             p.TakeDamage(strength);
             Destroy(gameObject);
         }
-        if (other.CompareTag("Zombie") && target == "mob")
+        else if (other.CompareTag("Zombie") && target == "mob")
         {
             Zombie p = other.GetComponent<Zombie>();
             p.TakeDamage(strength);
             Destroy(gameObject);
         }
-        if (other.CompareTag("Skeleton") && target == "mob")
+        else if (other.CompareTag("Skeleton") && target == "mob")
         {
             Skeleton p = other.GetComponent<Skeleton>();
+            p.TakeDamage(strength);
+            Destroy(gameObject);
+        }
+        else if (other.CompareTag("GhostBoss") && target == "mob")
+        {
+            GhostBoss p = other.GetComponent<GhostBoss>();
             p.TakeDamage(strength);
             Destroy(gameObject);
         }

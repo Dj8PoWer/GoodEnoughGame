@@ -20,6 +20,9 @@ public class Witch : MonoBehaviour, IPunObservable
     private GameObject target;
     public GameObject proj;
 
+    [SerializeField]
+    GameObject loot;
+
     private Animator animMobShooter;
     
     private PhotonView PV;
@@ -102,12 +105,15 @@ public class Witch : MonoBehaviour, IPunObservable
         }
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, bool willLoot = true)
     {
         health -= amount;
         //animPlayer.SetBool("Hurt", true);
         if (health <= 0 && alive)
         {
+            alive = false;
+            if (willLoot && Random.Range(0, 3) == 0)
+                Instantiate(loot, transform.position, Quaternion.identity);
             //animPlayer.SetBool("Dying", true);
             PV.RPC("RPC_Death", RpcTarget.All);
         }

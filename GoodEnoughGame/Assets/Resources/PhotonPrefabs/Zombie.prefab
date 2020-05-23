@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a81f6cc2b212d3479886c43f9e9e9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loot: {fileID: 0}
+  loot: {fileID: 640314737137429678, guid: a5ec004398a71004786f7c47090a8234, type: 3}
   speed: 1.5
   stopping: 0
   health: 50

@@ -56,7 +56,6 @@ public class TreeNode : MonoBehaviour, IPointerClickHandler
     {
         if (CanLearn && skillTree.SkillPoints > 0 && eventData.button == PointerEventData.InputButton.Right)
         {
-            Debug.Log("click");
             if (lvl == 0)
             {
                 text.enabled = true;
@@ -64,7 +63,6 @@ public class TreeNode : MonoBehaviour, IPointerClickHandler
             }
             lvl++;
             AddStats();
-            Debug.Log(c.hpFlat.Value);
             c.statPanel.UpdateStatValues();
             foreach(TreeNode node in connected)
             {

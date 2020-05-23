@@ -133,7 +133,7 @@ public class ItemLoot : MonoBehaviour
             int stats = Random.Range(1, 5);
             for (int j = 0; j < stats; j++)
             {
-                int n = Random.Range(0, 7);
+                int n = Random.Range(0, 8);
                 if (n == 0)
                 {
                     if (i.hpFlat == 0)
@@ -205,7 +205,7 @@ public class ItemLoot : MonoBehaviour
             int stats = Random.Range(1, 5);
             for (int j = 0; j < stats; j++)
             {
-                int n = Random.Range(0, 5);
+                int n = Random.Range(0, 6);
                 if (n == 0)
                 {
                     if (i.hpFlat == 0)
@@ -263,7 +263,7 @@ public class ItemLoot : MonoBehaviour
             int stats = Random.Range(1, 5);
             for (int j = 0; j < stats; j++)
             {
-                int n = Random.Range(0, 6);
+                int n = Random.Range(0, 7);
                 if (n == 0)
                 {
                     if (i.hpFlat == 0)
@@ -328,7 +328,7 @@ public class ItemLoot : MonoBehaviour
             int stats = Random.Range(1, 5);
             for (int j = 0; j < stats; j++)
             {
-                int n = Random.Range(0, 5);
+                int n = Random.Range(0, 6);
                 if (n == 0)
                 {
                     if (i.hpFlat == 0)
@@ -382,7 +382,7 @@ public class ItemLoot : MonoBehaviour
                 int stats = Random.Range(1, 7);
                 for (int j = 0; j < stats; j++)
                 {
-                    int n = Random.Range(0, 12);
+                    int n = Random.Range(0, 13);
                     if (n == 0)
                     {
                         if (i.globalDamage == 0)
@@ -489,7 +489,7 @@ public class ItemLoot : MonoBehaviour
                 int stats = Random.Range(1, 7);
                 for (int j = 0; j < stats; j++)
                 {
-                    int n = Random.Range(0, 12);
+                    int n = Random.Range(0, 13);
                     if (n == 0)
                     {
                         if (i.globalDamage == 0)
@@ -597,7 +597,7 @@ public class ItemLoot : MonoBehaviour
                 int stats = Random.Range(1, 7);
                 for (int j = 0; j < stats; j++)
                 {
-                    int n = Random.Range(0, 12);
+                    int n = Random.Range(0, 13);
                     if (n == 0)
                     {
                         if (i.globalDamage == 0)

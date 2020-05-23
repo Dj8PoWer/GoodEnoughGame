@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -10,12 +11,29 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     GameObject loot;
 
+    public GameObject[] spawnpoints;
+
     [SerializeField]
     int baseSpeed = 3;
     float speed = 3;
 
     public int baseHealth = 100;
     private float health = 100;
+    private float Health
+    {
+        get { return health; }
+         set
+         {
+            health = value;
+            if (health > 0)
+                hpBar.fillAmount = health / baseHealth;
+            else
+            {
+                health = 0;
+                hpBar.fillAmount = health / baseHealth;
+            }
+         }
+    }
 
     private float hpRegen = 1;
 
@@ -27,7 +45,11 @@ public class PlayerManager : MonoBehaviour
     private PhotonView PV;
 
     private Animator animPlayer;
-    
+
+    private Image hpBar;
+    public Text respawnText;
+
+    bool alive = true;
 
     public GameObject cam;
     public GameObject player;
@@ -36,10 +58,15 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        respawnText = GameObject.Find("RespawnText").GetComponent<Text>();
+        respawnText.gameObject.SetActive(false);
+        spawnpoints = GameObject.FindGameObjectsWithTag("spawnpoint");
+
+
         // Assings components to variables
         animPlayer = player.GetComponent<Animator>();
         PV = GetComponent<PhotonView>();
-
+        hpBar = GameObject.Find("HealthBar").GetComponent<Image>();
         // Enables the player's camera to avoid conflict if playing with other players
         if (PV.IsMine)
         {
@@ -57,8 +84,12 @@ public class PlayerManager : MonoBehaviour
             Deplacement();
             Flip();
         }
+
         if (Input.GetKeyDown(KeyCode.H))
+        {
             Instantiate(loot, transform.position, Quaternion.identity);
+        }
+
     }
 
     void Deplacement()
@@ -101,25 +132,58 @@ public class PlayerManager : MonoBehaviour
     
     public void TakeDamage(int amount)
     {
-        health -= amount;
+        Health -= amount;
+        Debug.Log(health + "    " + baseHealth);
         //animPlayer.SetBool("Hurt", true);
-        if (health <= 0)
+        if (health <= 0 && alive)
         {
-            //animPlayer.SetBool("Dying", true);
-            Debug.Log("DEAD");
+            StartCoroutine(Death());
         }
-        Debug.Log(health);
+    }
+
+    IEnumerator Death()
+    {
+        alive = false;
+        respawnText.gameObject.SetActive(true);
+        animPlayer.SetTrigger("death");
+        weaponManager.gameObject.SetActive(false);
+        float tempSpeed = speed;
+        speed = 0;
+        for (int i = 20; i >= 0; i--)
+        {
+            respawnText.text = "Réapparition dans " + i.ToString();
+            yield return new WaitForSeconds(1f);
+        }
+        respawnText.gameObject.SetActive(false);
+        speed = tempSpeed;
+        animPlayer.SetTrigger("alive");
+        weaponManager.gameObject.SetActive(true);
+        float min = float.MaxValue;
+        GameObject tp = null;
+        foreach (var obj in spawnpoints)
+        {
+            if (Vector2.Distance(transform.position, obj.transform.position) < min)
+            {
+                min = Vector2.Distance(transform.position, obj.transform.position);
+                tp = obj;
+            }
+        }
+        Teleport(tp.transform.position);
+        alive = true;
+        Health = baseHealth;
     }
 
     public void Teleport(Vector3 position)
     {
+        position.z = 0;
         if (PV.IsMine)
             transform.position = position;
     }
 
     public void LinkStats(CharacterStat[] stats)
     {
-        health = (baseHealth + stats[0].Value) * stats[1].Value;
+        baseHealth = (int)((100 + stats[0].Value) * stats[1].Value);
+        Health = health;
         hpRegen = (1 + stats[2].Value) * stats[3].Value;
 
         speed = baseSpeed * stats[4].Value;

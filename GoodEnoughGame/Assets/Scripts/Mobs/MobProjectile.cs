@@ -6,7 +6,7 @@ using UnityEngine;
 public class MobProjectile : MonoBehaviour
 {
     [SerializeField] private float time = 2f;
-    [SerializeField] private float speed = 1f;
+     public float speed = 1f;
 
     //public AudioClip spawn;
     //AudioSource audio;

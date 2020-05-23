@@ -6,10 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class UIMainMenu : MonoBehaviour
 {
+    public Slider slider;
+
     public void QuitGame()
     {
         Debug.Log("QUIT GAME");
         Application.Quit();
+    }
+
+    private void Update()
+    {
+        if (slider.enabled)
+            AudioListener.volume = slider.value;
     }
 
     public void JoinOnlineLooby()

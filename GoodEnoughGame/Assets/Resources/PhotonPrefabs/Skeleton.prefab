@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9203130813886153012}
   - component: {fileID: -1659587481986738934}
   - component: {fileID: 9131157664272968448}
+  - component: {fileID: -3960339450102757956}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Skeleton
@@ -122,6 +123,7 @@ MonoBehaviour:
   health: 50
   originalTime: 3.5
   proj: {fileID: 6417904226450301026, guid: e961a6f18ba2b7a47b365a86f078245f, type: 3}
+  loot: {fileID: 640314737137429678, guid: a5ec004398a71004786f7c47090a8234, type: 3}
 --- !u!114 &9203130813886153012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,3 +187,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7446785, y: 0.7939981}
   m_EdgeRadius: 0
+--- !u!50 &-3960339450102757956
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6396570139267440613}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

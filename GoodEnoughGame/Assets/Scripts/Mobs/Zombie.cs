@@ -86,13 +86,15 @@ public class Zombie : MonoBehaviour, IPunObservable
             levelSystem.AddExperience(50);
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, bool willLoot = true)
     {
         health -= amount;
         //animPlayer.SetBool("Hurt", true);
         if (health <= 0 && Alive)
         {
             //animPlayer.SetBool("Dying", true);
+            if (willLoot && Random.Range(0, 3) == 0)
+                Instantiate(loot, transform.position, Quaternion.identity);
             Alive = false;
             PV.RPC("RPC_Death", RpcTarget.All);
             //Destroy(gameObject);
