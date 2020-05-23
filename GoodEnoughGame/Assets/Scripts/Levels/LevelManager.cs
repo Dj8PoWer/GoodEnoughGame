@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     public GameObject[] leavers;
     
     public GameObject[] spawners1;
+    public GameObject[] spawners2;
 
     public AudioSource homeMusic;
     public AudioSource levelMusic;
@@ -61,6 +62,10 @@ public class LevelManager : MonoBehaviour
                 }
                 break;
             case 2:
+                foreach (var spawner in spawners2)
+                {
+                    spawner.GetComponent<LevelSpawner>().spawning = true;
+                }
                 break;
             default:
                 break;

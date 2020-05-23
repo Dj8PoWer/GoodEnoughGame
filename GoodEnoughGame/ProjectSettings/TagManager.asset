@@ -11,6 +11,8 @@ TagManager:
   - Skeleton
   - GhostBoss
   - spawnpoint
+  - Snake
+  - Scorpion
   layers:
   - Default
   - TransparentFX

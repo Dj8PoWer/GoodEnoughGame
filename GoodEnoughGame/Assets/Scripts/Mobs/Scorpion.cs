@@ -1,9 +1,9 @@
-﻿using Photon.Pun;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Snake : MonoBehaviour, IPunObservable
+public class Scorpion : MonoBehaviour, IPunObservable
 {
     public float speed = 1.5f;
     public float stopping = 8f;
@@ -51,9 +51,9 @@ public class Snake : MonoBehaviour, IPunObservable
 
         //Flips the object
         if (transform.position.x < target.transform.position.x)
-            transform.rotation = new Quaternion(0, 0, 0, 0);
-        else
             transform.rotation = new Quaternion(0, 180, 0, 0);
+        else
+            transform.rotation = new Quaternion(0, 0, 0, 0);
 
         if (target == null)
         {
@@ -125,12 +125,8 @@ public class Snake : MonoBehaviour, IPunObservable
     [PunRPC]
     void RPC_Shoot(Vector3 pos, Vector2 target)
     {
-        var Object = Instantiate(proj, pos, RotateTowards(target, 5));
-        var projectil = Object.GetComponent<Needle>();
-        projectil.target = "player";
-
-        Object = Instantiate(proj, pos, RotateTowards(target, -5));
-        projectil = Object.GetComponent<Needle>();
+        var Object = Instantiate(proj, pos, RotateTowards(target));
+        var projectil = Object.GetComponent<Dart>();
         projectil.target = "player";
     }
 
@@ -139,7 +135,7 @@ public class Snake : MonoBehaviour, IPunObservable
         animMobShooter.SetTrigger("attack");
         float tempSpeed = speed;
         speed = 0;
-        yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(0.45f);
         if (PhotonNetwork.IsMasterClient)
             PV.RPC("RPC_Shoot", RpcTarget.All, transform.position, (Vector2)target.transform.position);
         speed = tempSpeed;
@@ -154,8 +150,9 @@ public class Snake : MonoBehaviour, IPunObservable
             PhotonNetwork.Destroy(gameObject);
     }
 
-    private Quaternion RotateTowards(Vector2 target, float offset = 0f)
+    private Quaternion RotateTowards(Vector2 target)
     {
+        var offset = 0f;
         Vector2 direction = target - (Vector2)transform.position;
         direction.Normalize();
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
