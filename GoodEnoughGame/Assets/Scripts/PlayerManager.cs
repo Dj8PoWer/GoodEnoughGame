@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField]
     int baseSpeed = 3;
+    float tempSpeed = 3;
     float speed = 3;
 
     public int baseHealth = 100;
@@ -148,7 +149,7 @@ public class PlayerManager : MonoBehaviour
         respawnText.gameObject.SetActive(true);
         animPlayer.SetTrigger("death");
         weaponManager.gameObject.SetActive(false);
-        float tempSpeed = speed;
+        tempSpeed = speed;
         speed = 0;
         for (int i = 20; i >= 0; i--)
         {
@@ -187,7 +188,13 @@ public class PlayerManager : MonoBehaviour
         Health = health;
         hpRegen = (1 + stats[2].Value) * stats[3].Value;
 
-        speed = baseSpeed * stats[4].Value;
+        if (speed == tempSpeed)
+        {
+            tempSpeed = baseSpeed * stats[4].Value;
+            speed = tempSpeed;
+        }
+        else
+            tempSpeed = baseSpeed * stats[4].Value;
 
         armor = stats[5].Value;
         fireRes = stats[6].Value;
@@ -214,5 +221,31 @@ public class PlayerManager : MonoBehaviour
                 Health += hpRegen;
             }
         }
+    }
+
+    public void TakeDOTDamage(int repetition, float dmg)
+    {
+        StartCoroutine(DOTDamage(repetition, dmg));
+    }
+
+    IEnumerator DOTDamage(int repetition, float dmg)
+    {
+        for (int i = 0; i< repetition; i++)
+        {
+            Health -= dmg;
+            yield return new WaitForSeconds(1.5f);
+        }
+    }
+
+    public void SpeedBuff(int duration, float value)
+    {
+        StartCoroutine(SpeedB(duration, value));
+    }
+
+    IEnumerator SpeedB(int duration, float value)
+    {
+        speed = speed * value;
+        yield return new WaitForSeconds(duration);
+        speed = tempSpeed;
     }
 }

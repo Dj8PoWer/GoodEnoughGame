@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class LevelManager : MonoBehaviour
 {
     public int level = 0;
+    public int difficulty = 1;
     PhotonView PV;
 
     public GameObject HubPoint;
@@ -16,26 +17,24 @@ public class LevelManager : MonoBehaviour
     public GameObject[] leavers;
     
     public GameObject[] spawners1;
+    public GameObject[] spawners2;
 
-    public AudioSource homeMusic;
-    public AudioSource levelMusic;
+    //public AudioSource homeMusic;
+    //public AudioSource levelMusic;
+    public AudioSource[] musics;
 
     public Timer timer;
 
     void Start()
     {
-
         foreach (var leaver in leavers)
         {
             leaver.SetActive(false);
         }
-        homeMusic.Play();
+        //homeMusic.Play();
+        musics[0].Play();
 
         PV = GetComponent<PhotonView>();
-        //spawn1_1 = GetComponent<Level1Spawner1>();
-        //spawn1_2 = GetComponent<Level1Spawner2>();
-        //spawn1_3 = GetComponent<Level1Spawner3>();
-        //spawn1 = GetComponent<Level1SpawnPoint>();
     }
 
     void Update()
@@ -45,8 +44,10 @@ public class LevelManager : MonoBehaviour
 
     public void LoadLevel(int level)
     {
-        homeMusic.Stop();
-        levelMusic.Play();
+        //homeMusic.Stop();
+        //levelMusic.Play();
+        musics[0].Stop();
+        musics[level].Play();
         
         PV.RPC("StartLvl", RpcTarget.All, levels[level-1].transform.position);
         StartCoroutine(SpawnBoss(level));
@@ -61,6 +62,10 @@ public class LevelManager : MonoBehaviour
                 }
                 break;
             case 2:
+                foreach (var spawner in spawners2)
+                {
+                    spawner.GetComponent<LevelSpawner>().spawning = true;
+                }
                 break;
             default:
                 break;
@@ -69,8 +74,12 @@ public class LevelManager : MonoBehaviour
 
     public void BackSpawn()
     {
-        homeMusic.Play();
-        levelMusic.Stop();
+        //homeMusic.Play();
+        //levelMusic.Stop();
+        musics[0].Play();
+        musics[level].Stop();
+        level = 0;
+        
         PV.RPC("StartLvl", RpcTarget.All, HubPoint.transform.position);
         foreach (var leaver in leavers)
         {

@@ -51,9 +51,9 @@ public class Snake : MonoBehaviour, IPunObservable
 
         //Flips the object
         if (transform.position.x < target.transform.position.x)
-            transform.rotation = new Quaternion(0, 180, 0, 0);
-        else
             transform.rotation = new Quaternion(0, 0, 0, 0);
+        else
+            transform.rotation = new Quaternion(0, 180, 0, 0);
 
         if (target == null)
         {
@@ -126,11 +126,11 @@ public class Snake : MonoBehaviour, IPunObservable
     void RPC_Shoot(Vector3 pos, Vector2 target)
     {
         var Object = Instantiate(proj, pos, RotateTowards(target, 5));
-        var projectil = Object.GetComponent<Arrow>();
+        var projectil = Object.GetComponent<Needle>();
         projectil.target = "player";
 
         Object = Instantiate(proj, pos, RotateTowards(target, -5));
-        projectil = Object.GetComponent<Arrow>();
+        projectil = Object.GetComponent<Needle>();
         projectil.target = "player";
     }
 
@@ -139,7 +139,7 @@ public class Snake : MonoBehaviour, IPunObservable
         animMobShooter.SetTrigger("attack");
         float tempSpeed = speed;
         speed = 0;
-        yield return new WaitForSeconds(0.45f);
+        yield return new WaitForSeconds(0.35f);
         if (PhotonNetwork.IsMasterClient)
             PV.RPC("RPC_Shoot", RpcTarget.All, transform.position, (Vector2)target.transform.position);
         speed = tempSpeed;

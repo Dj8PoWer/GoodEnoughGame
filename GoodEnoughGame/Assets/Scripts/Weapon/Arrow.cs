@@ -17,6 +17,7 @@ public class Arrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.tag = "Snake";
         audio = GetComponent<AudioSource>();
         audio.PlayOneShot(spawn, 0.8F);
     }
@@ -62,6 +63,12 @@ public class Arrow : MonoBehaviour
         else if (other.CompareTag("GhostBoss") && target == "mob")
         {
             GhostBoss p = other.GetComponent<GhostBoss>();
+            p.TakeDamage(strength);
+            Destroy(gameObject);
+        }
+        else if (other.CompareTag("Snake") && target == "mob")
+        {
+            var p = other.GetComponent<Snake>();
             p.TakeDamage(strength);
             Destroy(gameObject);
         }
