@@ -28,12 +28,15 @@ public class PlayerManager : MonoBehaviour
             health = value;
             if (health > baseHealth)
                 health = baseHealth;
-            if (health > 0)
-                hpBar.fillAmount = health / baseHealth;
-            else
+            if (PV.IsMine)
             {
-                health = 0;
-                hpBar.fillAmount = health / baseHealth;
+                if (health > 0)
+                    hpBar.fillAmount = health / baseHealth;
+                else
+                {
+                    health = 0;
+                    hpBar.fillAmount = health / baseHealth;
+                }
             }
          }
     }
@@ -61,15 +64,19 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        respawnText = GameObject.Find("RespawnText").GetComponent<Text>();
-        respawnText.gameObject.SetActive(false);
-        spawnpoints = GameObject.FindGameObjectsWithTag("spawnpoint");
-
-        StartCoroutine(Regen());
         // Assings components to variables
         animPlayer = player.GetComponent<Animator>();
         PV = GetComponent<PhotonView>();
-        hpBar = GameObject.Find("HealthBar").GetComponent<Image>();
+
+
+        if (PV.IsMine)
+        {
+            hpBar = GameObject.Find("HealthBar").GetComponent<Image>();
+            respawnText = GameObject.Find("RespawnText").GetComponent<Text>();
+            respawnText.gameObject.SetActive(false);
+            spawnpoints = GameObject.FindGameObjectsWithTag("spawnpoint");
+            StartCoroutine(Regen());
+        }
         // Enables the player's camera to avoid conflict if playing with other players
         if (PV.IsMine)
         {
@@ -146,17 +153,24 @@ public class PlayerManager : MonoBehaviour
     IEnumerator Death()
     {
         alive = false;
-        respawnText.gameObject.SetActive(true);
+        
         animPlayer.SetTrigger("death");
         weaponManager.gameObject.SetActive(false);
         tempSpeed = speed;
         speed = 0;
+        if (PV.IsMine)
+        {
+            respawnText.gameObject.SetActive(true);
+        }
         for (int i = 20; i >= 0; i--)
         {
             respawnText.text = "Réapparition dans " + i.ToString();
             yield return new WaitForSeconds(1f);
         }
-        respawnText.gameObject.SetActive(false);
+        if (PV.IsMine)
+        {
+            respawnText.gameObject.SetActive(false);
+        }
         speed = tempSpeed;
         animPlayer.SetTrigger("alive");
         weaponManager.gameObject.SetActive(true);
@@ -170,7 +184,10 @@ public class PlayerManager : MonoBehaviour
                 tp = obj;
             }
         }
-        Teleport(tp.transform.position);
+        if (PV.IsMine)
+        {
+            Teleport(tp.transform.position);
+        }
         alive = true;
         Health = baseHealth;
     }

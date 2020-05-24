@@ -141,10 +141,12 @@ public class Snake : MonoBehaviour, IPunObservable
     {
         var Object = Instantiate(proj, pos, RotateTowards(target, 5));
         var projectil = Object.GetComponent<Needle>();
+        projectil.strength = strength;
         projectil.target = "player";
 
         Object = Instantiate(proj, pos, RotateTowards(target, -5));
         projectil = Object.GetComponent<Needle>();
+        projectil.strength = strength;
         projectil.target = "player";
     }
 
@@ -181,10 +183,13 @@ public class Snake : MonoBehaviour, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(health);
+            if (PV.IsMine)
+                stream.SendNext(level);
         }
         else
         {
             health = (int)stream.ReceiveNext();
+            Level = (int)stream.ReceiveNext();
         }
     }
 }

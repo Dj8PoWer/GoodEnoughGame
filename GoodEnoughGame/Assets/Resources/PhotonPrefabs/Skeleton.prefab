@@ -51,7 +51,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -122,6 +121,7 @@ MonoBehaviour:
   speed: 1.5
   stopping: 5
   health: 50
+  strength: 10
   originalTime: 3.5
   proj: {fileID: 6417904226450301026, guid: e961a6f18ba2b7a47b365a86f078245f, type: 3}
   loot: {fileID: 640314737137429678, guid: a5ec004398a71004786f7c47090a8234, type: 3}

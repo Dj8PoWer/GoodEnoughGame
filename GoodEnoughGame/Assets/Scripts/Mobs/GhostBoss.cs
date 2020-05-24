@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class GhostBoss : MonoBehaviour
+public class GhostBoss : MonoBehaviour, IPunObservable
 {
     float fire;
     float water;
     float air;
     float physical;
-
 
 
     float movetime;
@@ -24,7 +23,6 @@ public class GhostBoss : MonoBehaviour
         {
             level = value;
             health = 40 + 10 * level;
-            water = 5 + 2 * level;
         }
     }
 
@@ -234,6 +232,19 @@ public class GhostBoss : MonoBehaviour
             manager.leavers[0].SetActive(true);
             Instantiate(loot, transform.position, Quaternion.identity);
             PhotonNetwork.Destroy(gameObject);
+        }
+    }
+
+    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            if (PV.IsMine)
+                stream.SendNext(level);
+        }
+        else
+        {
+            Level = (int)stream.ReceiveNext();
         }
     }
 }

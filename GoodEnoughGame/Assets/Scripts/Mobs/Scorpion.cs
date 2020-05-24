@@ -141,6 +141,7 @@ public class Scorpion : MonoBehaviour, IPunObservable
     {
         var Object = Instantiate(proj, pos, RotateTowards(target));
         var projectil = Object.GetComponent<Dart>();
+        projectil.strength = strength;
         projectil.target = "player";
     }
 
@@ -178,10 +179,13 @@ public class Scorpion : MonoBehaviour, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(health);
+            if (PV.IsMine)
+                stream.SendNext(level);
         }
         else
         {
             health = (int)stream.ReceiveNext();
+            Level = (int)stream.ReceiveNext();
         }
     }
 }

@@ -164,7 +164,8 @@ public class Zombie : MonoBehaviour, IPunObservable
         if(stream.IsWriting)
         {
             stream.SendNext(health);
-            stream.SendNext(level);
+            if (PV.IsMine)
+                stream.SendNext(level);
         }
         else
         {

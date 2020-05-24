@@ -145,6 +145,7 @@ public class Skeleton : MonoBehaviour, IPunObservable
     {
         var Object = Instantiate(proj, pos, RotateTowards(target));
         var projectil = Object.GetComponent<Arrow>();
+        projectil.strength = strength;
         projectil.target = "player";
     }
 
@@ -182,10 +183,13 @@ public class Skeleton : MonoBehaviour, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(health);
+            if (PV.IsMine)
+                stream.SendNext(level);
         }
         else
         {
             health = (int)stream.ReceiveNext();
+            Level = (int)stream.ReceiveNext();
         }
     }
 }
