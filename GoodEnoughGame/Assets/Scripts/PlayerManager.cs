@@ -227,6 +227,11 @@ public class PlayerManager : MonoBehaviour
         weaponManager.Swap(weapon);
     }
 
+    public void SpellSelect(string[] names)
+    {
+        weaponManager.SpellSelect(names);
+    }
+
     IEnumerator Regen()
     {
         while (true)

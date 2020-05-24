@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class WeaponManager : MonoBehaviour
     public GameObject Fireball;
     public GameObject Bladevortex;
 
+    Action[] Spell = new Action[3];
 
     void Start()
     {
@@ -36,10 +38,16 @@ public class WeaponManager : MonoBehaviour
     {
         //if (PV.IsMine)
         //Swap();
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Z))
             PV.RPC("RPC_Fireball", RpcTarget.All, projPos.position, projPos.rotation);
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.X))
             PV.RPC("RPC_BladeVortex", RpcTarget.All, projPos.position, projPos.rotation);
+        if (Input.GetKeyDown(KeyCode.Alpha1) && Spell[0] != null)
+            Spell[0]();
+        if (Input.GetKeyDown(KeyCode.Alpha2) && Spell[1] != null)
+            Spell[1]();
+        if (Input.GetKeyDown(KeyCode.Alpha3) && Spell[2] != null)
+            Spell[2]();
 
     }
 
@@ -130,6 +138,30 @@ public class WeaponManager : MonoBehaviour
         this.sword.SetActive(!this.sword.activeInHierarchy);
 
         staff.GetComponent<Staff>().attackSpeed = 1 / attackSpeed;
+    }
+
+    public void SpellSelect(string[] names)
+    {
+        for (int i = 0; i <3; i++)
+        {
+            switch(names[i])
+            {
+                case "Fireball":
+                    Spell[i] = () => PV.RPC("RPC_Fireball", RpcTarget.All, projPos.position, projPos.rotation);
+                    break;
+                case "Blade Vortex":
+                    Spell[i] = () => PV.RPC("RPC_BladeVortex", RpcTarget.All, projPos.position, projPos.rotation);
+                    break;
+                case "Water Bomb":
+                    break;
+                case "":
+                    Spell[i] = null;
+                    break;
+                case null:
+                    Spell[i] = null;
+                    break;
+            }
+        }
     }
 
     [PunRPC]

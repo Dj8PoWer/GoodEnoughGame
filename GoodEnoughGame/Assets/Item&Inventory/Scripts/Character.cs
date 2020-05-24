@@ -202,6 +202,16 @@ public class Character : MonoBehaviour
                 else
                     player.SwapWeapons(name[1]);
             }
+            if (dragItem.equipmentType == EquipmentType.Gem)
+            {
+                string[] names = new string[3];
+                for (int i = 5; i <= 7; i++)
+                {
+                    if (EquipmentPanel.EquipmentSlots[i].ItemGS != null)
+                        names[i - 5] = EquipmentPanel.EquipmentSlots[i].ItemGS.ItemName;
+                }
+                player.SpellSelect(names);
+            }
         }
     }
 
