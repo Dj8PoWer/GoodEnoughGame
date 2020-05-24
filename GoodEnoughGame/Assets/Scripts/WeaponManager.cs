@@ -16,6 +16,12 @@ public class WeaponManager : MonoBehaviour
     int swordID;
     int bowID;
 
+    public float physdmg;
+    public float waterdmg;
+    public float firedmg;
+    public float airdmg;
+    
+
     public Transform projPos;
     public GameObject Fireball;
     public GameObject Bladevortex;
@@ -121,7 +127,7 @@ public class WeaponManager : MonoBehaviour
         transform.localScale = tempRot;
     }
 
-    public void LinkStats(float attackSpeed)
+    public void LinkStats(float attackSpeed, float castSpeed)
     {
         this.bow.SetActive(!this.bow.activeInHierarchy);
         Bow bow = this.bow.GetComponent<Bow>();

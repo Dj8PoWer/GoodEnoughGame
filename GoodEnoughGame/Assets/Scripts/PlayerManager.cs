@@ -200,9 +200,11 @@ public class PlayerManager : MonoBehaviour
 
     public void LinkStats(CharacterStat[] stats)
     {
-        baseHealth = (int)((100 + stats[0].Value) * stats[1].Value);
+        baseHealth = (int)(stats[0].Value * stats[1].Value);
         Health = health;
-        hpRegen = (1 + stats[2].Value) * stats[3].Value;
+        Debug.Log(baseHealth + "    " + health);
+        hpRegen = (stats[2].Value) * stats[3].Value;
+        Debug.Log(hpRegen);
 
         if (speed == tempSpeed)
         {
@@ -217,7 +219,12 @@ public class PlayerManager : MonoBehaviour
         waterRes = stats[7].Value;
         airRes = stats[8].Value;
 
-        weaponManager.LinkStats(stats[9].Value);
+        weaponManager.LinkStats(stats[9].Value, stats[10].Value);
+
+        weaponManager.physdmg = stats[11].Value * stats[12].Value * stats[13].Value;
+        weaponManager.firedmg = stats[11].Value * stats[14].Value * stats[17].Value;
+        weaponManager.waterdmg = stats[11].Value * stats[15].Value * stats[18].Value;
+        weaponManager.airdmg = stats[11].Value * stats[16].Value * stats[19].Value;
 
         //DAMAGES
     }
@@ -236,6 +243,7 @@ public class PlayerManager : MonoBehaviour
     {
         while (true)
         {
+            Debug.Log("regen");
             yield return new WaitForSeconds(1f);
             if (alive && health <= baseHealth)
             {
