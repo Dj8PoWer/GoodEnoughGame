@@ -8,11 +8,25 @@ public class Snake : MonoBehaviour, IPunObservable
     public float speed = 1.5f;
     public float stopping = 8f;
     public int health = 50;
+    public int strength = 5;
 
 
     private bool alive = true;
     public float originalTime;
     private float time;
+
+    private int level = 1;
+
+    public int Level
+    {
+        get { return level; }
+        set
+        {
+            level = value;
+            health = 40 + 10 * level;
+            strength = 5 + 2 * level;
+        }
+    }
 
     private GameObject target;
     public GameObject proj;

@@ -86,5 +86,11 @@ public class Projectile : MonoBehaviour
             p.TakeDamage(strength);
             Destroy(gameObject);
         }
+        else if (other.CompareTag("Snake") && target == "mob")
+        {
+            var p = other.GetComponent<Snake>();
+            p.TakeDamage(strength);
+            Destroy(gameObject);
+        }
     }
 }

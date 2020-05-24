@@ -13,7 +13,19 @@ public class Zombie : MonoBehaviour, IPunObservable
     public int health = 50;
     public int strength = 5;
 
-    public int level = 1;
+    private int level = 1;
+
+    public int Level
+    {
+        get { return level; }
+        set
+        {
+            level = value;
+            health = 40 + 10 * level;
+            strength = 5 + 2 * level;
+        }
+    }
+
     private bool Alive = true;
     
     private GameObject target;
@@ -48,7 +60,7 @@ public class Zombie : MonoBehaviour, IPunObservable
 
     void Update()
     {
-        // old version : target = GameObject.FindWithTag("Player");
+        Debug.Log(level);
 
         if (target == null)
         {
@@ -152,10 +164,12 @@ public class Zombie : MonoBehaviour, IPunObservable
         if(stream.IsWriting)
         {
             stream.SendNext(health);
+            stream.SendNext(level);
         }
         else
         {
             health = (int)stream.ReceiveNext();
+            Level = (int)stream.ReceiveNext();
         }
     }
 }

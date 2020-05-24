@@ -11,7 +11,20 @@ public class Witch : MonoBehaviour, IPunObservable
     public float back = 8f;
     public float fleeTime = 3f;
     public int health = 50;
+    public int strength = 5;
 
+    private int level = 1;
+
+    public int Level
+    {
+        get { return level; }
+        set
+        {
+            level = value;
+            health = 40 + 10 * level;
+            strength = 5 + 2 * level;
+        }
+    }
 
     private bool alive = true;
     public float originalTime;

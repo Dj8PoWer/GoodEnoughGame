@@ -9,6 +9,7 @@ public class Scorpion : MonoBehaviour, IPunObservable
     public float stopping = 8f;
     public int health = 50;
 
+    public int strength = 5;
 
     private bool alive = true;
     public float originalTime;
@@ -18,6 +19,19 @@ public class Scorpion : MonoBehaviour, IPunObservable
     public GameObject proj;
 
     private Animator animMobShooter;
+
+    private int level = 1;
+
+    public int Level
+    {
+        get { return level; }
+        set
+        {
+            level = value;
+            health = 40 + 10 * level;
+            strength = 5 + 2 * level;
+        }
+    }
 
     [SerializeField]
     GameObject loot;

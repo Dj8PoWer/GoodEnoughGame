@@ -9,6 +9,7 @@ public class Skeleton : MonoBehaviour, IPunObservable
     public float speed = 1.5f;
     public float stopping = 8f;
     public int health = 50;
+    public int strength = 10;
 
 
     private bool alive = true;
@@ -19,6 +20,19 @@ public class Skeleton : MonoBehaviour, IPunObservable
     public GameObject proj;
 
     private Animator animMobShooter;
+
+    private int level = 1;
+
+    public int Level
+    {
+        get { return level; }
+        set
+        {
+            level = value;
+            health = 40 + 10 * level;
+            strength = 5 + 2 * level;
+        }
+    }
 
     [SerializeField]
     GameObject loot;
@@ -101,8 +115,11 @@ public class Skeleton : MonoBehaviour, IPunObservable
         if (health <= 0 && alive)
         {
             alive = false;
-            if (willLoot && Random.Range(0,3) == 0)
-                Instantiate(loot, transform.position, Quaternion.identity);
+            if (willLoot && Random.Range(0, 3) == 0)
+            {
+                var item = Instantiate(loot, transform.position, Quaternion.identity);
+                item.GetComponent<ItemLoot>().GenerateRandomItem(level);
+            }
             //animPlayer.SetBool("Dying", true);
             PV.RPC("RPC_Death", RpcTarget.All);
         }

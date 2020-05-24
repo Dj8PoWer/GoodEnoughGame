@@ -10,8 +10,23 @@ public class GhostBoss : MonoBehaviour
     float air;
     float physical;
 
+
+
     float movetime;
     Vector2 direction;
+
+    private int level = 1;
+
+    public int Level
+    {
+        get { return level; }
+        set
+        {
+            level = value;
+            health = 40 + 10 * level;
+            water = 5 + 2 * level;
+        }
+    }
 
     int lvl = 1;
     [SerializeField]
