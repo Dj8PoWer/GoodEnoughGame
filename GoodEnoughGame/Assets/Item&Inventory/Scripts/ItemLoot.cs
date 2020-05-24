@@ -118,13 +118,13 @@ public class ItemLoot : MonoBehaviour
         EquipableItem i = item.GetCopy() as EquipableItem;
 
         //Select Type
-        int select = Random.Range(0, 8);
+        int select = Random.Range(0, 10);
         if (select < 5)
             i.equipmentType = (EquipmentType)select;
-        else if (select < 9)
+        else if (select < 8)
             i.equipmentType = EquipmentType.Weapon;
         else
-            i.equipmentType = EquipmentType.Weapon;
+            i.equipmentType = EquipmentType.Gem;
 
 
         #region Select Stats, name and icon for weapon/armors
@@ -193,10 +193,10 @@ public class ItemLoot : MonoBehaviour
             }
             //Select Name
             if (Random.Range(0, 3) < 3)
-                i.ItemName = prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
+                i.ItemName = prefixes[Random.Range(0, prefixes.Length)] + " ";
             i.ItemName += "Helmet";
             if (Random.Range(0, 3) < 3)
-                i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
+                i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length)];
             //Select Icon
             i.Icon = helmetIcons[Random.Range(0, 29)];
         }
@@ -251,10 +251,10 @@ public class ItemLoot : MonoBehaviour
             }
             //Select Name
             if (Random.Range(0, 3) < 3)
-                i.ItemName = prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
+                i.ItemName = prefixes[Random.Range(0, prefixes.Length)] + " ";
             i.ItemName += "Chestplate";
             if (Random.Range(0, 3) < 3)
-                i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
+                i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length)];
             //Select Icon
             i.Icon = chestIcons[Random.Range(0, 41)];
         }
@@ -316,10 +316,10 @@ public class ItemLoot : MonoBehaviour
             }
             //Select Name
             if (Random.Range(0, 3) < 3)
-                i.ItemName = prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
+                i.ItemName = prefixes[Random.Range(0, prefixes.Length)] + " ";
             i.ItemName += "Gloves";
             if (Random.Range(0, 3) < 3)
-                i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
+                i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length)];
             //Select Icon
             i.Icon = gloveIcons[Random.Range(0, 20)];
         }
@@ -367,10 +367,10 @@ public class ItemLoot : MonoBehaviour
             }
             //Select Name
             if (Random.Range(0, 3) < 3)
-                i.ItemName = prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
+                i.ItemName = prefixes[Random.Range(0, prefixes.Length)] + " ";
             i.ItemName += "Boots";
             if (Random.Range(0, 3) < 3)
-                i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
+                i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length)];
             //Select Icon
             i.Icon = bootsIcons[Random.Range(0, 53)];
         }
@@ -477,10 +477,10 @@ public class ItemLoot : MonoBehaviour
                 }
                 //Select Name
                 if (Random.Range(0, 3) < 3)
-                    i.ItemName = prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
+                    i.ItemName = prefixes[Random.Range(0, prefixes.Length)] + " ";
                 i.ItemName += "Sword";
                 if (Random.Range(0, 3) < 3)
-                    i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
+                    i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length)];
                 //Select Icon
                 i.Icon = swordIcons[Random.Range(0, 55)];
             }
@@ -584,10 +584,10 @@ public class ItemLoot : MonoBehaviour
                 }
                 //Select Name
                 if (Random.Range(0, 3) < 3)
-                    i.ItemName = prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
+                    i.ItemName = prefixes[Random.Range(0, prefixes.Length)] + " ";
                 i.ItemName += "Bow";
                 if (Random.Range(0, 3) < 3)
-                    i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
+                    i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length)];
                 //Select Icon
                 i.Icon = bowIcons[Random.Range(0, 20)];
 
@@ -692,10 +692,10 @@ public class ItemLoot : MonoBehaviour
                 }
                 //Select Name
                 if (Random.Range(0, 3) < 3)
-                    i.ItemName = prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
+                    i.ItemName = prefixes[Random.Range(0, prefixes.Length)] + " ";
                 i.ItemName += "Staff";
                 if (Random.Range(0, 3) < 3)
-                    i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
+                    i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length)];
                 //Select Icon
                 i.Icon = staffIcons[Random.Range(0, 18)];
 
@@ -705,8 +705,32 @@ public class ItemLoot : MonoBehaviour
         #region Spell
         else if (i.equipmentType == EquipmentType.Gem)
         {
-            //Select Spell
-            //Type
+            string[] spellNames = { "Fireball", "Blade Vortex", "Water Bomb", "Wind Burst" };
+            string spell = spellNames[Random.Range(0, spellNames.Length)];
+
+            switch(spell)
+            {
+                case "Fireball":
+                    i.Icon = gemIcons[0];
+                    i.fireDamageFlat = 10 + 2 * lvl + Random.Range(-1f, 1f) * lvl;
+                    i.ItemName = spell;
+                    break;
+                case "Blade Vortex":
+                    i.Icon = gemIcons[1];
+                    i.physicalDmgFlat = 10 + 2 * lvl + Random.Range(-1f, 1f) * lvl;
+                    i.ItemName = spell;
+                    break;
+                case "Water Bomb":
+                    i.Icon = gemIcons[2];
+                    i.waterDamageFlat = 10 + 2 * lvl + Random.Range(-1f, 1f) * lvl;
+                    i.ItemName = spell;
+                    break;
+                case "Wind Burst":
+                    i.Icon = gemIcons[3];
+                    i.airDamageFlat = 10 + 2 * lvl + Random.Range(-1f, 1f) * lvl;
+                    i.ItemName = spell;
+                    break;
+            }
             //Icon
             //Stats
         }

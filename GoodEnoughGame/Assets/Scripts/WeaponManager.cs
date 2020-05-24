@@ -152,14 +152,10 @@ public class WeaponManager : MonoBehaviour
                 case "Blade Vortex":
                     Spell[i] = () => PV.RPC("RPC_BladeVortex", RpcTarget.All, projPos.position, projPos.rotation);
                     break;
-                case "Water Bomb":
-                    break;
-                case "":
+                default:
                     Spell[i] = null;
                     break;
-                case null:
-                    Spell[i] = null;
-                    break;
+
             }
         }
     }
