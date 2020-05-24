@@ -840,6 +840,11 @@ MonoBehaviour:
   staff: {fileID: 2138596690222936472}
   sword: {fileID: 1438621976984995383}
   bow: {fileID: 8440037910673405104}
+  projPos: {fileID: 8136160453846979544}
+  Fireball: {fileID: 4565600713755393550, guid: 2ff9a0e8ad974044282a4f5ab4c768f2,
+    type: 3}
+  Bladevortex: {fileID: 3544799714709096488, guid: d4a551b296063b14388cd30633e867cc,
+    type: 3}
 --- !u!114 &9160554002699880057
 MonoBehaviour:
   m_ObjectHideFlags: 0

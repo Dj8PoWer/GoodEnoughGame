@@ -47,5 +47,7 @@ MonoBehaviour:
   - RPC_BurstAttack
   - RPC_SummonAttack
   - StartTimer
+  - RPC_Fireball
+  - RPC_BladeVortex
   DisableAutoOpenWizard: 1
   ShowSettings: 1

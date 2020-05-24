@@ -193,7 +193,7 @@ public class ItemLoot : MonoBehaviour
             }
             //Select Name
             if (Random.Range(0, 3) < 3)
-                i.ItemName += prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
+                i.ItemName = prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
             i.ItemName += "Helmet";
             if (Random.Range(0, 3) < 3)
                 i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
@@ -251,7 +251,7 @@ public class ItemLoot : MonoBehaviour
             }
             //Select Name
             if (Random.Range(0, 3) < 3)
-                i.ItemName += prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
+                i.ItemName = prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
             i.ItemName += "Chestplate";
             if (Random.Range(0, 3) < 3)
                 i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
@@ -316,7 +316,7 @@ public class ItemLoot : MonoBehaviour
             }
             //Select Name
             if (Random.Range(0, 3) < 3)
-                i.ItemName += prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
+                i.ItemName = prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
             i.ItemName += "Gloves";
             if (Random.Range(0, 3) < 3)
                 i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
@@ -367,7 +367,7 @@ public class ItemLoot : MonoBehaviour
             }
             //Select Name
             if (Random.Range(0, 3) < 3)
-                i.ItemName += prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
+                i.ItemName = prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
             i.ItemName += "Boots";
             if (Random.Range(0, 3) < 3)
                 i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
@@ -477,7 +477,7 @@ public class ItemLoot : MonoBehaviour
                 }
                 //Select Name
                 if (Random.Range(0, 3) < 3)
-                    i.ItemName += prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
+                    i.ItemName = prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
                 i.ItemName += "Sword";
                 if (Random.Range(0, 3) < 3)
                     i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
@@ -584,7 +584,7 @@ public class ItemLoot : MonoBehaviour
                 }
                 //Select Name
                 if (Random.Range(0, 3) < 3)
-                    i.ItemName += prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
+                    i.ItemName = prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
                 i.ItemName += "Bow";
                 if (Random.Range(0, 3) < 3)
                     i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
@@ -692,7 +692,7 @@ public class ItemLoot : MonoBehaviour
                 }
                 //Select Name
                 if (Random.Range(0, 3) < 3)
-                    i.ItemName += prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
+                    i.ItemName = prefixes[Random.Range(0, prefixes.Length - 1)] + " ";
                 i.ItemName += "Staff";
                 if (Random.Range(0, 3) < 3)
                     i.ItemName += " " + suffixes[Random.Range(0, suffixes.Length - 1)];
@@ -738,11 +738,12 @@ public class ItemLoot : MonoBehaviour
         i.airDamagePercent = (float)System.Math.Round(i.airDamagePercent, 2);
 
         item = i;
-        spritRenderer.sprite = i.Icon;
+        //spritRenderer.sprite = i.Icon;
     }
 
     IEnumerator SelfDestroy()
     {
+        spritRenderer.sprite = item.Icon;
         yield return new WaitForSeconds(30f);
         Destroy(gameObject);
     }

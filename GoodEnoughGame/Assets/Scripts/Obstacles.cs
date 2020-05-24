@@ -21,7 +21,6 @@ public class Obstacles : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("touched");
             touch.Play();
         }
     }

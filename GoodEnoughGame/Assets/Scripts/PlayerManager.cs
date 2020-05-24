@@ -68,14 +68,12 @@ public class PlayerManager : MonoBehaviour
         animPlayer = player.GetComponent<Animator>();
         PV = GetComponent<PhotonView>();
 
-
         if (PV.IsMine)
         {
             hpBar = GameObject.Find("HealthBar").GetComponent<Image>();
             respawnText = GameObject.Find("RespawnText").GetComponent<Text>();
             respawnText.gameObject.SetActive(false);
             spawnpoints = GameObject.FindGameObjectsWithTag("spawnpoint");
-            StartCoroutine(Regen());
         }
         // Enables the player's camera to avoid conflict if playing with other players
         if (PV.IsMine)
@@ -84,6 +82,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         gameObject.SetActive(true);
+        StartCoroutine(Regen());
     }
 
     // Update is called once per frame
@@ -233,7 +232,7 @@ public class PlayerManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
-            if (alive && health < baseHealth)
+            if (alive && health <= baseHealth)
             {
                 Health += hpRegen;
             }

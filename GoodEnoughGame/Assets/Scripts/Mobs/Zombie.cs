@@ -60,8 +60,6 @@ public class Zombie : MonoBehaviour, IPunObservable
 
     void Update()
     {
-        Debug.Log(level);
-
         if (target == null)
         {
             var players = GameObject.FindGameObjectsWithTag("Player");
@@ -107,6 +105,7 @@ public class Zombie : MonoBehaviour, IPunObservable
             //animPlayer.SetBool("Dying", true);
             if (willLoot && Random.Range(0, 3) == 0)
                 Instantiate(loot, transform.position, Quaternion.identity);
+            GetComponent<Collider2D>().enabled = false;
             Alive = false;
             PV.RPC("RPC_Death", RpcTarget.All);
             //Destroy(gameObject);

@@ -120,6 +120,8 @@ public class Skeleton : MonoBehaviour, IPunObservable
                 var item = Instantiate(loot, transform.position, Quaternion.identity);
                 item.GetComponent<ItemLoot>().GenerateRandomItem(level);
             }
+            GetComponent<Collider2D>().enabled = false;
+
             //animPlayer.SetBool("Dying", true);
             PV.RPC("RPC_Death", RpcTarget.All);
         }

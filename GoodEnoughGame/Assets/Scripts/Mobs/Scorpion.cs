@@ -116,6 +116,7 @@ public class Scorpion : MonoBehaviour, IPunObservable
             alive = false;
             if (willLoot && Random.Range(0, 3) == 0)
                 Instantiate(loot, transform.position, Quaternion.identity);
+            GetComponent<Collider2D>().enabled = false;
             //animPlayer.SetBool("Dying", true);
             PV.RPC("RPC_Death", RpcTarget.All);
         }

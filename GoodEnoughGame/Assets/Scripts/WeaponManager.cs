@@ -15,6 +15,11 @@ public class WeaponManager : MonoBehaviour
     int swordID;
     int bowID;
 
+    public Transform projPos;
+    public GameObject Fireball;
+    public GameObject Bladevortex;
+
+
     void Start()
     {
         PV = GetComponent<PhotonView>();
@@ -29,8 +34,13 @@ public class WeaponManager : MonoBehaviour
 
     private void Update()
     {
-        if (PV.IsMine)
-            Swap();
+        //if (PV.IsMine)
+        //Swap();
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            PV.RPC("RPC_Fireball", RpcTarget.All, projPos.position, projPos.rotation);
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            PV.RPC("RPC_BladeVortex", RpcTarget.All, projPos.position, projPos.rotation);
+
     }
 
     public void Swap()
@@ -120,5 +130,21 @@ public class WeaponManager : MonoBehaviour
         this.sword.SetActive(!this.sword.activeInHierarchy);
 
         staff.GetComponent<Staff>().attackSpeed = 1 / attackSpeed;
+    }
+
+    [PunRPC]
+    void RPC_Fireball(Vector3 pos, Quaternion rot)
+    {
+        var Object = Instantiate(Fireball, pos, rot);
+        var projectil = Object.GetComponent<Fireball>();
+        projectil.target = "mob";
+    }
+
+    [PunRPC]
+    void RPC_BladeVortex(Vector3 pos, Quaternion rot)
+    {
+        var Object = Instantiate(Bladevortex, pos, rot);
+        var projectil = Object.GetComponent<BladeVortex>();
+        projectil.target = "mob";
     }
 }
