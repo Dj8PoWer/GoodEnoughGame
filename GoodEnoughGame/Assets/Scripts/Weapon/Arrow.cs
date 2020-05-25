@@ -89,5 +89,11 @@ public class Arrow : MonoBehaviour
             p.TakeDamage(strength);
             Destroy(gameObject);
         }
+        else if (other.CompareTag("Chest") && target == "mob")
+        {
+            var p = other.GetComponent<Chest>();
+            p.TakeDamage(strength);
+            Destroy(gameObject);
+        }
     }
 }
