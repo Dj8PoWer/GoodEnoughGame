@@ -25,6 +25,7 @@ public class WeaponManager : MonoBehaviour
     public Transform projPos;
     public GameObject Fireball;
     public GameObject Bladevortex;
+    public GameObject WaterBomb;
 
     Action[] Spell = new Action[3];
 
@@ -48,6 +49,8 @@ public class WeaponManager : MonoBehaviour
             PV.RPC("RPC_Fireball", RpcTarget.All, projPos.position, projPos.rotation);
         if (Input.GetKeyDown(KeyCode.X))
             PV.RPC("RPC_BladeVortex", RpcTarget.All, projPos.position, projPos.rotation);
+        if (Input.GetKeyDown(KeyCode.C))
+            ThrowWaterBomb();
         if (Input.GetKeyDown(KeyCode.Alpha1) && Spell[0] != null)
             Spell[0]();
         if (Input.GetKeyDown(KeyCode.Alpha2) && Spell[1] != null)
@@ -158,12 +161,29 @@ public class WeaponManager : MonoBehaviour
                 case "Blade Vortex":
                     Spell[i] = () => PV.RPC("RPC_BladeVortex", RpcTarget.All, projPos.position, projPos.rotation);
                     break;
+                case "Water Bomb":
+                    Spell[i] = () => ThrowWaterBomb();
+                    break;
                 default:
                     Spell[i] = null;
                     break;
-
             }
         }
+    }
+
+    void ThrowWaterBomb()
+    {
+        Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        position.z = 0;
+        PV.RPC("RPC_WaterBomb", RpcTarget.All, position);
+    }
+
+    [PunRPC]
+    void RPC_WaterBomb(Vector3 pos)
+    {
+        var Object = Instantiate(WaterBomb, pos, Quaternion.identity);
+        var projectil = Object.GetComponent<WaterBomb>();
+        projectil.target = "mob";
     }
 
     [PunRPC]

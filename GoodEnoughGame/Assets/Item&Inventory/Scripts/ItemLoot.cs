@@ -688,6 +688,8 @@ public class ItemLoot : MonoBehaviour
                             i.moveSpeed -= 0.1f + 0.05f * lvl + Random.Range(-0.001f, 0.001f) * lvl;
                         else
                             stats++;
+                        if (i.moveSpeed < -.5f)
+                            i.moveSpeed = -.5f;
                     }
                 }
                 //Select Name

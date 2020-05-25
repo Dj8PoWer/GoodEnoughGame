@@ -849,6 +849,8 @@ MonoBehaviour:
     type: 3}
   Bladevortex: {fileID: 3544799714709096488, guid: d4a551b296063b14388cd30633e867cc,
     type: 3}
+  WaterBomb: {fileID: 6034058883949491483, guid: 375ba7ed9f6a2364f8a8014a1050f319,
+    type: 3}
 --- !u!114 &9160554002699880057
 MonoBehaviour:
   m_ObjectHideFlags: 0

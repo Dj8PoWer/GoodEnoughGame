@@ -49,5 +49,6 @@ MonoBehaviour:
   - StartTimer
   - RPC_Fireball
   - RPC_BladeVortex
+  - RPC_WaterBomb
   DisableAutoOpenWizard: 1
   ShowSettings: 1

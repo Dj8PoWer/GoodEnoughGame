@@ -247,7 +247,6 @@ public class PlayerManager : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("regen");
             yield return new WaitForSeconds(1f);
             if (alive && health <= baseHealth)
             {

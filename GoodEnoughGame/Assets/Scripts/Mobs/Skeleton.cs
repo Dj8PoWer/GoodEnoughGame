@@ -39,9 +39,11 @@ public class Skeleton : MonoBehaviour, IPunObservable
 
     private PhotonView PV;
 
+    float tempSpeed;
+
     void Start()
     {
-
+        tempSpeed = speed;
         animMobShooter = GetComponentInChildren<Animator>();
         time = originalTime;
 
@@ -89,7 +91,7 @@ public class Skeleton : MonoBehaviour, IPunObservable
 
         if (PhotonNetwork.IsMasterClient)
         {
-            if (time <= 0 && alive)
+            if (time <= 0 && alive && Vector2.Distance(transform.position, target.transform.position) <= stopping + .3f)
             {
                 float angle = (Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg) - 90;
                 Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -193,5 +195,20 @@ public class Skeleton : MonoBehaviour, IPunObservable
             health = (int)stream.ReceiveNext();
             Level = (int)stream.ReceiveNext();
         }
+    }
+
+    public void SpeedBuff(float duration, float value)
+    {
+        StartCoroutine(SpeedB(duration, value));
+    }
+
+    IEnumerator SpeedB(float duration, float value)
+    {
+        if (value < 0)
+            speed = -Mathf.Abs(speed);
+        else
+            speed = speed * value;
+        yield return new WaitForSeconds(duration);
+        speed = tempSpeed;
     }
 }
