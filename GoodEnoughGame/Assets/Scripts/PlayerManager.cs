@@ -60,6 +60,8 @@ public class PlayerManager : MonoBehaviour
     public GameObject cam;
     public GameObject player;
 
+    GameObject Blinder;
+
 
     // Start is called before the first frame update
     void Start()
@@ -80,6 +82,8 @@ public class PlayerManager : MonoBehaviour
         {
             cam.SetActive(true);
         }
+        Blinder = GameObject.Find("Blinder");
+        Blinder.SetActive(false);
 
         gameObject.SetActive(true);
         StartCoroutine(Regen());
@@ -133,9 +137,9 @@ public class PlayerManager : MonoBehaviour
     void Flip()
     {
         //if camera is on the right side of the screen, flips the character
-        if (Camera.main.ScreenToViewportPoint(Input.mousePosition).x < 0.5f)
+        if (Camera.main.ScreenToViewportPoint(Input.mousePosition).x < 0.5f && alive)
             player.transform.rotation = new Quaternion(0, 180, 0, 0);
-        else
+        else if (alive)
             player.transform.rotation = new Quaternion(0, 0, 0, 0);
     }
     
@@ -273,18 +277,27 @@ public class PlayerManager : MonoBehaviour
 
     IEnumerator SpeedB(float duration, float value)
     {
-        speed = speed * value;
+        if (value < 0)
+            speed = - Mathf.Abs(speed);
+        else
+            speed = speed * value;
         yield return new WaitForSeconds(duration);
         speed = tempSpeed;
     }
 
     public void Blind(float duration)
     {
-        StartCoroutine(BlindDB(duration));
+        if (PV.IsMine && alive)
+        {
+            StartCoroutine(BlindDB(duration));
+            StopCoroutine("BlindDB");
+        }
     }
 
     IEnumerator BlindDB(float duration)
     {
+        Blinder.SetActive(true);
         yield return new WaitForSeconds(duration);
+        Blinder.SetActive(false);
     }
 }

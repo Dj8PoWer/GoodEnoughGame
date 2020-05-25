@@ -56,6 +56,11 @@ public class SwordSlash : MonoBehaviour
             GhostBoss p = other.GetComponent<GhostBoss>();
             p.TakeDamage(strength);
         }
+        else if (other.CompareTag("Snake") && target == "mob")
+        {
+            var p = other.GetComponent<Snake>();
+            p.TakeDamage(strength);
+        }
         else if (other.CompareTag("Scorpion") && target == "mob")
         {
             var p = other.GetComponent<Scorpion>();
@@ -64,6 +69,11 @@ public class SwordSlash : MonoBehaviour
         else if (other.CompareTag("Phantom") && target == "mob")
         {
             var p = other.GetComponent<Phantom>();
+            p.TakeDamage(strength);
+        }
+        else if (other.CompareTag("Haunted") && target == "mob")
+        {
+            var p = other.GetComponent<Haunted>();
             p.TakeDamage(strength);
         }
     }

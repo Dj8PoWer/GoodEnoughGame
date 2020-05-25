@@ -19304,7 +19304,7 @@ MonoBehaviour:
   hpRegenFlat:
     baseValue: 1
   hpRegenPercent:
-    baseValue: 0
+    baseValue: 1
   moveSpeed:
     baseValue: 1
   armor:

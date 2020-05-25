@@ -104,5 +104,11 @@ public class Projectile : MonoBehaviour
             p.TakeDamage(strength);
             Destroy(gameObject);
         }
+        else if (other.CompareTag("Haunted") && target == "mob")
+        {
+            var p = other.GetComponent<Haunted>();
+            p.TakeDamage(strength);
+            Destroy(gameObject);
+        }
     }
 }

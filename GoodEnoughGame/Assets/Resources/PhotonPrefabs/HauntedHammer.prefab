@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2409325310843585385}
   m_Layer: 0
   m_Name: HauntedHammer
-  m_TagString: Zombie
+  m_TagString: Haunted
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 5986020335365812220}
-  - {fileID: 0}
+  - {fileID: 2409325310843585385}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -307,7 +307,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2647517764717577490, guid: 12bb5ac82d7c71848934ace7a9fe44e5,
+  m_Sprite: {fileID: -8296385383580801948, guid: a86160427db2c6546af6042c8822c1d6,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -329,7 +329,7 @@ Animator:
   m_GameObject: {fileID: 6415893122135479967}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6fdd1b25f9f6bc74ab4a1be453cd6151, type: 2}
+  m_Controller: {fileID: 9100000, guid: 53ea93af0dda0e14b97405570a2cb2fd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

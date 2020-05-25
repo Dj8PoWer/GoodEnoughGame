@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3533153487025704595}
   m_Layer: 0
   m_Name: HauntedFork
-  m_TagString: Zombie
+  m_TagString: Haunted
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 4860915883877818886}
-  - {fileID: 0}
+  - {fileID: 3533153487025704595}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -307,7 +307,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2647517764717577490, guid: 12bb5ac82d7c71848934ace7a9fe44e5,
+  m_Sprite: {fileID: -8296385383580801948, guid: bffe6eea2fc6e5c488e1203db28c844b,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -329,7 +329,7 @@ Animator:
   m_GameObject: {fileID: 5291228422623255397}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6fdd1b25f9f6bc74ab4a1be453cd6151, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4abfb535d35b27a4db0d816cf7e74ffa, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

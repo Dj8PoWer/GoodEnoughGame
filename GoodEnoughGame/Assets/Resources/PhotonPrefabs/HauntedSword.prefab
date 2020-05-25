@@ -70,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2647517764717577490, guid: 12bb5ac82d7c71848934ace7a9fe44e5,
+  m_Sprite: {fileID: -3527056022417232336, guid: aed48835359cd0643b26bc1055ea2d98,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -92,7 +92,7 @@ Animator:
   m_GameObject: {fileID: 3368384223738550803}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6fdd1b25f9f6bc74ab4a1be453cd6151, type: 2}
+  m_Controller: {fileID: 9100000, guid: 35b2f43baf48bcd43b785042a8939cf2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: -2965453446925905947}
   m_Layer: 0
   m_Name: HauntedSword
-  m_TagString: Zombie
+  m_TagString: Haunted
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,7 +204,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 2640708691171009392}
-  - {fileID: 0}
+  - {fileID: -2965453446925905947}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

@@ -77,6 +77,27 @@ public class Fireball : MonoBehaviour
             if (speed != 0)
                 StartCoroutine(Explode());
         }
+        else if (other.CompareTag("Scorpion") && target == "mob")
+        {
+            var p = other.GetComponent<Scorpion>();
+            p.TakeDamage(strength);
+            if (speed != 0)
+                StartCoroutine(Explode());
+        }
+        else if (other.CompareTag("Phantom") && target == "mob")
+        {
+            var p = other.GetComponent<Phantom>();
+            p.TakeDamage(strength);
+            if (speed != 0)
+                StartCoroutine(Explode());
+        }
+        else if (other.CompareTag("Haunted") && target == "mob")
+        {
+            var p = other.GetComponent<Haunted>();
+            p.TakeDamage(strength);
+            if (speed != 0)
+                StartCoroutine(Explode());
+        }
     }
 
     IEnumerator Explode()

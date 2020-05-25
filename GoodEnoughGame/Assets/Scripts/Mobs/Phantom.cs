@@ -65,9 +65,9 @@ public class Phantom : MonoBehaviour, IPunObservable
 
         //Flips the object
         if (transform.position.x < target.transform.position.x)
-            transform.rotation = new Quaternion(0, 180, 0, 0);
-        else
             transform.rotation = new Quaternion(0, 0, 0, 0);
+        else
+            transform.rotation = new Quaternion(0, 180, 0, 0);
 
         if (target == null)
         {

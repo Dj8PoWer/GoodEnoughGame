@@ -76,9 +76,9 @@ public class Haunted : MonoBehaviour, IPunObservable
 
         //Flips the object
         if (transform.position.x < target.transform.position.x)
-            transform.rotation = new Quaternion(0, 180, 0, 0);
-        else
             transform.rotation = new Quaternion(0, 0, 0, 0);
+        else
+            transform.rotation = new Quaternion(0, 180, 0, 0);
 
         if (Vector2.Distance(transform.position, target.transform.position) > stopping)
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
@@ -118,7 +118,7 @@ public class Haunted : MonoBehaviour, IPunObservable
         {
             PlayerManager p = other.gameObject.GetComponent<PlayerManager>();
             p.TakeDamage(strength);
-            //p.blind
+            p.Blind(4);
             PV.RPC("RPC_Attack", RpcTarget.All);
             time = originalTime;
         }
