@@ -15,6 +15,7 @@ TagManager:
   - Scorpion
   - Phantom
   - Haunted
+  - Chest
   layers:
   - Default
   - TransparentFX

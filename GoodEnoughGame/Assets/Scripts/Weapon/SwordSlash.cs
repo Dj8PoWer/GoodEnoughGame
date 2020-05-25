@@ -76,6 +76,12 @@ public class SwordSlash : MonoBehaviour
             var p = other.GetComponent<Haunted>();
             p.TakeDamage(strength);
         }
+        else if (other.CompareTag("Chest") && target == "mob")
+        {
+            var p = other.GetComponent<Chest>();
+            p.TakeDamage(strength);
+            Destroy(gameObject);
+        }
     }
 
 }
