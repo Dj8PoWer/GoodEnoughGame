@@ -14,7 +14,7 @@ public class WaterBomb : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Collider2D>().enabled = false;
+        GetComponent<CircleCollider2D>().enabled = false;
         animator = GetComponent<Animator>();
         StartCoroutine(Explode());
     }
@@ -82,7 +82,7 @@ public class WaterBomb : MonoBehaviour
         Debug.Log("explode");
         yield return new WaitForSeconds(time);
         animator.SetTrigger("explode");
-        GetComponent<Collider2D>().enabled = true;
+        GetComponent<CircleCollider2D>().enabled = true;
         transform.localScale = new Vector3(3, 3, 1);
         yield return new WaitForSeconds(.6f);
         Destroy(gameObject);

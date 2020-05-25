@@ -281,7 +281,8 @@ public class PlayerManager : MonoBehaviour
         else
             speed = speed * value;
         yield return new WaitForSeconds(duration);
-        speed = tempSpeed;
+        if (alive)
+            speed = tempSpeed;
     }
 
     public void Blind(float duration)

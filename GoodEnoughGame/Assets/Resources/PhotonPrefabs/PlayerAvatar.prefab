@@ -649,8 +649,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 8195488267972436746}
   - {fileID: 6810624358083220820}
+  - {fileID: 8195488267972436746}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -670,8 +670,14 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 4
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: Moving
+  - Type: 9
+    SynchronizeType: 2
+    Name: death
+  - Type: 9
+    SynchronizeType: 2
+    Name: alive
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0

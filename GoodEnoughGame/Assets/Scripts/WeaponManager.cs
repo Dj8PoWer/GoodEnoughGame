@@ -45,18 +45,21 @@ public class WeaponManager : MonoBehaviour
     {
         //if (PV.IsMine)
         //Swap();
-        if (Input.GetKeyDown(KeyCode.Z))
-            PV.RPC("RPC_Fireball", RpcTarget.All, projPos.position, projPos.rotation);
-        if (Input.GetKeyDown(KeyCode.X))
-            PV.RPC("RPC_BladeVortex", RpcTarget.All, projPos.position, projPos.rotation);
-        if (Input.GetKeyDown(KeyCode.C))
-            ThrowWaterBomb();
-        if (Input.GetKeyDown(KeyCode.Alpha1) && Spell[0] != null)
-            Spell[0]();
-        if (Input.GetKeyDown(KeyCode.Alpha2) && Spell[1] != null)
-            Spell[1]();
-        if (Input.GetKeyDown(KeyCode.Alpha3) && Spell[2] != null)
-            Spell[2]();
+        if (PV.IsMine)
+        {
+            if (Input.GetKeyDown(KeyCode.Z))
+                PV.RPC("RPC_Fireball", RpcTarget.All, projPos.position, projPos.rotation);
+            if (Input.GetKeyDown(KeyCode.X))
+                PV.RPC("RPC_BladeVortex", RpcTarget.All, projPos.position, projPos.rotation);
+            if (Input.GetKeyDown(KeyCode.C))
+                ThrowWaterBomb();
+            if (Input.GetKeyDown(KeyCode.Alpha1) && Spell[0] != null)
+                Spell[0]();
+            if (Input.GetKeyDown(KeyCode.Alpha2) && Spell[1] != null)
+                Spell[1]();
+            if (Input.GetKeyDown(KeyCode.Alpha3) && Spell[2] != null)
+                Spell[2]();
+        }
 
     }
 
