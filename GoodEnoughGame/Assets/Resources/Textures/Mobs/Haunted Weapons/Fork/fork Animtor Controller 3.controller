@@ -94,7 +94,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 685db73cb5440754cbfeeabce46f2187, type: 2}
+  m_Motion: {fileID: 7400000, guid: b3ab9c69139c8b8429f8d6eafb68ccfb, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -120,7 +120,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 3870cac9ec6ce7a448dcc98fa9ffa37f, type: 2}
+  m_Motion: {fileID: 7400000, guid: fd90beae868a91b47bf1cfc8240c8569, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -132,7 +132,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: zombie Animtor Controller 3
+  m_Name: Fork Animtor Controller 3
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: attack
@@ -235,7 +235,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: f02f32e7f71fe484389f7fbeb9788a2f, type: 2}
+  m_Motion: {fileID: 7400000, guid: 8515783265a83284bb1e6223f1d9968e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

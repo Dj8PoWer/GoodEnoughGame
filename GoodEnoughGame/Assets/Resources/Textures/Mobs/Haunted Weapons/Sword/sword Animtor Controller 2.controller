@@ -94,7 +94,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 685db73cb5440754cbfeeabce46f2187, type: 2}
+  m_Motion: {fileID: 7400000, guid: 73f6fa293c97b0a43929a49a20d53964, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -120,7 +120,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 3870cac9ec6ce7a448dcc98fa9ffa37f, type: 2}
+  m_Motion: {fileID: 7400000, guid: bad009313ff3eb74c8bef05aca1b6888, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -132,7 +132,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: zombie Animtor Controller 2
+  m_Name: Sword Animtor Controller 2
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: attack
@@ -235,7 +235,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: f02f32e7f71fe484389f7fbeb9788a2f, type: 2}
+  m_Motion: {fileID: 7400000, guid: 66f69e74389a7da4e8b4e338d0155c50, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
