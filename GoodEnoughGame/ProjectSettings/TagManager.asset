@@ -16,6 +16,7 @@ TagManager:
   - Phantom
   - Haunted
   - Chest
+  - KnightSuperBoss
   layers:
   - Default
   - TransparentFX

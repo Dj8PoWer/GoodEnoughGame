@@ -16,7 +16,7 @@ MonoBehaviour:
     AppIdRealtime: f44e0647-feaf-45ef-8a48-1a6ab6f602cb
     AppIdChat: 
     AppIdVoice: 
-    AppVersion: 0
+    AppVersion: 
     UseNameServer: 1
     FixedRegion: 
     Server: 
@@ -31,27 +31,24 @@ MonoBehaviour:
   RpcList:
   - ClickRpc
   - DestroyRpc
-  - DestroySpaceship
-  - Fire
-  - RespawnSpaceship
-  - RPC_CreatePlayer
-  - RPC_LoadedGameScene
+  - ExplodeOne
   - RPC_Attack
-  - Flip
-  - SpawnZombie
-  - SwapWeapon
-  - StartLvl
-  - RPC_Death
-  - RPC_Shoot
-  - RPC_CircleAttack
-  - RPC_BurstAttack
-  - RPC_SummonAttack
-  - StartTimer
-  - RPC_Fireball
   - RPC_BladeVortex
-  - RPC_WaterBomb
+  - RPC_BurstAttack
+  - RPC_CircleAttack
+  - RPC_CreatePlayer
+  - RPC_Death
+  - RPC_ExplosiveAttack
+  - RPC_Fireball
   - RPC_HeadSeekerAttack
+  - RPC_LoadedGameScene
+  - RPC_Shoot
+  - RPC_SummonAttack
   - RPC_TriangeAttack
   - RPC_WallAttack
+  - RPC_WaterBomb
+  - StartLvl
+  - StartTimer
+  - SwapWeapon
   DisableAutoOpenWizard: 1
-  ShowSettings: 1
+  ShowSettings: 0
