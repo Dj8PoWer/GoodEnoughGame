@@ -13,6 +13,7 @@ TagManager:
   - spawnpoint
   - Snake
   - Scorpion
+  - Phantom
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,8 @@ public class Bubble : MonoBehaviour
     public int strength = 10;
     public string target = "";
 
+    public float confusionTime = 4f;
+
     // Update is called once per frame
     void Update()
     {
@@ -28,7 +30,7 @@ public class Bubble : MonoBehaviour
         {
             PlayerManager p = other.GetComponent<PlayerManager>();
             p.TakeDamage(strength);
-            p.SpeedBuff(5, -1f);
+            p.SpeedBuff(confusionTime, -1f);
             Destroy(gameObject);
         }
     }

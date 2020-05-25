@@ -252,12 +252,12 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void TakeDOTDamage(int repetition, float dmg)
+    public void TakeDOTDamage(float repetition, float dmg)
     {
         StartCoroutine(DOTDamage(repetition, dmg));
     }
 
-    IEnumerator DOTDamage(int repetition, float dmg)
+    IEnumerator DOTDamage(float repetition, float dmg)
     {
         for (int i = 0; i< repetition; i++)
         {
@@ -266,24 +266,24 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void SpeedBuff(int duration, float value)
+    public void SpeedBuff(float duration, float value)
     {
         StartCoroutine(SpeedB(duration, value));
     }
 
-    IEnumerator SpeedB(int duration, float value)
+    IEnumerator SpeedB(float duration, float value)
     {
         speed = speed * value;
         yield return new WaitForSeconds(duration);
         speed = tempSpeed;
     }
 
-    public void Blind(int duration)
+    public void Blind(float duration)
     {
         StartCoroutine(BlindDB(duration));
     }
 
-    IEnumerator BlindDB(int duration)
+    IEnumerator BlindDB(float duration)
     {
         yield return new WaitForSeconds(duration);
     }

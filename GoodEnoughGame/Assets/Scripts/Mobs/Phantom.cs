@@ -11,7 +11,6 @@ public class Phantom : MonoBehaviour, IPunObservable
     public int health = 50;
     public int strength = 10;
 
-
     private bool alive = true;
     public float originalTime;
     private float time;
