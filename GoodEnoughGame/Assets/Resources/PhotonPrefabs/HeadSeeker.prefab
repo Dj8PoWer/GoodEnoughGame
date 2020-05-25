@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2960166149434554229}
   - component: {fileID: 4036033944691678973}
-  - component: {fileID: 1652985724190703379}
   - component: {fileID: 3145204410127457697}
   - component: {fileID: -1476211259451445810}
   - component: {fileID: 3824499275768228609}
+  - component: {fileID: 4932929480041702487}
   m_Layer: 0
-  m_Name: Fireball
+  m_Name: HeadSeeker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4565600713755393550}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &4036033944691678973
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -85,23 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1652985724190703379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4565600713755393550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eef9dee721ef1b34fb31c4f147235f10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  time: 3
-  speed: 5
-  explosion: {fileID: 0}
-  strength: 10
-  target: 
 --- !u!95 &3145204410127457697
 Animator:
   serializedVersion: 3
@@ -158,3 +141,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4
+--- !u!114 &4932929480041702487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4565600713755393550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df1d7b4d4ef1504f866cd3d80ee19b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 5
+  speed: 1.5
+  strength: 10
+  target: 
