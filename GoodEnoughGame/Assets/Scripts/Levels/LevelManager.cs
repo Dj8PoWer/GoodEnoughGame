@@ -48,7 +48,7 @@ public class LevelManager : MonoBehaviour
         //homeMusic.Stop();
         //levelMusic.Play();
         musics[0].Stop();
-        //musics[level - 1].Play();
+        musics[level].Play();
         
         PV.RPC("StartLvl", RpcTarget.All, levels[level-1].transform.position);
         StartCoroutine(SpawnBoss(level));
