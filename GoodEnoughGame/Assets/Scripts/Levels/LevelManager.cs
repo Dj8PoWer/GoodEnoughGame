@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour
     
     public GameObject[] spawners1;
     public GameObject[] spawners2;
+    public GameObject[] spawners3;
 
     //public AudioSource homeMusic;
     //public AudioSource levelMusic;
@@ -47,7 +48,7 @@ public class LevelManager : MonoBehaviour
         //homeMusic.Stop();
         //levelMusic.Play();
         musics[0].Stop();
-        musics[level].Play();
+        //musics[level - 1].Play();
         
         PV.RPC("StartLvl", RpcTarget.All, levels[level-1].transform.position);
         StartCoroutine(SpawnBoss(level));
@@ -68,6 +69,11 @@ public class LevelManager : MonoBehaviour
                 }
                 break;
             default:
+                foreach (var spawner in spawners3)
+                {
+                    spawner.GetComponent<LevelSpawner>().spawning = true;
+                }
+                break;
                 break;
         }
     }

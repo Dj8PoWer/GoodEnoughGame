@@ -202,7 +202,6 @@ MonoBehaviour:
   stopping: 0
   health: 50
   strength: 5
-  level: 1
   originalTime: 1
   contactPlayer: {fileID: 0}
 --- !u!114 &5920657434985954449

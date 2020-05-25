@@ -277,4 +277,14 @@ public class PlayerManager : MonoBehaviour
         yield return new WaitForSeconds(duration);
         speed = tempSpeed;
     }
+
+    public void Blind(int duration)
+    {
+        StartCoroutine(BlindDB(duration));
+    }
+
+    IEnumerator BlindDB(int duration)
+    {
+        yield return new WaitForSeconds(duration);
+    }
 }

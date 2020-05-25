@@ -98,5 +98,11 @@ public class Projectile : MonoBehaviour
             p.TakeDamage(strength);
             Destroy(gameObject);
         }
+        else if (other.CompareTag("Fantome") && target == "mob")
+        {
+            var p = other.GetComponent<Scorpion>();
+            p.TakeDamage(strength);
+            Destroy(gameObject);
+        }
     }
 }
