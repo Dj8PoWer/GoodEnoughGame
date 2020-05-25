@@ -121,6 +121,7 @@ MonoBehaviour:
   speed: 1.5
   stopping: 8
   health: 50
+  strength: 5
   originalTime: 4
   proj: {fileID: 6417904226450301026, guid: 6b5d1333164aab44ba561d994fe9422b, type: 3}
   loot: {fileID: 640314737137429678, guid: a5ec004398a71004786f7c47090a8234, type: 3}

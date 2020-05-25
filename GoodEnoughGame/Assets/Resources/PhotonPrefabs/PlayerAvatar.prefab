@@ -840,6 +840,10 @@ MonoBehaviour:
   staff: {fileID: 2138596690222936472}
   sword: {fileID: 1438621976984995383}
   bow: {fileID: 8440037910673405104}
+  physdmg: 0
+  waterdmg: 0
+  firedmg: 0
+  airdmg: 0
   projPos: {fileID: 8136160453846979544}
   Fireball: {fileID: 4565600713755393550, guid: 2ff9a0e8ad974044282a4f5ab4c768f2,
     type: 3}
