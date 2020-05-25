@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -6779279929208027431}
   m_Layer: 0
   m_Name: KnightSuperBoss
-  m_TagString: GhostBoss
+  m_TagString: KnightSuperBoss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
