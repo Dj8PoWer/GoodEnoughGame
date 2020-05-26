@@ -37,10 +37,14 @@ public class KnightSuperBoss : MonoBehaviour, IPunObservable
     public int maxHealth;
 
     public int howManyExplosives = 2;
+    public int howManyFives = 4;
     
     //Projectiles
     [SerializeField]
     GameObject explosiveProj;
+    
+    [SerializeField]
+    GameObject proj;
 
     // Start is called before the first frame update
     void Start()
@@ -67,8 +71,8 @@ public class KnightSuperBoss : MonoBehaviour, IPunObservable
         {
             if (health < maxHealth / 2)
                 time = 1;
-            //yield return new WaitForSeconds(time);
-            //yield return BurstAttack(30);
+            yield return new WaitForSeconds(time);
+            yield return Fives(howManyFives);
             if (health < maxHealth / 2)
                 time = 1;
             yield return new WaitForSeconds(time);
@@ -83,12 +87,13 @@ public class KnightSuperBoss : MonoBehaviour, IPunObservable
             //yield return SummonAttack(10);
             if (health < maxHealth / 2)
                 time /= 2;
-            //yield return new WaitForSeconds(time);
-            //yield return CircleAttack(30);
+            yield return new WaitForSeconds(time);
+            yield return CircleAttack(30);
         }
     }
     #endregion
 
+    
     #region Explosive
     //Summons 3 Explosivve projectiles (every 2s, each one throws 6 projectiles)
     [PunRPC]
@@ -120,7 +125,75 @@ public class KnightSuperBoss : MonoBehaviour, IPunObservable
         }
         animator.SetTrigger("idle");
     }
+    #endregion
+    
+    #region Fives
+    //Circle Attack Shoots 6 projectile all around the boss, multiple times with an offset each time
+    [PunRPC]
+    void RPC_FivesAttack(Vector2 target)
+    {
+        for (int angle = 0; angle <= 15; angle += 3)
+        {
+            GameObject Object = Instantiate(proj, transform.position, RotateTowards(target, -7.5f + angle));
+            var projectil = Object.GetComponent<KnightSnow>();
+            projectil.speed = 3f;
+            Object.transform.localScale = new Vector3(.5f, .5f, .5f);
+            projectil.target = "player";
+        }
+    }
 
+    IEnumerator Fives(int howManyFives)
+    {
+        GameObject target = null;
+
+        var players = GameObject.FindGameObjectsWithTag("Player");
+        float minimum = float.MaxValue;
+        foreach (var play in players)
+        {
+            if (Vector2.Distance(transform.position, play.transform.position) < minimum)
+            {
+                minimum = Vector2.Distance(transform.position, play.transform.position);
+                target = play;
+            }
+        }
+
+        animator.SetTrigger("attack");
+        for (int i = 0; i < howManyFives; i++)
+        {
+            yield return new WaitForSeconds(2f);
+            PV.RPC("RPC_FivesAttack", RpcTarget.All, (Vector2)target.transform.position);
+        }
+        animator.SetTrigger("idle");
+    }
+    #endregion
+    
+    #region CircleAttack
+    //Circle Attack Shoots 6 projectile all around the boss, multiple times with an offset each time
+    [PunRPC]
+    void RPC_CircleAttack(int offset)
+    {
+        for (int angle = 0; angle < 360; angle += 36)
+        {
+            var Object = Instantiate(proj, transform.position, Quaternion.Euler(Vector3.forward * (angle+offset)));
+            var projectil = Object.GetComponent<KnightSnow>();
+            projectil.speed = 3f;
+            Object.transform.localScale = new Vector3(.5f, .5f, .5f);
+            projectil.target = "player";
+        }
+    }
+
+    IEnumerator CircleAttack(int attack)
+    {
+        animator.SetTrigger("attack");
+        for (int i = 0; i < attack; i++)
+        {
+            yield return new WaitForSeconds(0.35f);
+            Debug.Log("Attack");
+            //RPC_CircleAttack(i * 20);
+            PV.RPC("RPC_CircleAttack", RpcTarget.All, i * 20);
+        }
+        animator.SetTrigger("idle");
+    }
     #endregion
 
     /*#region Burst

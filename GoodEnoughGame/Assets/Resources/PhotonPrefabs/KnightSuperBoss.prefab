@@ -196,5 +196,7 @@ MonoBehaviour:
   loot: {fileID: 640314737137429678, guid: a5ec004398a71004786f7c47090a8234, type: 3}
   maxHealth: 200
   howManyExplosives: 2
+  howManyFives: 4
   explosiveProj: {fileID: 3231551903551686922, guid: bb4129d3f8804b1498b4efa4d68dfea4,
     type: 3}
+  proj: {fileID: 7962881296611633635, guid: 6ba365eb4d9233245a4781bafec06af8, type: 3}
