@@ -46,6 +46,8 @@ public class Sarcophagus : MonoBehaviour, IPunObservable
     GameObject WallProjectil;
     [SerializeField]
     GameObject Tornado;
+    
+    public AudioSource death;
 
     // Start is called before the first frame update
     void Start()
@@ -232,6 +234,7 @@ public class Sarcophagus : MonoBehaviour, IPunObservable
         //animPlayer.SetBool("Hurt", true);
         if (health <= 0)
         {
+            death.Play();
             LevelManager manager = FindObjectOfType<LevelManager>();
             manager.leavers[1].SetActive(true);
             Debug.Log(manager.leavers[1].activeInHierarchy + "    " + manager.leavers[1].name);

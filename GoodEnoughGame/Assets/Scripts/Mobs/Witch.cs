@@ -42,6 +42,8 @@ public class Witch : MonoBehaviour, IPunObservable
 
     float tempSpeed;
     
+    public AudioSource death;
+    
     void Start()
     {
         tempSpeed = speed;
@@ -168,6 +170,7 @@ public class Witch : MonoBehaviour, IPunObservable
 
     IEnumerator Death()
     {
+        death.Play();
         animMobShooter.SetTrigger("death");
         speed = 0;
         yield return new WaitForSeconds(1);

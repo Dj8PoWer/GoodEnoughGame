@@ -35,6 +35,7 @@ public class Zombie : MonoBehaviour, IPunObservable
 
     private Animator animMobChaser;
 
+    public AudioSource death;
     public AudioSource contactPlayer;
 
     private PhotonView PV;
@@ -152,6 +153,7 @@ public class Zombie : MonoBehaviour, IPunObservable
     {
         float baseSpeed = speed;
         speed = 0;
+        contactPlayer.Play();
         animMobChaser.SetTrigger("attack");
         yield return new WaitForSeconds(0.4f);
         speed = baseSpeed;
@@ -160,6 +162,7 @@ public class Zombie : MonoBehaviour, IPunObservable
     IEnumerator Death()
     {
         speed = 0;
+        death.Play();
         animMobChaser.SetTrigger("death");
         yield return new WaitForSeconds(1.1f);
         PhotonNetwork.Destroy(gameObject);

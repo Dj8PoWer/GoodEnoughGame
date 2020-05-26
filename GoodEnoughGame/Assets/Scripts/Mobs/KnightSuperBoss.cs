@@ -48,6 +48,8 @@ public class KnightSuperBoss : MonoBehaviour, IPunObservable
     
     [SerializeField]
     GameObject proj;
+    
+    public AudioSource death;
 
     // Start is called before the first frame update
     void Start()
@@ -61,9 +63,9 @@ public class KnightSuperBoss : MonoBehaviour, IPunObservable
     }
 
     bool halfhp = true;
-
-
-
+    
+    
+    
     #region Pattern
     IEnumerator Pattern1(float time)
     {
@@ -315,6 +317,7 @@ public class KnightSuperBoss : MonoBehaviour, IPunObservable
         //animPlayer.SetBool("Hurt", true);
         if (health <= 0)
         {
+            death.Play();
             LevelManager manager = FindObjectOfType<LevelManager>();
             manager.leavers[2].SetActive(true);
             if (Random.Range(0, 3) == 0)

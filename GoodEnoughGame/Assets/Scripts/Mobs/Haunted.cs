@@ -36,11 +36,12 @@ public class Haunted : MonoBehaviour, IPunObservable
     private Animator animMobChaser;
 
     public AudioSource contactPlayer;
+    public AudioSource death;
 
     private PhotonView PV;
 
     float tempSpeed;
-    
+
     void Start()
     {
         tempSpeed = speed;
@@ -122,6 +123,7 @@ public class Haunted : MonoBehaviour, IPunObservable
     {
         if (other.gameObject.CompareTag("Player") && time <= 0 && Alive)
         {
+            contactPlayer.Play();
             PlayerManager p = other.gameObject.GetComponent<PlayerManager>();
             p.TakeDamage(strength, PlayerManager.DmgType.Physical);
             p.Blind(4);
@@ -159,6 +161,7 @@ public class Haunted : MonoBehaviour, IPunObservable
 
     IEnumerator Death()
     {
+        death.Play();
         speed = 0;
         animMobChaser.SetTrigger("death");
         yield return new WaitForSeconds(1.1f);

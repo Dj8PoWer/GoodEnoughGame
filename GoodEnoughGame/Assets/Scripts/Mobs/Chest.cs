@@ -39,6 +39,9 @@ public class Chest : MonoBehaviour, IPunObservable
     private PhotonView PV;
 
     float tempSpeed;
+    
+    public AudioSource death;
+    public AudioSource coins;
 
     void Start()
     {
@@ -156,6 +159,7 @@ public class Chest : MonoBehaviour, IPunObservable
 
     IEnumerator Attack()
     {
+        coins.Play();
         animMobShooter.SetTrigger("attack");
         float tempSpeed = speed;
         speed = 0;
@@ -167,6 +171,7 @@ public class Chest : MonoBehaviour, IPunObservable
 
     IEnumerator Death()
     {
+        death.Play();
         animMobShooter.SetTrigger("death");
         speed = 0;
         yield return new WaitForSeconds(1);

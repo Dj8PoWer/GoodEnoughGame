@@ -37,6 +37,8 @@ public class Scorpion : MonoBehaviour, IPunObservable
     GameObject loot;
 
     private PhotonView PV;
+    
+    public AudioSource death;
 
     void Start()
     {
@@ -162,6 +164,7 @@ public class Scorpion : MonoBehaviour, IPunObservable
 
     IEnumerator Death()
     {
+        death.Play();
         animMobShooter.SetTrigger("death");
         speed = 0;
         yield return new WaitForSeconds(1);

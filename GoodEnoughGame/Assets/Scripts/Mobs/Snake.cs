@@ -39,6 +39,8 @@ public class Snake : MonoBehaviour, IPunObservable
     float tempSpeed;
 
     private PhotonView PV;
+    
+    public AudioSource death;
 
     void Start()
     {
@@ -169,6 +171,7 @@ public class Snake : MonoBehaviour, IPunObservable
 
     IEnumerator Death()
     {
+        death.Play();
         animMobShooter.SetTrigger("death");
         speed = 0;
         yield return new WaitForSeconds(1);

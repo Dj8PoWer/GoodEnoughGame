@@ -41,6 +41,8 @@ public class GhostBoss : MonoBehaviour, IPunObservable
     //Projectiles
     [SerializeField]
     GameObject CircleProj;
+    
+    public AudioSource death;
 
     // Start is called before the first frame update
     void Start()
@@ -232,6 +234,7 @@ public class GhostBoss : MonoBehaviour, IPunObservable
         //animPlayer.SetBool("Hurt", true);
         if (health <= 0)
         {
+            death.Play();
             LevelManager manager = FindObjectOfType<LevelManager>();
             manager.leavers[0].SetActive(true);
             var item = Instantiate(loot, transform.position, Quaternion.identity);

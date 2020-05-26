@@ -22,6 +22,8 @@ public class Skeleton : MonoBehaviour, IPunObservable
     private Animator animMobShooter;
 
     private int level = 1;
+    
+    public AudioSource death;
 
     public int Level
     {
@@ -166,6 +168,7 @@ public class Skeleton : MonoBehaviour, IPunObservable
 
     IEnumerator Death()
     {
+        death.Play();
         animMobShooter.SetTrigger("death");
         speed = 0;
         yield return new WaitForSeconds(1);

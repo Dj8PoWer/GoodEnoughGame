@@ -38,6 +38,8 @@ public class Phantom : MonoBehaviour, IPunObservable
 
     private PhotonView PV;
     private float tempSpeed;
+    
+    public AudioSource death;
 
     void Start()
     {
@@ -164,6 +166,7 @@ public class Phantom : MonoBehaviour, IPunObservable
 
     IEnumerator Death()
     {
+        death.Play();
         animMobShooter.SetTrigger("death");
         speed = 0;
         yield return new WaitForSeconds(1);
