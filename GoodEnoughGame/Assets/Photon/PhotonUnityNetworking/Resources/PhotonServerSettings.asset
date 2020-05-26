@@ -54,5 +54,6 @@ MonoBehaviour:
   - RPC_Tornado
   - RPC_CageAttack
   - RPC_StarAttack
+  - RPC_WindBurst
   DisableAutoOpenWizard: 1
   ShowSettings: 0
