@@ -101,5 +101,11 @@ public class Arrow : MonoBehaviour
             p.TakeDamage(strength);
             Destroy(gameObject);
         }
+        else if (other.CompareTag("KnightSuperBoss") && target == "mob")
+        {
+            var p = other.GetComponent<KnightSuperBoss>();
+            p.TakeDamage(strength);
+            Destroy(gameObject);
+        }
     }
 }

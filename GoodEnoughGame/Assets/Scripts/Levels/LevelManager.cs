@@ -25,9 +25,14 @@ public class LevelManager : MonoBehaviour
     public AudioSource[] musics;
 
     public Timer timer;
+    public GameObject diff;
+    public Text difficultyDisplay;
 
     void Start()
     {
+        if (!PhotonNetwork.IsMasterClient)
+            diff.SetActive(false);
+
         foreach (var leaver in leavers)
         {
             leaver.SetActive(false);
@@ -52,7 +57,7 @@ public class LevelManager : MonoBehaviour
         
         PV.RPC("StartLvl", RpcTarget.All, levels[level-1].transform.position);
         StartCoroutine(SpawnBoss(level));
-        StartTimer();
+        PV.RPC("StartTimer", RpcTarget.All);
 
         switch (level)
         {
@@ -60,23 +65,26 @@ public class LevelManager : MonoBehaviour
                 foreach (var spawner in spawners1)
                 {
                     spawner.GetComponent<LevelSpawner>().spawning = true;
+                    spawner.GetComponent<LevelSpawner>().level = difficulty;
                 }
                 break;
             case 2:
                 foreach (var spawner in spawners2)
                 {
                     spawner.GetComponent<LevelSpawner>().spawning = true;
+                    spawner.GetComponent<LevelSpawner>().level = difficulty;
                 }
                 break;
             default:
                 foreach (var spawner in spawners3)
                 {
                     spawner.GetComponent<LevelSpawner>().spawning = true;
+                    spawner.GetComponent<LevelSpawner>().level = difficulty;
                 }
-                break;
                 break;
         }
     }
+
 
     public void BackSpawn()
     {
@@ -104,11 +112,24 @@ public class LevelManager : MonoBehaviour
                 {
                     spawner.GetComponent<LevelSpawner>().spawning = false;
                 }
-                PhotonNetwork.Instantiate(System.IO.Path.Combine("PhotonPrefabs", "GhostBoss"), levels[level - 1].transform.position, Quaternion.identity, 0);
+                var O = PhotonNetwork.Instantiate(System.IO.Path.Combine("PhotonPrefabs", "GhostBoss"), levels[level - 1].transform.position, Quaternion.identity, 0);
+                O.GetComponent<GhostBoss>().Level = difficulty;
                 break;
             case 2:
+                foreach (var spawner in spawners2)
+                {
+                    spawner.GetComponent<LevelSpawner>().spawning = false;
+                }
+                O = PhotonNetwork.Instantiate(System.IO.Path.Combine("PhotonPrefabs", "Sarcophagus"), levels[level - 1].transform.position, Quaternion.identity, 0);
+                O.GetComponent<Sarcophagus>().Level = difficulty;
                 break;
             case 3:
+                foreach (var spawner in spawners3)
+                {
+                    spawner.GetComponent<LevelSpawner>().spawning = false;
+                }
+                O = PhotonNetwork.Instantiate(System.IO.Path.Combine("PhotonPrefabs", "KnightSuperBoss"), levels[level - 1].transform.position, Quaternion.identity, 0);
+                O.GetComponent<KnightSuperBoss>().Level = difficulty;
                 break;
         }
 
@@ -149,5 +170,11 @@ public class LevelManager : MonoBehaviour
     void StartTimer()
     {
         timer.StartTimer();
+    }
+
+    public void ChangeDifficulty(int d)
+    {
+        difficulty += d;
+        difficultyDisplay.text = "Mob level = " + difficulty.ToString();
     }
 }

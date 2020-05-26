@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
-  stopping: 8
+  stopping: 3
   health: 50
   strength: 10
   originalTime: 3.5

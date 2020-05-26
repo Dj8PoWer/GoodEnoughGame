@@ -38,9 +38,11 @@ public class Chest : MonoBehaviour, IPunObservable
 
     private PhotonView PV;
 
+    float tempSpeed;
+
     void Start()
     {
-
+        tempSpeed = speed;
         animMobShooter = GetComponentInChildren<Animator>();
         time = originalTime;
 
@@ -190,5 +192,20 @@ public class Chest : MonoBehaviour, IPunObservable
             health = (int)stream.ReceiveNext();
             Level = (int)stream.ReceiveNext();
         }
+    }
+
+    public void SpeedBuff(float duration, float value)
+    {
+        StartCoroutine(SpeedB(duration, value));
+    }
+
+    IEnumerator SpeedB(float duration, float value)
+    {
+        if (value < 0)
+            speed = -Mathf.Abs(speed);
+        else
+            speed = speed * value;
+        yield return new WaitForSeconds(duration);
+        speed = tempSpeed;
     }
 }

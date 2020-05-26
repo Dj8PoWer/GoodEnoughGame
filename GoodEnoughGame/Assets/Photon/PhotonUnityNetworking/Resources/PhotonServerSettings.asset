@@ -51,5 +51,8 @@ MonoBehaviour:
   - StartTimer
   - SwapWeapon
   - RPC_FivesAttack
+  - RPC_Tornado
+  - RPC_CageAttack
+  - RPC_StarAttack
   DisableAutoOpenWizard: 1
   ShowSettings: 0

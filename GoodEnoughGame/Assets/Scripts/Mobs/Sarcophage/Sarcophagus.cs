@@ -229,7 +229,7 @@ public class Sarcophagus : MonoBehaviour, IPunObservable
         if (health <= 0)
         {
             LevelManager manager = FindObjectOfType<LevelManager>();
-            manager.leavers[0].SetActive(true);
+            manager.leavers[1].SetActive(true);
             Instantiate(loot, transform.position, Quaternion.identity);
             PhotonNetwork.Destroy(gameObject);
         }

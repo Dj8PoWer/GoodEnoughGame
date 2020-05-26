@@ -80,7 +80,16 @@ public class SwordSlash : MonoBehaviour
         {
             var p = other.GetComponent<Chest>();
             p.TakeDamage(strength);
-            Destroy(gameObject);
+        }
+        else if (other.CompareTag("Sarco") && target == "mob")
+        {
+            var p = other.GetComponent<Sarcophagus>();
+            p.TakeDamage(strength);
+        }
+        else if (other.CompareTag("KnightSuperBoss") && target == "mob")
+        {
+            var p = other.GetComponent<KnightSuperBoss>();
+            p.TakeDamage(strength);
         }
     }
 

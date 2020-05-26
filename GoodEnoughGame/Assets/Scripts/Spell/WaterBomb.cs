@@ -74,7 +74,23 @@ public class WaterBomb : MonoBehaviour
             p.TakeDamage(strength);
             p.SpeedBuff(6, .5f);
         }
-       
+        else if (other.CompareTag("Chest") && target == "mob")
+        {
+            var p = other.GetComponent<Chest>();
+            p.TakeDamage(strength);
+            p.SpeedBuff(6, .5f);
+        }
+        else if (other.CompareTag("Sarco") && target == "mob")
+        {
+            var p = other.GetComponent<Sarcophagus>();
+            p.TakeDamage(strength);
+        }
+        else if (other.CompareTag("KnightSuperBoss") && target == "mob")
+        {
+            var p = other.GetComponent<KnightSuperBoss>();
+            p.TakeDamage(strength);
+        }
+
     }
 
     IEnumerator Explode()

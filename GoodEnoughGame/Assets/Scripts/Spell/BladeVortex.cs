@@ -85,6 +85,21 @@ public class BladeVortex : MonoBehaviour
                 var p = other.GetComponent<Haunted>();
                 p.TakeDamage(strength);
             }
+            else if (other.CompareTag("Chest") && target == "mob")
+            {
+                var p = other.GetComponent<Chest>();
+                p.TakeDamage(strength);
+            }
+            else if (other.CompareTag("Sarco") && target == "mob")
+            {
+                var p = other.GetComponent<Sarcophagus>();
+                p.TakeDamage(strength);
+            }
+            else if (other.CompareTag("KnightSuperBoss") && target == "mob")
+            {
+                var p = other.GetComponent<KnightSuperBoss>();
+                p.TakeDamage(strength);
+            }
             timeattack = cooldown;
         }
     }

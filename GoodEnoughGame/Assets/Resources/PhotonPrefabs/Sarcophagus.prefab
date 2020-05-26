@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 579ba1720ef16cc449a1329d4d0afd70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loot: {fileID: 0}
+  loot: {fileID: 640314737137429678, guid: a5ec004398a71004786f7c47090a8234, type: 3}
   maxHealth: 500
   CircleProj: {fileID: 3718564163613458053, guid: 2acfb32a7c6a7504aace1bbeb7f8a5dd,
     type: 3}

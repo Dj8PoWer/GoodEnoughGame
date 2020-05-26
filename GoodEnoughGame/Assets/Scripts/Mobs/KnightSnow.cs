@@ -10,6 +10,10 @@ public class KnightSnow : MonoBehaviour
     public int strength = 10;
     public string target = "";
 
+    public float stun = 1;
+    public float slow = 1;
+    public bool dot;
+
     // Update is called once per frame
     void Update()
     {
@@ -27,7 +31,12 @@ public class KnightSnow : MonoBehaviour
         if (other.CompareTag("Player") && target == "player")
         {
             PlayerManager p = other.GetComponent<PlayerManager>();
-            p.TakeDOTDamage(3 , strength);
+            if (dot)
+                p.TakeDOTDamage(3, strength);
+            else
+                p.TakeDamage(strength);
+            p.SpeedBuff(1, stun);
+            p.SpeedBuff(5, slow);
             Destroy(gameObject);
         }
     }

@@ -28,20 +28,22 @@ public class LevelSpawner : MonoBehaviour
                 string mob = mobs[rnd.Next(mobsDiversity)];
                 var monster = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", mob), transform.position, Quaternion.identity, 0);
                 
-                if (mob == "Zombie")
+                if (mob == "Zombie" || mob == "Mummy")
                     monster.GetComponent<Zombie>().Level = level;
                 else if (mob == "Skeleton")
                     monster.GetComponent<Skeleton>().Level = level;
-                else if (mob == "Skeleton")
+                else if (mob == "Witch")
                     monster.GetComponent<Witch>().Level = level;
-                else if (mob == "Skeleton")
+                else if (mob == "Scorpion")
                     monster.GetComponent<Scorpion>().Level = level;
-                else if (mob == "Skeleton")
+                else if (mob == "Snake")
                     monster.GetComponent<Snake>().Level = level;
-                else if (mob == "Skeleton")
-                    monster.GetComponent<Zombie>().Level = level;
-                else if (mob == "Skeleton")
-                    monster.GetComponent<Zombie>().Level = level;
+                else if (mob.Substring(0, 7) == "Haunted")
+                    monster.GetComponent<Haunted>().Level = level;
+                else if (mob == "Chest")
+                    monster.GetComponent<Chest>().Level = level;
+                else if (mob == "Phantom")
+                    monster.GetComponent<Phantom>().Level = level;
                 time = spawningFrequency;
             }
             else

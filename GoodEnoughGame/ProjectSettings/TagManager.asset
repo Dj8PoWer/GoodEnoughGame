@@ -17,6 +17,7 @@ TagManager:
   - Haunted
   - Chest
   - KnightSuperBoss
+  - Sarco
   layers:
   - Default
   - TransparentFX
