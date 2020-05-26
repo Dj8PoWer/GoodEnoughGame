@@ -95,5 +95,11 @@ public class Arrow : MonoBehaviour
             p.TakeDamage(strength);
             Destroy(gameObject);
         }
+        else if (other.CompareTag("Sarco") && target == "mob")
+        {
+            var p = other.GetComponent<Sarcophagus>();
+            p.TakeDamage(strength);
+            Destroy(gameObject);
+        }
     }
 }

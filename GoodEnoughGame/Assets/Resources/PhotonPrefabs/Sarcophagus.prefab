@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9038397670441408591}
   m_Layer: 0
   m_Name: Sarcophagus
-  m_TagString: Untagged
+  m_TagString: Sarco
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,3 +163,4 @@ MonoBehaviour:
     type: 3}
   WallProjectil: {fileID: 6417904226450301026, guid: bd4a08471e0eed44081dd1b0d3dc1917,
     type: 3}
+  Tornado: {fileID: 7422095369811196961, guid: 3382ced781ecbfd4d986d1fb5da18f3e, type: 3}

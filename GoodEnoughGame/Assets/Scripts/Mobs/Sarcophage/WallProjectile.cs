@@ -44,6 +44,7 @@ public class WallProjectile : MonoBehaviour
         {
             PlayerManager p = other.GetComponent<PlayerManager>();
             p.TakeDamage(strength);
+            p.SpeedBuff(1.5f, 0);
         }
     }
 }

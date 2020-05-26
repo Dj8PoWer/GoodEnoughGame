@@ -43,6 +43,8 @@ public class Sarcophagus : MonoBehaviour, IPunObservable
     GameObject Headseek;
     [SerializeField]
     GameObject WallProjectil;
+    [SerializeField]
+    GameObject Tornado;
 
     // Start is called before the first frame update
     void Start()
@@ -54,37 +56,62 @@ public class Sarcophagus : MonoBehaviour, IPunObservable
             StartCoroutine("Pattern1", 3f);
     }
 
-    private void Update()
-    {
-    }
-
-
+    bool thirdhp = true;
 
     #region Pattern
     IEnumerator Pattern1(float time)
     {
         while (true)
         {
-            Debug.Log("pattern");
-            //yield return new WaitForSeconds(time);
-            //yield return TriangleAttack(15);
+            if (thirdhp && health < maxHealth / 3)
+            {
+                PV.RPC("RPC_Tornado", RpcTarget.All);
+                thirdhp = false;
+            }
+
+            yield return new WaitForSeconds(time);
+            yield return TriangleAttack(15);
+
+            if (thirdhp && health < maxHealth / 3)
+            {
+                PV.RPC("RPC_Tornado", RpcTarget.All);
+                thirdhp = false;
+            }
 
             yield return new WaitForSeconds(time);
             yield return WallAttack(3);
 
-            yield return new WaitForSeconds(time);
-            //yield return BurstAttack(30);
+            if (thirdhp && health < maxHealth / 3)
+            {
+                PV.RPC("RPC_Tornado", RpcTarget.All);
+                thirdhp = false;
+            }
 
             yield return new WaitForSeconds(time);
-            //yield return SummonAttack(10);
+            yield return HeadSeekerAttack(3);
+
+            if (thirdhp && health < maxHealth / 3)
+            {
+                PV.RPC("RPC_Tornado", RpcTarget.All);
+                thirdhp = false;
+            }
 
             yield return new WaitForSeconds(time);
-            //yield return CircleAttack(30);
+            yield return TriangleAttack(10);
+
+            if (thirdhp && health < maxHealth / 3)
+            {
+                PV.RPC("RPC_Tornado", RpcTarget.All);
+                thirdhp = false;
+            }
+
+            yield return new WaitForSeconds(time);
+            yield return WallAttack(3);
         }
     }
     #endregion
 
-    #region Summon
+    #region triangle
     //Summons 3 Skeleton Archers twice and shoots 4 projectiles every 1.5s
     [PunRPC]
     void RPC_TriangeAttack(Vector2 target)
@@ -114,7 +141,7 @@ public class Sarcophagus : MonoBehaviour, IPunObservable
 
         for (int i = 0; i < attack; i++)
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(.7f);
             PV.RPC("RPC_TriangeAttack", RpcTarget.All, (Vector2)target.transform.position);
         }
     }
@@ -143,7 +170,7 @@ public class Sarcophagus : MonoBehaviour, IPunObservable
     }
     #endregion
 
-    #region CircleAttack
+    #region Wall
     //Circle Attack Shoots 6 projectile all around the boss, multiple times with an offset each time
     [PunRPC]
     void RPC_WallAttack(Vector2 position)
@@ -159,16 +186,32 @@ public class Sarcophagus : MonoBehaviour, IPunObservable
         for (int i = 0; i < attack; i++)
         {
             //RPC_CircleAttack(i * 20);
-            for (int j = -10; j <= 10; j++)
+            for (int j = -5; j <= 5; j++)
             {
-                if (Random.Range(0, 3) == 0)
+                if (Random.Range(0, 2) != 0)
                 {
                     PV.RPC("RPC_WallAttack", RpcTarget.All, new Vector2(transform.position.x - 10, transform.position.y + j));
                 }
             }
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(5f);
         }
     }
+    #endregion
+
+    #region Tornado
+
+    [PunRPC]
+    void RPC_Tornado()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            var Object = Instantiate(Tornado, transform.position, Quaternion.Euler(Vector3.forward * i * 90));
+            var projectil = Object.GetComponentInChildren<Tornado>();
+            projectil.target = "player";
+        }
+    }
+
+
     #endregion
 
     private Quaternion RotateTowards(Vector2 target, float offset = 0f)
