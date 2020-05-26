@@ -41,6 +41,7 @@ public class WeaponManager : MonoBehaviour
     public GameObject Fireball;
     public GameObject Bladevortex;
     public GameObject WaterBomb;
+    public GameObject WindBurst;
 
     Action[] Spell = new Action[3];
 
@@ -68,6 +69,8 @@ public class WeaponManager : MonoBehaviour
                 PV.RPC("RPC_BladeVortex", RpcTarget.All, projPos.position, projPos.rotation, waterdmg);
             if (Input.GetKeyDown(KeyCode.C))
                 ThrowWaterBomb();
+            if (Input.GetKeyDown(KeyCode.X))
+                PV.RPC("RPC_WindBurst", RpcTarget.All, projPos.position, projPos.rotation, airdmg);
 
 
             if (Input.GetKey(KeyCode.Alpha1) && Spell[0] != null && cd1 <= 0)
@@ -202,7 +205,7 @@ public class WeaponManager : MonoBehaviour
                     Spell[i] = () => ThrowWaterBomb();
                     break;
                 case "Wind Burst":
-                    Spell[i] = null;
+                    Spell[i] = () => PV.RPC("RPC_WindBurst", RpcTarget.All, projPos.position, projPos.rotation, airdmg);
                     break;
                 default:
                     Spell[i] = null;
@@ -241,6 +244,15 @@ public class WeaponManager : MonoBehaviour
     {
         var Object = Instantiate(Bladevortex, pos, rot);
         var projectil = Object.GetComponent<BladeVortex>();
+        projectil.target = "mob";
+        projectil.strength = strength;
+    }
+
+    [PunRPC]
+    void RPC_WindBurst(Vector3 pos, Quaternion rot, int strength)
+    {
+        var Object = Instantiate(WindBurst, pos, rot);
+        var projectil = Object.GetComponent<WindBurst>();
         projectil.target = "mob";
         projectil.strength = strength;
     }

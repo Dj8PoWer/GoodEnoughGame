@@ -858,6 +858,8 @@ MonoBehaviour:
     type: 3}
   WaterBomb: {fileID: 6034058883949491483, guid: 375ba7ed9f6a2364f8a8014a1050f319,
     type: 3}
+  WindBurst: {fileID: 4289008111060315013, guid: 26a59b71abea9b04faa46bc522b5f86a,
+    type: 3}
 --- !u!114 &9160554002699880057
 MonoBehaviour:
   m_ObjectHideFlags: 0
