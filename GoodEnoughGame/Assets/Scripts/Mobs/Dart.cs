@@ -27,7 +27,7 @@ public class Dart : MonoBehaviour
         if (other.CompareTag("Player") && target == "player")
         {
             PlayerManager p = other.GetComponent<PlayerManager>();
-            p.TakeDamage(strength);
+            p.TakeDamage(strength, PlayerManager.DmgType.Physical);
             p.SpeedBuff(5, .7f);
             Destroy(gameObject);
         }

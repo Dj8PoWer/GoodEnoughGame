@@ -29,7 +29,7 @@ public class Bubble : MonoBehaviour
         if (other.CompareTag("Player") && target == "player")
         {
             PlayerManager p = other.GetComponent<PlayerManager>();
-            p.TakeDamage(strength);
+            p.TakeDamage(strength, PlayerManager.DmgType.Water);
             p.SpeedBuff(confusionTime, -1f);
             Destroy(gameObject);
         }

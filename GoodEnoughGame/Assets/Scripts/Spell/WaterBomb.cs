@@ -24,7 +24,7 @@ public class WaterBomb : MonoBehaviour
         if (other.CompareTag("Player") && target == "player")
         {
             PlayerManager p = other.GetComponent<PlayerManager>();
-            p.TakeDamage(strength);
+            p.TakeDamage(strength, PlayerManager.DmgType.Water);
             p.SpeedBuff(6, .5f);
         }
         else if (other.CompareTag("Witch") && target == "mob")

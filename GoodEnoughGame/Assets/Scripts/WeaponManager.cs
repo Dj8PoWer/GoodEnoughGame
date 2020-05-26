@@ -12,14 +12,29 @@ public class WeaponManager : MonoBehaviour
     public GameObject sword;
     public GameObject bow;
 
+    float cd1 = 3f;
+    float cd2 = 3f;
+    float cd3 = 3f;
+
     int staffID;
     int swordID;
     int bowID;
 
-    public float physdmg;
-    public float waterdmg;
-    public float firedmg;
-    public float airdmg;
+    float castspeed;
+
+    int physdmg;
+    public int Phys
+    {
+        get { return physdmg; }
+        set { physdmg = value;
+            bow.GetComponent<Bow>().strength = value;
+            sword.GetComponent<Sword>().strength = value;
+            staff.GetComponent<Staff>().strength = value;
+        }
+    }
+    public int waterdmg;
+    public int firedmg;
+    public int airdmg;
     
 
     public Transform projPos;
@@ -48,17 +63,34 @@ public class WeaponManager : MonoBehaviour
         if (PV.IsMine)
         {
             if (Input.GetKeyDown(KeyCode.Z))
-                PV.RPC("RPC_Fireball", RpcTarget.All, projPos.position, projPos.rotation);
+                PV.RPC("RPC_Fireball", RpcTarget.All, projPos.position, projPos.rotation, firedmg);
             if (Input.GetKeyDown(KeyCode.X))
-                PV.RPC("RPC_BladeVortex", RpcTarget.All, projPos.position, projPos.rotation);
+                PV.RPC("RPC_BladeVortex", RpcTarget.All, projPos.position, projPos.rotation, waterdmg);
             if (Input.GetKeyDown(KeyCode.C))
                 ThrowWaterBomb();
-            if (Input.GetKeyDown(KeyCode.Alpha1) && Spell[0] != null)
+
+
+            if (Input.GetKeyDown(KeyCode.Alpha1) && Spell[0] != null && cd1 <= 0)
+            {
                 Spell[0]();
-            if (Input.GetKeyDown(KeyCode.Alpha2) && Spell[1] != null)
+                cd1 = 3 / castspeed;
+            }
+            else
+                cd1 -= Time.deltaTime;
+            if (Input.GetKeyDown(KeyCode.Alpha2) && Spell[1] != null && cd2 <= 0)
+            {
                 Spell[1]();
-            if (Input.GetKeyDown(KeyCode.Alpha3) && Spell[2] != null)
+                cd2 = 3 / castspeed;
+            }
+            else
+                cd2 -= Time.deltaTime;
+            if (Input.GetKeyDown(KeyCode.Alpha3) && Spell[2] != null && cd3 <= 0)
+            {
                 Spell[2]();
+                cd3 = 3 / castspeed;
+            }
+            else
+                cd3 -= Time.deltaTime;
         }
 
     }
@@ -149,6 +181,8 @@ public class WeaponManager : MonoBehaviour
         sword.animator.SetFloat("Speed", attackSpeed * 0.310f);
         this.sword.SetActive(!this.sword.activeInHierarchy);
 
+        castspeed = castSpeed;
+
         staff.GetComponent<Staff>().attackSpeed = 1 / attackSpeed;
     }
 
@@ -159,13 +193,16 @@ public class WeaponManager : MonoBehaviour
             switch(names[i])
             {
                 case "Fireball":
-                    Spell[i] = () => PV.RPC("RPC_Fireball", RpcTarget.All, projPos.position, projPos.rotation);
+                    Spell[i] = () => PV.RPC("RPC_Fireball", RpcTarget.All, projPos.position, projPos.rotation, firedmg);
                     break;
                 case "Blade Vortex":
-                    Spell[i] = () => PV.RPC("RPC_BladeVortex", RpcTarget.All, projPos.position, projPos.rotation);
+                    Spell[i] = () => PV.RPC("RPC_BladeVortex", RpcTarget.All, projPos.position, projPos.rotation, physdmg);
                     break;
                 case "Water Bomb":
                     Spell[i] = () => ThrowWaterBomb();
+                    break;
+                case "Wind Burst":
+                    Spell[i] = null;
                     break;
                 default:
                     Spell[i] = null;
@@ -178,30 +215,33 @@ public class WeaponManager : MonoBehaviour
     {
         Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         position.z = 0;
-        PV.RPC("RPC_WaterBomb", RpcTarget.All, position);
+        PV.RPC("RPC_WaterBomb", RpcTarget.All, position, waterdmg);
     }
 
     [PunRPC]
-    void RPC_WaterBomb(Vector3 pos)
+    void RPC_WaterBomb(Vector3 pos, int strength)
     {
         var Object = Instantiate(WaterBomb, pos, Quaternion.identity);
         var projectil = Object.GetComponent<WaterBomb>();
         projectil.target = "mob";
+        projectil.strength = strength;
     }
 
     [PunRPC]
-    void RPC_Fireball(Vector3 pos, Quaternion rot)
+    void RPC_Fireball(Vector3 pos, Quaternion rot, int strength)
     {
         var Object = Instantiate(Fireball, pos, rot);
         var projectil = Object.GetComponent<Fireball>();
         projectil.target = "mob";
+        projectil.strength = strength;
     }
 
     [PunRPC]
-    void RPC_BladeVortex(Vector3 pos, Quaternion rot)
+    void RPC_BladeVortex(Vector3 pos, Quaternion rot, int strength)
     {
         var Object = Instantiate(Bladevortex, pos, rot);
         var projectil = Object.GetComponent<BladeVortex>();
         projectil.target = "mob";
+        projectil.strength = strength;
     }
 }

@@ -22,7 +22,8 @@ public class GhostBoss : MonoBehaviour, IPunObservable
         set
         {
             level = value;
-            health = 40 + 10 * level;
+            health = 300 + 10 * level;
+            strength = 10 + 2 * level;
         }
     }
 
@@ -35,7 +36,7 @@ public class GhostBoss : MonoBehaviour, IPunObservable
 
     int health;
     public int maxHealth;
-
+    public int strength;
     
     //Projectiles
     [SerializeField]
@@ -109,6 +110,7 @@ public class GhostBoss : MonoBehaviour, IPunObservable
             var Object = Instantiate(CircleProj, transform.position, Quaternion.Euler(Vector3.forward * (angle + offset)));
             var projectil = Object.GetComponent<MobProjectile>();
             projectil.target = "player";
+            projectil.strength = strength;
         }
     }
 
@@ -157,6 +159,7 @@ public class GhostBoss : MonoBehaviour, IPunObservable
         Object.transform.localScale = new Vector3(0.2f, 0.2f, 1);
         var projectil = Object.GetComponent<MobProjectile>();
         projectil.target = "player";
+        projectil.strength = strength;
     }
 
     IEnumerator BurstAttack(int attack)
@@ -195,6 +198,7 @@ public class GhostBoss : MonoBehaviour, IPunObservable
             var Object = Instantiate(CircleProj, transform.position, Quaternion.Euler(Vector3.forward * (angle+offset)));
             var projectil = Object.GetComponent<MobProjectile>();
             projectil.speed = 3f;
+            projectil.strength = strength;
             Object.transform.localScale = new Vector3(.5f, .5f, .5f);
             projectil.target = "player";
         }

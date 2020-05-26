@@ -38,7 +38,7 @@ public class Arrow : MonoBehaviour
         if (other.CompareTag("Player") && target == "player")
         {
             PlayerManager p = other.GetComponent<PlayerManager>();
-            p.TakeDamage(strength);
+            p.TakeDamage(strength, PlayerManager.DmgType.Physical);
             Destroy(gameObject);
         }
         else if (other.CompareTag("Witch") && target == "mob")

@@ -27,7 +27,7 @@ public class Coin : MonoBehaviour
         if (other.CompareTag("Player") && target == "player")
         {
             PlayerManager p = other.GetComponent<PlayerManager>();
-            p.TakeDOTDamage(3 , strength);
+            p.TakeDamage(strength, PlayerManager.DmgType.Physical);
             Destroy(gameObject);
         }
     }

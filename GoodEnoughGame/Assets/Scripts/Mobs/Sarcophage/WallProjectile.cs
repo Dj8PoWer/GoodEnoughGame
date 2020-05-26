@@ -43,7 +43,7 @@ public class WallProjectile : MonoBehaviour
         if (other.CompareTag("Player") && target == "player")
         {
             PlayerManager p = other.GetComponent<PlayerManager>();
-            p.TakeDamage(strength);
+            p.TakeDamage(strength, PlayerManager.DmgType.Air);
             p.SpeedBuff(1.5f, 0);
         }
     }

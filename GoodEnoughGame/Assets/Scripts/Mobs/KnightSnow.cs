@@ -34,7 +34,7 @@ public class KnightSnow : MonoBehaviour
             if (dot)
                 p.TakeDOTDamage(3, strength);
             else
-                p.TakeDamage(strength);
+                p.TakeDamage(strength, PlayerManager.DmgType.Water);
             p.SpeedBuff(1, stun);
             p.SpeedBuff(5, slow);
             Destroy(gameObject);

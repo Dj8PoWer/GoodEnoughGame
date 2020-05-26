@@ -38,7 +38,7 @@ public class Fireball : MonoBehaviour
         if (other.CompareTag("Player") && target == "player")
         {
             PlayerManager p = other.GetComponent<PlayerManager>();
-            p.TakeDamage(strength);
+            p.TakeDamage(strength, PlayerManager.DmgType.Fire);
             if (speed != 0)
                 StartCoroutine(Explode());
         }

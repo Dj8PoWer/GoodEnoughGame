@@ -41,7 +41,7 @@ public class Explosive : MonoBehaviour
         for (int i = 0; i < 360; i+=60)
         {
             var Object = Instantiate(proj, transform.position, Quaternion.Euler(Vector3.forward * i));
-            var projectil = Object.GetComponent<Coin>();
+            var projectil = Object.GetComponent<MobProjectile>();
             projectil.strength = strength;
             projectil.target = "player";
         }

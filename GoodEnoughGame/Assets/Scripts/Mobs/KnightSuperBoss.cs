@@ -23,12 +23,15 @@ public class KnightSuperBoss : MonoBehaviour, IPunObservable
         {
             level = value;
             health = 500 + 10 * level;
+            strength = 10 + 2 * level;
         }
     }
 
     int lvl = 1;
     [SerializeField]
     GameObject loot;
+
+    public int strength;
 
     Animator animator;
     PhotonView PV;
@@ -137,6 +140,7 @@ public class KnightSuperBoss : MonoBehaviour, IPunObservable
     void RPC_ExplosiveAttack(Vector2 target)
     {
         GameObject Object = Instantiate(explosiveProj, transform.position, RotateTowards(target, 0));
+        Object.GetComponent<Explosive>().strength = strength;
     }
 
     IEnumerator ExplosiveAttack(int howManyExplosives)
@@ -174,6 +178,7 @@ public class KnightSuperBoss : MonoBehaviour, IPunObservable
             projectil.speed = 3f;
             projectil.stun = 1;
             projectil.slow = 1;
+            projectil.strength = strength;
             Object.transform.localScale = new Vector3(.5f, .5f, .5f);
             projectil.target = "player";
         }
@@ -214,6 +219,7 @@ public class KnightSuperBoss : MonoBehaviour, IPunObservable
             projectil.speed = 3f;
             projectil.stun = 0;
             projectil.slow = 1;
+            projectil.strength = strength;
             Object.transform.localScale = new Vector3(.5f, .5f, .5f);
             projectil.target = "player";
         }
@@ -247,6 +253,7 @@ public class KnightSuperBoss : MonoBehaviour, IPunObservable
             projectil.speed = 6f;
             projectil.slow = 1;
             projectil.stun = 1;
+            projectil.strength = strength;
             Object.transform.localScale = new Vector3(.5f, .5f, .5f);
             projectil.target = "player";
         }
@@ -273,6 +280,7 @@ public class KnightSuperBoss : MonoBehaviour, IPunObservable
             var projectil = Object.GetComponent<KnightSnow>();
             projectil.speed = 6f;
             projectil.stun = 1;
+            projectil.strength = strength;
             projectil.slow = .8f;
             projectil.target = "player";
         }

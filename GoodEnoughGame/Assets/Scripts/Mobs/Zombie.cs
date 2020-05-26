@@ -120,7 +120,7 @@ public class Zombie : MonoBehaviour, IPunObservable
         if (other.gameObject.CompareTag("Player") && time <= 0 && Alive)
         {
             PlayerManager p = other.gameObject.GetComponent<PlayerManager>();
-            p.TakeDamage(strength);
+            p.TakeDamage(strength, PlayerManager.DmgType.Physical);
             PV.RPC("RPC_Attack", RpcTarget.All);
             time = originalTime;
         }

@@ -44,7 +44,7 @@ public class MobProjectile : MonoBehaviour
         {
             Debug.Log("touch");
             PlayerManager p = other.GetComponent<PlayerManager>();
-            p.TakeDamage(strength);
+            p.TakeDamage(strength, PlayerManager.DmgType.Fire);
             Destroy(gameObject);
         }
         if (other.CompareTag("Witch") && target == "mob")

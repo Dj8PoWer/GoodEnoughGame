@@ -16,6 +16,8 @@ public class Bow : MonoBehaviour
 
     private PhotonView PV;
 
+    public int strength = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +41,7 @@ public class Bow : MonoBehaviour
             if (cooldown <= 0 && Input.GetKey(KeyCode.Mouse0))
             {
                 animator.SetBool("Shot", true);
-                PV.RPC("RPC_Attack", RpcTarget.All, arrowPos.position, arrowRot.rotation);
+                PV.RPC("RPC_Attack", RpcTarget.All, arrowPos.position, arrowRot.rotation, strength);
                 cooldown = attackSpeed;
             }
             else
@@ -48,10 +50,11 @@ public class Bow : MonoBehaviour
     }
 
     [PunRPC]
-    void RPC_Attack(Vector3 pos, Quaternion rot)
+    void RPC_Attack(Vector3 pos, Quaternion rot, int strength)
     {
         var Object = Instantiate(arrow, pos, rot);
         var projectil = Object.GetComponent<Arrow>();
         projectil.target = "mob";
+        projectil.strength = strength;
     }
 }

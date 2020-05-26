@@ -120,7 +120,7 @@ public class Haunted : MonoBehaviour, IPunObservable
         if (other.gameObject.CompareTag("Player") && time <= 0 && Alive)
         {
             PlayerManager p = other.gameObject.GetComponent<PlayerManager>();
-            p.TakeDamage(strength);
+            p.TakeDamage(strength, PlayerManager.DmgType.Physical);
             p.Blind(4);
             PV.RPC("RPC_Attack", RpcTarget.All);
             time = originalTime;

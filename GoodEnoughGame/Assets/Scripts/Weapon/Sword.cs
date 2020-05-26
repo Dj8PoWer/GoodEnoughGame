@@ -16,6 +16,8 @@ public class Sword : MonoBehaviour
 
     private PhotonView PV;
 
+    public int strength = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +37,7 @@ public class Sword : MonoBehaviour
             {
                 //                animator.SetBool("Attack", true);
                 animator.SetTrigger("attacc");
-                PV.RPC("RPC_Attack", RpcTarget.All, slashPos.position, slashRot.rotation);
+                PV.RPC("RPC_Attack", RpcTarget.All, slashPos.position, slashRot.rotation, strength);
                 cooldown = attackSpeed;
             }
             else
@@ -56,11 +58,12 @@ public class Sword : MonoBehaviour
     }
 
     [PunRPC]
-    void RPC_Attack(Vector3 pos, Quaternion rot)
+    void RPC_Attack(Vector3 pos, Quaternion rot, int strength)
     {
         var Object = Instantiate(slash, pos, rot);
         var projectil = Object.GetComponent<SwordSlash>();
         projectil.target = "mob";
+        projectil.strength = strength;
     }
     
 }

@@ -22,7 +22,8 @@ public class Sarcophagus : MonoBehaviour, IPunObservable
         set
         {
             level = value;
-            health = 40 + 10 * level;
+            health = 400 + 10 * level;
+            strength = 10 + 2 * level;
         }
     }
 
@@ -34,7 +35,7 @@ public class Sarcophagus : MonoBehaviour, IPunObservable
 
     int health;
     public int maxHealth;
-
+    public int strength;
 
     //Projectiles
     [SerializeField]
@@ -120,6 +121,7 @@ public class Sarcophagus : MonoBehaviour, IPunObservable
         {
             var Object = Instantiate(CircleProj, transform.position, RotateTowards(target, angle));
             var projectil = Object.GetComponent<MobProjectile>();
+            projectil.strength = strength;
             projectil.target = "player";
         }
     }
@@ -155,7 +157,7 @@ public class Sarcophagus : MonoBehaviour, IPunObservable
     {
         var Object = Instantiate(Headseek, transform.position, Quaternion.Euler(Vector3.forward * -90));
         var projectil = Object.GetComponent<Headseeker>();
-        
+        projectil.strength = strength;
         projectil.target = "player";
     }
 
@@ -178,6 +180,7 @@ public class Sarcophagus : MonoBehaviour, IPunObservable
         var Object = Instantiate(WallProjectil, position, Quaternion.identity);
         var projectil = Object.GetComponent<WallProjectile>();
         Object.transform.localScale = new Vector3(.5f, .5f, .5f);
+        projectil.strength = strength;
         projectil.target = "player";
     }
 
@@ -207,6 +210,7 @@ public class Sarcophagus : MonoBehaviour, IPunObservable
         {
             var Object = Instantiate(Tornado, transform.position, Quaternion.Euler(Vector3.forward * i * 90));
             var projectil = Object.GetComponentInChildren<Tornado>();
+            projectil.strength = strength;
             projectil.target = "player";
         }
     }

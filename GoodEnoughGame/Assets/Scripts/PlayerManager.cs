@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
+    public enum DmgType
+    {
+        Fire, Physical, Water, Air
+    };
+
     [SerializeField]
     WeaponManager weaponManager;
     [SerializeField]
@@ -143,9 +148,31 @@ public class PlayerManager : MonoBehaviour
             player.transform.rotation = new Quaternion(0, 0, 0, 0);
     }
     
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, DmgType type)
     {
-        Health -= amount;
+        switch (type)
+        {
+            case DmgType.Air:
+                if (airRes > .8f)
+                    airRes = .8f;
+                Health -= amount * (- airRes);
+                break;
+            case DmgType.Fire:
+                if (fireRes > .8f)
+                    fireRes = .8f;
+                Health -= amount * (-fireRes);
+                break;
+            case DmgType.Physical:
+                if (armor > .8f)
+                    armor = .8f;
+                Health -= amount * (-armor);
+                break;
+            case DmgType.Water:
+                if (waterRes > .8f)
+                    waterRes = .8f;
+                Health -= amount * (-waterRes);
+                break;
+        }
         //animPlayer.SetBool("Hurt", true);
         if (health <= 0 && alive)
         {
@@ -225,10 +252,10 @@ public class PlayerManager : MonoBehaviour
 
         weaponManager.LinkStats(stats[9].Value, stats[10].Value);
 
-        weaponManager.physdmg = stats[11].Value * stats[12].Value * stats[13].Value;
-        weaponManager.firedmg = stats[11].Value * stats[14].Value * stats[17].Value;
-        weaponManager.waterdmg = stats[11].Value * stats[15].Value * stats[18].Value;
-        weaponManager.airdmg = stats[11].Value * stats[16].Value * stats[19].Value;
+        weaponManager.Phys = (int)(stats[11].Value * stats[12].Value * stats[13].Value);
+        weaponManager.firedmg = (int)(stats[11].Value * stats[14].Value * stats[17].Value);
+        weaponManager.waterdmg = (int)(stats[11].Value * stats[15].Value * stats[18].Value);
+        weaponManager.airdmg = (int)(stats[11].Value * stats[16].Value * stats[19].Value);
 
         //DAMAGES
     }
