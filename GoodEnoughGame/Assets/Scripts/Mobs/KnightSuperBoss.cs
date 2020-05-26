@@ -317,7 +317,11 @@ public class KnightSuperBoss : MonoBehaviour, IPunObservable
         {
             LevelManager manager = FindObjectOfType<LevelManager>();
             manager.leavers[2].SetActive(true);
-            Instantiate(loot, transform.position, Quaternion.identity);
+            if (Random.Range(0, 3) == 0)
+            {
+                var item = Instantiate(loot, transform.position, Quaternion.identity);
+                item.GetComponent<ItemLoot>().GenerateRandomItem(level);
+            }
             PhotonNetwork.Destroy(gameObject);
         }
     }

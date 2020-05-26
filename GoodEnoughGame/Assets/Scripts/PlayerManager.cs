@@ -75,6 +75,8 @@ public class PlayerManager : MonoBehaviour
         animPlayer = player.GetComponent<Animator>();
         PV = GetComponent<PhotonView>();
 
+        
+
         if (PV.IsMine)
         {
             hpBar = GameObject.Find("HealthBar").GetComponent<Image>();
@@ -105,9 +107,14 @@ public class PlayerManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            Instantiate(loot, transform.position, Quaternion.identity);
+            var item = Instantiate(loot, transform.position, Quaternion.identity);
+            item.GetComponent<ItemLoot>().GenerateRandomItem(Random.Range(20,200));
         }
 
+        if (Input.GetKeyDown(KeyCode.K))
+            Time.timeScale = 10;
+        if (Input.GetKeyDown(KeyCode.J))
+            Time.timeScale = 1;
     }
 
     void Deplacement()

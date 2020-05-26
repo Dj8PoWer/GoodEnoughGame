@@ -38,7 +38,7 @@ public class LevelSpawner : MonoBehaviour
                     monster.GetComponent<Scorpion>().Level = level;
                 else if (mob == "Snake")
                     monster.GetComponent<Snake>().Level = level;
-                else if (mob.Substring(0, 7) == "Haunted")
+                else if (mob.Length > 6 && mob.Substring(0, 7) == "Haunted")
                     monster.GetComponent<Haunted>().Level = level;
                 else if (mob == "Chest")
                     monster.GetComponent<Chest>().Level = level;

@@ -70,21 +70,21 @@ public class WeaponManager : MonoBehaviour
                 ThrowWaterBomb();
 
 
-            if (Input.GetKeyDown(KeyCode.Alpha1) && Spell[0] != null && cd1 <= 0)
+            if (Input.GetKey(KeyCode.Alpha1) && Spell[0] != null && cd1 <= 0)
             {
                 Spell[0]();
                 cd1 = 3 / castspeed;
             }
             else
                 cd1 -= Time.deltaTime;
-            if (Input.GetKeyDown(KeyCode.Alpha2) && Spell[1] != null && cd2 <= 0)
+            if (Input.GetKey(KeyCode.Alpha2) && Spell[1] != null && cd2 <= 0)
             {
                 Spell[1]();
                 cd2 = 3 / castspeed;
             }
             else
                 cd2 -= Time.deltaTime;
-            if (Input.GetKeyDown(KeyCode.Alpha3) && Spell[2] != null && cd3 <= 0)
+            if (Input.GetKey(KeyCode.Alpha3) && Spell[2] != null && cd3 <= 0)
             {
                 Spell[2]();
                 cd3 = 3 / castspeed;

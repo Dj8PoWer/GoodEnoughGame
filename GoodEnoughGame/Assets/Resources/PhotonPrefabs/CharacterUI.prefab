@@ -19322,7 +19322,7 @@ MonoBehaviour:
   globalDamage:
     baseValue: 1
   physicalDmgFlat:
-    baseValue: 0
+    baseValue: 10
   physicalDmgPercent:
     baseValue: 1
   fireDamageFlat:

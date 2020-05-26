@@ -107,7 +107,11 @@ public class Zombie : MonoBehaviour, IPunObservable
         {
             //animPlayer.SetBool("Dying", true);
             if (willLoot && Random.Range(0, 3) == 0)
-                Instantiate(loot, transform.position, Quaternion.identity);
+            {
+                var item = Instantiate(loot, transform.position, Quaternion.identity);
+                item.GetComponent<ItemLoot>().GenerateRandomItem(level);
+            }
+
             GetComponent<Collider2D>().enabled = false;
             Alive = false;
             PV.RPC("RPC_Death", RpcTarget.All);

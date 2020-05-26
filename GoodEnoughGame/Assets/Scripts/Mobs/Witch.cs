@@ -128,7 +128,10 @@ public class Witch : MonoBehaviour, IPunObservable
         {
             alive = false;
             if (willLoot && Random.Range(0, 3) == 0)
-                Instantiate(loot, transform.position, Quaternion.identity);
+            {
+                var item = Instantiate(loot, transform.position, Quaternion.identity);
+                item.GetComponent<ItemLoot>().GenerateRandomItem(level);
+            }
             GetComponent<Collider2D>().enabled = false;
             //animPlayer.SetBool("Dying", true);
             PV.RPC("RPC_Death", RpcTarget.All);

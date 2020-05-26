@@ -234,8 +234,18 @@ public class Sarcophagus : MonoBehaviour, IPunObservable
         {
             LevelManager manager = FindObjectOfType<LevelManager>();
             manager.leavers[1].SetActive(true);
-            Instantiate(loot, transform.position, Quaternion.identity);
+            Debug.Log(manager.leavers[1].activeInHierarchy + "    " + manager.leavers[1].name);
+            var item = Instantiate(loot, transform.position, Quaternion.identity);
+            item.GetComponent<ItemLoot>().GenerateRandomItem(level);
             PhotonNetwork.Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        foreach (var tor in FindObjectsOfType<Tornado>())
+        {
+            Destroy(tor.Parent);
         }
     }
 

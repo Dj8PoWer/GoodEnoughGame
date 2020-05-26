@@ -9,7 +9,7 @@ public class LevelLeaver : MonoBehaviour
 
     private void Start()
     {
-        gameObject.SetActive(false);
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)

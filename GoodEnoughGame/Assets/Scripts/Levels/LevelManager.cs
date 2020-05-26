@@ -164,6 +164,17 @@ public class LevelManager : MonoBehaviour
             mob.TakeDamage(int.MaxValue, false);
         foreach (var mob in FindObjectsOfType<Witch>())
             mob.TakeDamage(int.MaxValue, false);
+        foreach (var mob in FindObjectsOfType<Snake>())
+            mob.TakeDamage(int.MaxValue, false);
+        foreach (var mob in FindObjectsOfType<Scorpion>())
+            mob.TakeDamage(int.MaxValue, false);
+        foreach (var mob in FindObjectsOfType<Haunted>())
+            mob.TakeDamage(int.MaxValue, false);
+        foreach (var mob in FindObjectsOfType<Chest>())
+            mob.TakeDamage(int.MaxValue, false);
+        foreach (var mob in FindObjectsOfType<Phantom>())
+            mob.TakeDamage(int.MaxValue, false);
+
     }
 
     [PunRPC]
@@ -175,6 +186,8 @@ public class LevelManager : MonoBehaviour
     public void ChangeDifficulty(int d)
     {
         difficulty += d;
+        if (difficulty <= 0)
+            difficulty = 1;
         difficultyDisplay.text = "Mob level = " + difficulty.ToString();
     }
 }

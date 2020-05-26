@@ -50,7 +50,6 @@ public class ItemLoot : MonoBehaviour
     {
         spritRenderer = GetComponent<SpriteRenderer>();
         spritRenderer.sprite = item.Icon;
-        GenerateRandomItem(Random.Range(20,200));
         StartCoroutine(SelfDestroy());
     }
 

@@ -82,6 +82,7 @@ MonoBehaviour:
   slashPos: {fileID: 8136160453846979544}
   slashRot: {fileID: 2649066424973443087}
   slash: {fileID: 1480412902462566018, guid: 48f71385266b96e41b0a48f89ca7d489, type: 3}
+  strength: 10
 --- !u!114 &6467234959265010202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,6 +328,7 @@ MonoBehaviour:
   projectileRot: {fileID: 2649066424973443087}
   projectile: {fileID: 1391134630614147319, guid: 2e22ce2abd6c958468fbd91ed2fdc838,
     type: 3}
+  strength: 10
 --- !u!114 &9151655210588369337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -846,7 +848,6 @@ MonoBehaviour:
   staff: {fileID: 2138596690222936472}
   sword: {fileID: 1438621976984995383}
   bow: {fileID: 8440037910673405104}
-  physdmg: 0
   waterdmg: 0
   firedmg: 0
   airdmg: 0
@@ -1112,6 +1113,7 @@ MonoBehaviour:
   arrowPos: {fileID: 8136160453846979544}
   arrowRot: {fileID: 2649066424973443087}
   arrow: {fileID: 6417904226450301026, guid: e961a6f18ba2b7a47b365a86f078245f, type: 3}
+  strength: 10
 --- !u!114 &478661653233268473
 MonoBehaviour:
   m_ObjectHideFlags: 0

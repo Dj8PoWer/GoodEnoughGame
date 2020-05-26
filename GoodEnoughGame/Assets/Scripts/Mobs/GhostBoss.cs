@@ -234,7 +234,8 @@ public class GhostBoss : MonoBehaviour, IPunObservable
         {
             LevelManager manager = FindObjectOfType<LevelManager>();
             manager.leavers[0].SetActive(true);
-            Instantiate(loot, transform.position, Quaternion.identity);
+            var item = Instantiate(loot, transform.position, Quaternion.identity);
+            item.GetComponent<ItemLoot>().GenerateRandomItem(level);
             PhotonNetwork.Destroy(gameObject);
         }
     }
