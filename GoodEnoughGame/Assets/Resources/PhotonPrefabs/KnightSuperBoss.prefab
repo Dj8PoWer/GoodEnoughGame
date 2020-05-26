@@ -143,7 +143,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!58 &2773247524248548173
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loot: {fileID: 640314737137429678, guid: a5ec004398a71004786f7c47090a8234, type: 3}
+  strength: 0
   maxHealth: 200
   howManyExplosives: 2
   howManyFives: 4

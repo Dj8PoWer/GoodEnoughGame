@@ -164,7 +164,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!58 &8312670352823978721
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -195,5 +195,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loot: {fileID: 640314737137429678, guid: a5ec004398a71004786f7c47090a8234, type: 3}
   maxHealth: 200
+  strength: 0
   CircleProj: {fileID: 3718564163613458053, guid: 2acfb32a7c6a7504aace1bbeb7f8a5dd,
     type: 3}

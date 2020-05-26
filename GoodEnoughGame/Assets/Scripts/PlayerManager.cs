@@ -162,22 +162,22 @@ public class PlayerManager : MonoBehaviour
             case DmgType.Air:
                 if (airRes > .8f)
                     airRes = .8f;
-                Health -= amount * (- airRes);
+                Health -= amount * (1 - airRes);
                 break;
             case DmgType.Fire:
                 if (fireRes > .8f)
                     fireRes = .8f;
-                Health -= amount * (-fireRes);
+                Health -= amount * (1 - fireRes);
                 break;
             case DmgType.Physical:
                 if (armor > .8f)
                     armor = .8f;
-                Health -= amount * (-armor);
+                Health -= amount * (1 - armor);
                 break;
             case DmgType.Water:
                 if (waterRes > .8f)
                     waterRes = .8f;
-                Health -= amount * (-waterRes);
+                Health -= amount * (1 - waterRes);
                 break;
         }
         //animPlayer.SetBool("Hurt", true);
